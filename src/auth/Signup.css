@@ -1,7 +1,7 @@
-/* Login Component Styles */
+/* signup Component Styles */
 
 /* Main container - centers the form on the page with beige background */
-.login-container {
+.signup-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,7 +10,7 @@
 }
 
 /* Form container - white background with shadow and rounded corners */
-.login-form {
+.signup-form {
   background-color: white;
   padding: 2rem; /* 2rem padding around form content */
   border-radius: 8px; /* Rounded corners */
@@ -20,19 +20,19 @@
 }
 
 /* Form title styling */
-.login-form h2 {
+.signup-form h2 {
   text-align: center;
   margin-bottom: 1.5rem; /* Space below title */
   color: #333; /* Dark gray text color */
 }
 
 /* Form group container - groups label and input together */
-.form-group {
+.signup-form-group {
   margin-bottom: 1rem; /* Space between form groups */
 }
 
 /* Label styling within form groups */
-.form-group label {
+.signup-form-group label {
   display: block; /* Block display for full width */
   margin-bottom: 0.5rem; /* Space below label */
   font-weight: bold; /* Bold font weight */
@@ -40,7 +40,7 @@
 }
 
 /* Input field styling */
-.form-group input {
+.signup-form-group input {
   width: 100%; /* Full width of container */
   padding: 0.75rem; /* Padding inside input */
   border: 1px solid #ddd; /* Light gray border */
@@ -49,7 +49,7 @@
 }
 
 /* Input focus state - highlights focused input with beige border */
-.form-group input:focus {
+.signup-form-group input:focus {
   outline: none; /* Remove default outline */
   border-color: #f5f5dc; /* Beige border on focus */
   box-shadow: 0 0 0 2px rgba(245, 245, 220, 0.5); /* Beige glow effect */
@@ -61,6 +61,7 @@
   padding: 0.75rem;
   background-color: #F5F5DC; 
   color: #333;
+  
   border: none;
   border-radius: 4px; 
   font-size: 1rem; 
@@ -74,18 +75,18 @@
 }
 
 /* Paragraph styling for signup link */
-.login-form p {
+.signup-form p {
   text-align: center;
   margin-top: 1rem; /* Space above paragraph */
 }
 
 /* Link styling within the form */
-.login-form a {
+.signup-form a {
   color: #000000; /* Black link color */
   text-decoration: none; /* Remove underline */
 }
 
 /* Link hover state - adds underline on hover */
-.login-form a:hover {
+.signup-form a:hover {
   text-decoration: underline; /* Underline on hover */
 }

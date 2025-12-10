@@ -32,7 +32,7 @@ const Login = () => {
       <div className="login-form"> {/* Form container with white background and shadow */}
         <h2>{t('loginTitle')}</h2> {/* Form title */}
         <form onSubmit={handleSubmit}> {/* Form element with submit handler */}
-          <div className="form-group"> {/* Container for email input group */}
+          <div className="login-form-group"> {/* Container for email input group */}
             <label htmlFor="email">{t('email')}</label> {/* Label for email input */}
             <input
               type="email" // Input type for email validation
@@ -42,7 +42,7 @@ const Login = () => {
               required // Make field required
             />
           </div>
-          <div className="form-group"> {/* Container for password input group */}
+          <div className="login-form-group"> {/* Container for password input group */}
             <label htmlFor="password">{t('password')}</label> {/* Label for password input */}
             <input
               type="password" // Input type to hide password text

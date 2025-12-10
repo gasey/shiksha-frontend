@@ -20,6 +20,7 @@ import Login from '../auth/Login'
 import Signup from '../auth/Signup'
 import Courses from './Courses'
 import TermsCondition from './TermsCondition'
+import Insight from './Insight'
 
 function App() {
   return (
@@ -123,6 +124,14 @@ function App() {
           <div className="page-content">
             <Navbar />
             <TermsCondition />
+            <Footer />
+          </div>
+        } />
+
+      <Route path="/insight" element={
+          <div className="page-content">
+            <Navbar />
+            <Insight />
             <Footer />
           </div>
         } />

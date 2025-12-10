@@ -10,11 +10,11 @@ const LowerGrid = () => {
           <div className="label">Courses</div>
         </div>
         <div className="stat">
-          <div className="number">10k+</div>
+          <div className="number">0+</div>
           <div className="label">Enrollment</div>
         </div>
         <div className="stat">
-          <div className="number">7</div>
+          <div className="number">1</div>
           <div className="label">Sites</div>
         </div>
       </section>

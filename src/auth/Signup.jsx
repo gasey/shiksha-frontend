@@ -57,7 +57,7 @@ const Signup = () => {
         <h2>{t('signupTitle')}</h2> {/* Form title */}
         <form onSubmit={handleSubmit}> {/* Form element with submit handler */}
           {/* First Name Input */}
-          <div className="form-group">
+          <div className="signup-form-group">
             <label htmlFor="firstName">{t('firstName')}</label>
             <input
               type="text"
@@ -70,7 +70,7 @@ const Signup = () => {
           </div>
 
           {/* Last Name Input */}
-          <div className="form-group">
+          <div className="signup-form-group">
             <label htmlFor="lastName">{t('lastName')}</label>
             <input
               type="text"
@@ -83,7 +83,7 @@ const Signup = () => {
           </div>
 
           {/* Address Input */}
-          <div className="form-group">
+          <div className="signup-form-group">
             <label htmlFor="Address">{t('address')}</label>
             <input
               type="text"
@@ -96,7 +96,7 @@ const Signup = () => {
           </div>
 
           {/* Email Input */}
-          <div className="form-group">
+          <div className="signup-form-group">
             <label htmlFor="email">{t('email')}</label>
             <input
               type="email"
@@ -109,7 +109,7 @@ const Signup = () => {
           </div>
 
           {/* Password Input */}
-          <div className="form-group">
+          <div className="signup-form-group">
             <label htmlFor="password">{t('password')}</label>
             <input
               type="password"
@@ -122,7 +122,7 @@ const Signup = () => {
           </div>
 
           {/* Confirm Password Input */}
-          <div className="form-group">
+          <div className="signup-form-group">
             <label htmlFor="confirmPassword">{t('confirmPassword')}</label>
             <input
               type="password"
@@ -135,7 +135,7 @@ const Signup = () => {
           </div>
 
           {/* Class Selection Dropdown */}
-          <div className="form-group">
+          <div className="signup-form-group">
             <label htmlFor="class">{t('class')}</label>
             <select
               id="class"
@@ -155,7 +155,7 @@ const Signup = () => {
 
           {/* Conditional Subject Stream Dropdown - only shown for classes 11 and 12 */}
           {showSubjectDropdown && (
-            <div className="form-group">
+            <div className="signup-form-group">
               <label htmlFor="subject">{t('subjectStream')}</label>
               <select
                 id="subject"
