@@ -1,54 +1,60 @@
+/* ===== ROOT APP STYLES ===== */
+
 .app {
   margin: 0;
   padding: 0;
   width: 100%;
+  min-height: 100vh;
+
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  /* min-width: 100%; */
   line-height: 1.6;
   color: #333;
   background-color: #faf9f6;
+
+  overflow-x: hidden;
+}
+
+/* Wrapper for each route */
+.page-content {
+  width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
 }
-.page-content{
-  min-width: 100%;
+
+/* ===== HOME PAGE PC-SCALE FIX ===== */
+
+.home-scale-wrapper {
+  transform-origin: top center;
 }
-@media (min-width:1024px) {
-  .app{
-    min-width: fit-content;
-  }
-    .page-content{
-    min-width: fit-content;
-  }
-}
-@media (min-width:768px) {
-  .app{
-    min-width: fit-content;
-  }
-    .page-content{
-    min-width: fit-content;
+
+/* Laptop / large tablets */
+@media (max-width: 1024px) {
+  .home-scale-wrapper {
+    transform: scale(0.9);
   }
 }
-@media (min-width:425px) {
-  .app{
-    min-width: fit-content;
-  }
-    .page-content{
-    min-width: fit-content;
-  }
-}
-@media (min-width:375px) {
-  .app{
-    min-width: fit-content;
-  }
-    .page-content{
-    min-width: fit-content;
+
+/* Tablets / large phones */
+@media (max-width: 768px) {
+  .home-scale-wrapper {
+    transform: scale(0.82);
   }
 }
-@media (min-width:320px) {
-  .app{
-    min-width: fit-content;
+
+/* Small phones */
+@media (max-width: 480px) {
+  .home-scale-wrapper {
+    transform: scale(0.75);
   }
-    .page-content{
-    min-width: fit-content;
-  }
+}
+
+/* ===== GLOBAL SAFETY ===== */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
