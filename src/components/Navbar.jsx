@@ -74,7 +74,9 @@ const Navbar = () => {
               <li><Link to="/why-shiksha">{t('whyShiksha')}</Link></li>
             </ul>
           </li>
-
+            <li className="nav-item">
+            <Link to="/upcoming">{t('registration')}</Link>
+          </li>
           <li className="nav-item">
             <Link to="/courses">{t('services')}</Link>
           </li>
@@ -91,7 +93,9 @@ const Navbar = () => {
           <li className="nav-item">
             <Link to="/forum">{t('forum')}</Link>
           </li>
-
+           <li className="nav-item">
+            <Link to="/counselling">{t('counselling')}</Link>
+          </li>
           <li className="nav-item">
             <Link to="/insight">{t('insight')}</Link>
           </li>

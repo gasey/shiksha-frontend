@@ -45,7 +45,9 @@ const Upcoming = () => {
   return (
     <div className="upcoming-page">
       <div className="upcoming-page-content">
+
         <Navbar />
+        
         <div className="upcoming-container">
           <h1>Coming Soon</h1>
           <p className="upcoming-page-description">
