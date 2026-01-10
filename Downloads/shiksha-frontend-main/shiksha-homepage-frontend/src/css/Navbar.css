@@ -1,0 +1,129 @@
+/* ===== TOP STRIP ===== */
+.top-strip {
+  background: #f2f2f2;
+  padding: 5px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  border-bottom: 1px solid #ccc;
+}
+
+.strip-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.accessibility-btn,
+.language-btn {
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  background: white;
+  cursor: pointer;
+}
+
+/* ===== HEADER ===== */
+.main-header {
+  background: #faf3df;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #decfbd;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+}
+
+.title h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #222;
+}
+
+.title p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.header-right {
+  display: flex;
+  gap: 15px;
+}
+
+/* ===== NAVBAR (PC STYLE ALWAYS) ===== */
+.navbar {
+  background: #ffedc6;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-pc {
+  overflow-x: auto;
+}
+
+.nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-item a {
+  display: block;
+  padding: 14px 20px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.nav-item a:hover {
+  background: #d6e0ea;
+}
+
+/* ===== DROPDOWN ===== */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #cedaea;
+  min-width: 200px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li {
+  list-style: none;
+}
+
+.dropdown-menu a {
+  padding: 12px 16px;
+}
+
+/* ===== MOBILE SAFETY ===== */
+@media (max-width: 768px) {
+  .nav-menu {
+    justify-content: flex-start;
+  }
+}

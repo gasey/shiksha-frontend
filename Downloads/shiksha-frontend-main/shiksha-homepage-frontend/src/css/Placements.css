@@ -1,0 +1,47 @@
+.card {
+  border-radius: 24px;       /* rounded-2xl */
+  box-shadow: 0 10px 15px rgba(0,0,0,0.1); /* shadow-lg */
+  transition: box-shadow 0.2s ease;        /* transition */
+  padding: 8px;             /* p-2 */
+  background-color: white;   /* bg-white */
+  border: 1px solid #e5e7eb; /* border-gray-200 */
+}
+
+.card:hover {
+  box-shadow: 0 20px 25px rgba(0,0,0,0.15); /* hover:shadow-2xl */
+}
+
+button .explore{
+  display: flex;               /* flex layout for icon + text */
+  align-items: center;         /* vertical centering */
+  gap: 8px;                    /* space between icon and text */
+  border-radius: 12px;         /* rounded-xl */
+  padding: 8px 16px;           /* padding inside button */
+  background-color: #f97316;   /* bg-orange-500 */
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button .explore:hover {
+  background-color: #ea580c;   /* bg-orange-600 on hover */
+}
+.button-green {
+  display: flex;
+  align-items: center;
+  gap: 12px;                  /* gap-3 */
+  padding: 16px 32px;         /* py-4 px-8 */
+  font-size: 18px;            /* text-lg */
+  border-radius: 24px;        /* rounded-2xl */
+  background-color: #34d399;  /* bg-green-400 */
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 10px 15px rgba(0,0,0,0.1); /* shadow-lg */
+  transition: background-color 0.2s ease;
+}
+
+.button-green:hover {
+  background-color: #10b981;  /* bg-green-500 */
+}

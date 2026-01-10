@@ -1,0 +1,36 @@
+{
+  "1": [
+    {
+      "id": 101,
+      "thread_id": 1,
+      "author_username": "admin",
+      "content": "Welcome everyone to the official Shiksha forum!",
+      "created_at": "2025-01-01T10:02:00Z"
+    },
+    {
+      "id": 102,
+      "thread_id": 1,
+      "author_username": "user01",
+      "content": "Happy to be here!",
+      "created_at": "2025-01-02T11:00:00Z"
+    }
+  ],
+  "2": [
+    {
+      "id": 201,
+      "thread_id": 2,
+      "author_username": "teacher_mk",
+      "content": "Start with NCERT books and previous year papers.",
+      "created_at": "2025-01-05T15:00:00Z"
+    }
+  ],
+  "3": [
+    {
+      "id": 301,
+      "thread_id": 3,
+      "author_username": "mentor",
+      "content": "Consider online platforms like Khan Academy, Coursera, and edX.",
+      "created_at": "2025-01-10T09:40:00Z"
+    }
+  ]
+}

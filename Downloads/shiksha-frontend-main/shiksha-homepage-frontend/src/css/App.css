@@ -1,0 +1,60 @@
+/* ===== ROOT APP STYLES ===== */
+
+.app {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #faf9f6;
+
+  overflow-x: hidden;
+}
+
+/* Wrapper for each route */
+.page-content {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== HOME PAGE PC-SCALE FIX ===== */
+
+.home-scale-wrapper {
+  transform-origin: top center;
+}
+
+/* Laptop / large tablets */
+@media (max-width: 1024px) {
+  .home-scale-wrapper {
+    transform: scale(0.9);
+  }
+}
+
+/* Tablets / large phones */
+@media (max-width: 768px) {
+  .home-scale-wrapper {
+    transform: scale(0.82);
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .home-scale-wrapper {
+    transform: scale(0.75);
+  }
+}
+
+/* ===== GLOBAL SAFETY ===== */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}

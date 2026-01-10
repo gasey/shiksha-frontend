@@ -1,0 +1,237 @@
+/* Background and layout */
+.about2-container {
+  background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  padding: 80px 20px;
+  text-align: center;
+  color: #000;
+  overflow-x: hidden;
+}
+
+/* Header */
+.about2-header {
+  margin-bottom: 60px;
+}
+
+.about2-header h1 {
+  font-size: 2.8rem; /* Matches Service2 heading */
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.about2-header p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* About list section */
+.about2-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.about2-item {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 30px 35px;
+  max-width: 800px;
+  width: 100%;
+  text-align: left;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.about2-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.about2-item h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-icon {
+  font-size: 1.8rem;
+}
+
+.about2-item p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Cards section */
+.about2-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  justify-items: center;
+}
+
+.about2-card {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 30px 35px;
+  max-width: 800px;
+  width: 100%;
+  text-align: left;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.about2-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.about2-card h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.about2-card p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.about2-card ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.about2-card li {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.about2-card strong {
+  font-weight: 600;
+  color: #000;
+}
+
+/* Team section */
+.about2-team-section {
+  margin-top: 60px;
+}
+
+.about2-team-section h2 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+/* Horizontal team layout */
+.about2-team-list {
+  display: flex;
+  flex-wrap: wrap; /* allows wrapping on smaller screens */
+  justify-content: center;
+  align-items: stretch;
+  gap: 25px;
+}
+
+.about2-team-item {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 25px 30px;
+  width: 300px; /* fixed width for even box sizes */
+  text-align: left;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.about2-team-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+.about2-team-item h3 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+}
+
+.about2-team-item p {
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+.team-button {
+  align-self: flex-start;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.team-button:hover {
+  background-color: #333;
+  transform: scale(1.05);
+}
+
+/* Smooth Fade + Slide Animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .about2-team-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about2-team-item {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .about2-item,
+  .about2-team-item {
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  .about2-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .about2-header p {
+    font-size: 1rem;
+  }
+}

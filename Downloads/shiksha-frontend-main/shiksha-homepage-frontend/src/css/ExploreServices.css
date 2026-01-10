@@ -1,0 +1,143 @@
+.explore-services-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f9f7f1ff;
+}
+
+.explore-services-canvas {
+  background-color: white;
+  padding: 40px;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.explore-services-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 30px;
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.tabs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.main-tabs {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f5f5dc;
+  padding: 15px 20px;
+  width: 100%;
+}
+
+.tab {
+  padding: 10px 20px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #333;
+}
+
+.tab.selected {
+  background-color: white;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.sub-tabs {
+  display: flex;
+  justify-content: space-around;
+  background-color: #deb887;
+  padding: 15px 20px;
+  width: 100%;
+}
+
+.sub-tab {
+  padding: 10px 20px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #333;
+}
+
+.sub-tab:hover:not(.disabled) {
+  background-color: #c0c0c0;
+  border-radius: 5px;
+}
+
+.sub-tab.selected {
+  background-color: #d2b48c;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.sub-tab.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-bottom: 30px;
+  margin-left: 0;
+}
+
+.service-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  width: 200px;
+  text-align: center;
+  background-color: #faf0e6;
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.card-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.show-all-button {
+  background-color: #ece3b4ff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 0;
+  display: inline-block;
+  color: #333;
+}
+
+.show-all-button:hover {
+  background-color: #deb887;
+}
+
+.upcoming-feature-message {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 1.5rem;
+  color: #333;
+}

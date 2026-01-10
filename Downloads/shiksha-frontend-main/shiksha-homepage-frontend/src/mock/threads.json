@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Welcome to Shiksha Forum!",
+    "author_username": "admin",
+    "created_at": "2025-01-01T10:00:00Z",
+    "tags": ["announcement"],
+    "reply_count": 2
+  },
+  {
+    "id": 2,
+    "title": "How do I prepare for competitive exams?",
+    "author_username": "student123",
+    "created_at": "2025-01-05T14:30:00Z",
+    "tags": ["exam", "preparation"],
+    "reply_count": 5
+  },
+  {
+    "id": 3,
+    "title": "Best learning resources?",
+    "author_username": "learner99",
+    "created_at": "2025-01-10T09:15:00Z",
+    "tags": ["resources"],
+    "reply_count": 1
+  }
+]

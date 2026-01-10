@@ -1,0 +1,164 @@
+.lower-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+/* ========================
+   STATS SECTION
+======================== */
+.stats-section {
+  background: #efe3d1;
+  padding: 25px 0;
+  margin: 40px 0;
+  border-top: 1px solid #dcccb4;
+  border-bottom: 1px solid #dcccb4;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat .number {
+  font-size: 45px;
+  font-weight: 700;
+}
+
+.stat .label {
+  font-size: 20px;
+  color: #666;
+}
+
+/* ========================
+   WHY CHOOSE SHIKSHA HEADING
+======================== */
+.why-choose-heading {
+  position: relative;
+  top: 30px;
+  left: 60px;
+}
+
+.why-choose-heading h2 {
+  color: #222;
+  margin: 0;
+  font-size: 2rem;
+}
+
+/* ========================
+   WHY CHOOSE SECTION
+======================== */
+.why-choose-section {
+  display: flex;
+  padding: 40px;
+  gap: 40px;
+}
+
+.features {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.feature-card {
+  background: #f7efe2;
+  border: 1px solid #e4d8c8;
+  border-radius: 12px;
+  padding: 16px;
+  height: 100px;
+}
+
+.feature-card h4 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.feature-card p {
+  margin: 4px 0 0;
+  font-size: 0.99rem;
+  color: #6a6a6a;
+}
+
+.promo-video {
+  flex: 1;
+  background: #d9d9d9;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 450px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .lower-grid {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .why-choose-section {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .features {
+    align-items: center;
+  }
+
+  .feature-card {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .promo-video {
+    width: 100%;
+    max-width: 420px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .why-choose-section {
+    padding: 15px;
+    gap: 30px;
+  }
+
+  .feature-card {
+    height: auto;
+  }
+
+  .promo-video {
+    height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lower-grid {
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .why-choose-heading {
+    left: 10px;
+    top: 15px;
+  }
+
+  .why-choose-section {
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .feature-card {
+    max-width: 100%;
+  }
+
+  .promo-video {
+    height: 180px;
+  }
+}

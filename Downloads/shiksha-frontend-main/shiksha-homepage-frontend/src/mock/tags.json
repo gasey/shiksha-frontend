@@ -1,0 +1,6 @@
+[
+  { "id": 1, "name": "announcement" },
+  { "id": 2, "name": "exam" },
+  { "id": 3, "name": "preparation" },
+  { "id": 4, "name": "resources" }
+]
