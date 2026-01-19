@@ -1,63 +1,104 @@
-/**
- * Login Component
- *
- * This component renders a login form with email and password fields.
- * It uses React state to manage form data and handles form submission.
- */
-
-import React, { useState } from 'react'; // Import React and useState hook for state management
-import { Link } from 'react-router-dom'; // Import Link for navigation
-import { useLanguage } from '../contexts/LanguageContext'; // Import language context
-import './Login.css'; // Import the CSS file for styling
+import React, { useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useLanguage } from "../contexts/LanguageContext";
+import { useAuth } from "../contexts/AuthContext";
+import "./Login.css";
 
 const Login = () => {
-  const { t } = useLanguage(); // Get translation function
-  // State variables to store email and password input values
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { t } = useLanguage();
+  const { login, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
-  /**
-   * Handles form submission
-   * @param {Event} e - The form submit event
-   */
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    // TODO: Implement actual login logic (e.g., API call to authenticate user)
-    console.log('Login:', { email, password }); // Log the login data for debugging
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  if (isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSubmitting(true);
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/token/`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.detail || "Invalid credentials");
+        return;
+      }
+
+      login({
+        access: data.access,
+        refresh: data.refresh,
+      });
+
+      navigate("/", { replace: true });
+    } catch {
+      setError("Unable to reach server");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  // Render the login form
   return (
-    <div className="login-container"> {/* Main container with beige background */}
-      <div className="login-form"> {/* Form container with white background and shadow */}
-        <h2>{t('loginTitle')}</h2> {/* Form title */}
-        <form onSubmit={handleSubmit}> {/* Form element with submit handler */}
-          <div className="login-form-group"> {/* Container for email input group */}
-            <label htmlFor="email">{t('email')}</label> {/* Label for email input */}
+    <div className="login-container">
+      <div className="login-form">
+        <h2>{t("loginTitle")}</h2>
+
+        <form onSubmit={handleSubmit}>
+          <div className="login-form-group">
+            <label htmlFor="email">{t("email")}</label>
             <input
-              type="email" // Input type for email validation
-              id="email" // Unique ID for accessibility
-              value={email} // Controlled input value
-              onChange={(e) => setEmail(e.target.value)} // Update state on change
-              required // Make field required
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
-          <div className="login-form-group"> {/* Container for password input group */}
-            <label htmlFor="password">{t('password')}</label> {/* Label for password input */}
+
+          <div className="login-form-group">
+            <label htmlFor="password">{t("password")}</label>
             <input
-              type="password" // Input type to hide password text
-              id="password" // Unique ID for accessibility
-              value={password} // Controlled input value
-              onChange={(e) => setPassword(e.target.value)} // Update state on change
-              required // Make field required
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
-          <button type="submit" className="login-btn">{t('login')}</button> {/* Submit button */}
+
+          {error && <p className="login-error">{error}</p>}
+
+          <button
+            type="submit"
+            className="login-btn"
+            disabled={submitting}
+          >
+            {submitting ? "Logging in…" : t("login")}
+          </button>
         </form>
-        <p>{t('dontHaveAccount')} <Link to="/signup">{t('signup')}</Link></p> {/* Link to signup page */}
+
+        <p>
+          {t("dontHaveAccount")}{" "}
+          <Link to="/signup">{t("signup")}</Link>
+        </p>
       </div>
     </div>
   );
 };
 
-export default Login; // Export the component as default
+export default Login;
