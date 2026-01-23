@@ -1,24 +1,39 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa';
 import '../css/Navbar.css';
+
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const Navbar = () => {
   const { t, switchLanguage } = useLanguage();
+  const { isAuthenticated, user, logout, hasRole, loading } = useAuth();
+  const navigate = useNavigate();
+
   const [fontSize, setFontSize] = useState(1);
 
+  if (loading) return null;
+
   const increaseFont = () => {
-    const newSize = Math.min(fontSize + 0.1, 1.5);
-    setFontSize(newSize);
-    document.documentElement.style.fontSize = `${newSize * 100}%`;
+    const size = Math.min(fontSize + 0.1, 1.5);
+    setFontSize(size);
+    document.documentElement.style.fontSize = `${size * 100}%`;
   };
 
   const decreaseFont = () => {
-    const newSize = Math.max(fontSize - 0.1, 0.8);
-    setFontSize(newSize);
-    document.documentElement.style.fontSize = `${newSize * 100}%`;
+    const size = Math.max(fontSize - 0.1, 0.8);
+    setFontSize(size);
+    document.documentElement.style.fontSize = `${size * 100}%`;
   };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
+  const showDashboard =
+    isAuthenticated && !hasRole('admin');
 
   return (
     <>
@@ -58,51 +73,39 @@ const Navbar = () => {
         </div>
       </header>
 
-      {/* ===== NAVBAR (PC STYLE ALWAYS) ===== */}
+      {/* ===== NAV ===== */}
       <nav className="navbar navbar-pc">
         <ul className="nav-menu">
-          <li className="nav-item">
-            <Link to="/">{t('home')}</Link>
-          </li>
+          <li><Link to="/">{t('home')}</Link></li>
+          <li><Link to="/about">{t('about')}</Link></li>
+          <li><Link to="/upcoming">{t('registration')}</Link></li>
+          <li><Link to="/courses">{t('services')}</Link></li>
+          <li><Link to="/placements">Placements</Link></li>
+          <li><Link to="/general-studies">{t('generalStudies')}</Link></li>
+          <li><Link to="/forum">{t('forum')}</Link></li>
+          <li><Link to="/counselling">{t('counselling')}</Link></li>
+          <li><Link to="/insight">{t('insight')}</Link></li>
+          <li><Link to="/contact">{t('contact')}</Link></li>
 
-          <li className="nav-item dropdown">
-            <Link to="/about">{t('about')}</Link>
-            <ul className="dropdown-menu">
-              <li><Link to="/vision">{t('vision')}</Link></li>
-              <li><Link to="/mission">{t('mission')}</Link></li>
-              <li><Link to="/values">{t('values')}</Link></li>
-              <li><Link to="/why-shiksha">{t('whyShiksha')}</Link></li>
-            </ul>
-          </li>
-            <li className="nav-item">
-            <Link to="/upcoming">{t('registration')}</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/courses">{t('services')}</Link>
-          </li>
+          {!isAuthenticated ? (
+            <>
+              <li><Link to="/login">Login</Link></li>
+              <li><Link to="/signup">Sign Up</Link></li>
+            </>
+          ) : (
+            <>
+              {showDashboard && <li><Link to="/dashboard">Dashboard</Link></li>}
+              {hasRole('teacher') && <li><Link to="/teacher">Teacher</Link></li>}
+              {hasRole('admin') && <li><Link to="/admin">Admin</Link></li>}
 
-          {/* ✅ PLACEMENTS ADDED */}
-          <li className="nav-item">
-            <Link to="/placements">Placements</Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to="/general-studies">{t('generalStudies')}</Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to="/forum">{t('forum')}</Link>
-          </li>
-           <li className="nav-item">
-            <Link to="/counselling">{t('counselling')}</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/insight">{t('insight')}</Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to="/contact">{t('contact')}</Link>
-          </li>
+              <li className="nav-user">
+                <span>{user?.email}</span>
+                <button onClick={handleLogout} className="logout-btn">
+                  Logout
+                </button>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </>

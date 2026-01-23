@@ -1,73 +1,35 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import "./Signup.css";
 
 const Signup = () => {
+  const { signup } = useAuth();
   const navigate = useNavigate();
-  const { login } = useAuth();
 
-  const [formData, setFormData] = useState({
-    email: "",
-    username: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const [errors, setErrors] = useState({});
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
-
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors({});
-    setSubmitting(true);
+    setError("");
 
-    if (formData.password !== formData.confirmPassword) {
-      setErrors({ password: "Passwords do not match" });
-      setSubmitting(false);
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
       return;
     }
 
+    setSubmitting(true);
+
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/signup/`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: formData.email,
-            username: formData.username,
-            password: formData.password,
-          }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setErrors(data);
-        return;
-      }
-
-      // Optional auto-login if backend returns tokens
-      if (data.access && data.refresh) {
-        login({
-          access: data.access,
-          refresh: data.refresh,
-          user: data.user || null,
-        });
-      }
-
+      await signup({ email, username, password });
       navigate("/", { replace: true });
     } catch (err) {
-      setErrors({ global: "Network error. Please try again." });
+      setError("Signup failed. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -78,45 +40,34 @@ const Signup = () => {
       <div className="signup-form">
         <h2>Sign Up</h2>
 
-        {errors.global && (
-          <p className="error-text">{errors.global}</p>
-        )}
+        {error && <p className="signup-error">{error}</p>}
 
         <form onSubmit={handleSubmit}>
           <div className="signup-form-group">
             <label>Email</label>
             <input
-              name="email"
               type="email"
-              value={formData.email}
-              onChange={handleChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
-            {errors.email && (
-              <p className="error-text">{errors.email[0]}</p>
-            )}
           </div>
 
           <div className="signup-form-group">
             <label>Username</label>
             <input
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
             />
-            {errors.username && (
-              <p className="error-text">{errors.username[0]}</p>
-            )}
           </div>
 
           <div className="signup-form-group">
             <label>Password</label>
             <input
-              name="password"
               type="password"
-              value={formData.password}
-              onChange={handleChange}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
@@ -124,23 +75,15 @@ const Signup = () => {
           <div className="signup-form-group">
             <label>Confirm Password</label>
             <input
-              name="confirmPassword"
               type="password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
-            {errors.password && (
-              <p className="error-text">{errors.password}</p>
-            )}
           </div>
 
-          <button
-            type="submit"
-            className="signup-btn"
-            disabled={submitting}
-          >
-            {submitting ? "Signing up…" : "Sign up"}
+          <button type="submit" disabled={submitting}>
+            {submitting ? "Signing up..." : "Sign Up"}
           </button>
         </form>
 
@@ -152,4 +95,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Signup; // ✅ THIS IS REQUIRED

@@ -1,78 +1,81 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { apiFetch } from "./http";
+import { createContext, useContext, useEffect, useState } from "react";
+import api from "../api/apiClient";
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    let mounted = true;
+  const isAuthenticated = !!user;
 
-    const restoreSession = async () => {
-      try {
-        const res = await apiFetch("/me/");
-        if (!res.ok) throw new Error();
-        const data = await res.json();
-
-        if (!mounted) return;
-        setIsAuthenticated(true);
-        setUser(data);
-      } catch {
-        if (!mounted) return;
-        localStorage.removeItem("access");
-        localStorage.removeItem("refresh");
-        setIsAuthenticated(false);
-        setUser(null);
-      } finally {
-        if (mounted) setLoading(false);
-      }
-    };
-
-    restoreSession();
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  const login = ({ access, refresh, user }) => {
-    localStorage.setItem("access", access);
-    localStorage.setItem("refresh", refresh);
-    setIsAuthenticated(true);
-    setUser(user);
+  // 🔐 Single source of truth for user state
+  const bootstrap = async () => {
+    try {
+      const res = await api.get("/me/");
+      setUser(res.data);
+    } catch {
+      logout();
+    } finally {
+      setLoading(false);
+    }
   };
 
+  // 🔄 Restore session on refresh
+  useEffect(() => {
+    if (localStorage.getItem("access")) {
+      bootstrap();
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  // 🔑 LOGIN
+  const login = async (email, password) => {
+    const res = await api.post("/token/", { email, password });
+
+    localStorage.setItem("access", res.data.access);
+    localStorage.setItem("refresh", res.data.refresh);
+
+    await bootstrap(); // ✅ normalize user
+  };
+
+  // 🔑 SIGNUP (FIXED)
+  const signup = async (payload) => {
+    const res = await api.post("/signup/", payload);
+
+    localStorage.setItem("access", res.data.access);
+    localStorage.setItem("refresh", res.data.refresh);
+
+    await bootstrap(); // ✅ SAME as login
+  };
+
+  // 🚪 LOGOUT
   const logout = () => {
-    localStorage.removeItem("access");
-    localStorage.removeItem("refresh");
-    setIsAuthenticated(false);
+    localStorage.clear();
     setUser(null);
   };
 
-  if (loading) {
-    return <div>Loading authentication…</div>;
-  }
+  // 🎭 ROLE CHECK
+  const hasRole = (role) => {
+    return user?.roles?.includes(role) ?? false;
+  };
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, user, login, logout }}
+      value={{
+        user,
+        isAuthenticated,
+        loading,
+        login,
+        signup,
+        logout,
+        hasRole,
+      }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => {
-  const ctx = useContext(AuthContext);
-  if (!ctx) {
-    throw new Error("useAuth must be used inside AuthProvider");
-  }
-  return ctx;
-};
+export const useAuth = () => useContext(AuthContext);

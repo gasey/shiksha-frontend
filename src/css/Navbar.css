@@ -127,3 +127,12 @@
     justify-content: flex-start;
   }
 }
+
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: #c00;
+  margin-left: 8px;
+}

@@ -1,69 +1,59 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom';
 
-import Navbar from './Navbar'
-import LandingHeader from './LandingHeader'
-import MainGrid from './MainGrid'
-import LowerGrid from './LowerGrid'
-import Feedback from './Feedback'
-import Footer from './Footer'
+import Dashboard from './Dashboard';
+import ProtectedRoute from '../routes/ProtectedRoute';
 
-import About from './About'
-import About2 from './About2'
-import Vision from './Vision'
-import Mission from './Mission'
-import Values from './Values'
-import WhySiksha from './WhySiksha'
+import Navbar from './Navbar';
+import LandingHeader from './LandingHeader';
+import MainGrid from './MainGrid';
+import LowerGrid from './LowerGrid';
+import Feedback from './Feedback';
+import Footer from './Footer';
 
-import '../css/App.css'
+import About from './About';
+import About2 from './About2';
+import Vision from './Vision';
+import Mission from './Mission';
+import Values from './Values';
+import WhySiksha from './WhySiksha';
 
-import Contact from './Contact'
-import ExploreServices from './ExploreServices'
-import CurrentAffairs from './CurrentAffairs'
-import Upcoming from './Upcoming'
-import Courses from './Courses'
-import TermsCondition from './TermsCondition'
+import '../css/App.css';
 
-import Login from '../auth/Login'
-import Signup from '../auth/Signup'
+import Contact from './Contact';
+import ExploreServices from './ExploreServices';
+import CurrentAffairs from './CurrentAffairs';
+import Upcoming from './Upcoming';
+import Courses from './Courses';
+import TermsCondition from './TermsCondition';
 
-import Insight from './Insight'
-import Training from './Training'
-import GeneralStudies from './GeneralStudies'
-import Faq from './Faq'
-import Counselling from './Counselling'
+import Login from '../auth/Login';
+import Signup from '../auth/Signup';
 
-import Placements from './Placements'   // ✅ ADDED
+import Insight from './Insight';
+import Training from './Training';
+import GeneralStudies from './GeneralStudies';
+import Faq from './Faq';
+import Counselling from './Counselling';
 
-import ThreadListPage from '../forum/ThreadListPage'
-import ThreadDetailPage from '../forum/ThreadDetailPage'
+import Placements from './Placements';
+
+import ThreadListPage from '../forum/ThreadListPage';
+import ThreadDetailPage from '../forum/ThreadDetailPage';
+
+function Page({ children }) {
+  return (
+    <div className="page-content">
+      <Navbar />
+      {children}
+      <Footer />
+    </div>
+  );
+}
 
 function App() {
   return (
     <div className="app">
       <Routes>
-
-        {/* ===== FORUM ===== */}
-        <Route
-          path="/forum"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <ThreadListPage />
-              <Footer />
-            </div>
-          }
-        />
-
-        <Route
-          path="/forum/:threadId"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <ThreadDetailPage />
-              <Footer />
-            </div>
-          }
-        />
 
         {/* ===== HOME ===== */}
         <Route
@@ -83,194 +73,50 @@ function App() {
           }
         />
 
-        {/* ===== STATIC PAGES ===== */}
+        {/* ===== DASHBOARD (PROTECTED) ===== */}
         <Route
-          path="/about"
+          path="/dashboard"
           element={
-            <div className="page-content">
-              <Navbar />
-              <About2 />
-              <About />
-              <Footer />
-            </div>
-          }
-        />
-
-        <Route
-          path="/vision"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <Vision />
-              <Footer />
-            </div>
-          }
-        />
-
-        <Route
-          path="/mission"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <Mission />
-              <Footer />
-            </div>
-          }
-        />
-
-        <Route
-          path="/values"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <Values />
-              <Footer />
-            </div>
-          }
-        />
-
-        <Route
-          path="/why-shiksha"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <WhySiksha />
-              <Footer />
-            </div>
-          }
-        />
-
-        <Route
-          path="/contact"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <Contact />
-              <Footer />
-            </div>
+            <ProtectedRoute>
+              <Page>
+                <Dashboard />
+              </Page>
+            </ProtectedRoute>
           }
         />
 
         {/* ===== AUTH ===== */}
-        <Route
-          path="/login"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <Login />
-              <Footer />
-            </div>
-          }
-        />
+        <Route path="/login" element={<Page><Login /></Page>} />
+        <Route path="/signup" element={<Page><Signup /></Page>} />
 
-        <Route
-          path="/signup"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <Signup />
-              <Footer />
-            </div>
-          }
-        />
+        {/* ===== STATIC ===== */}
+        <Route path="/about" element={<Page><About2 /><About /></Page>} />
+        <Route path="/vision" element={<Page><Vision /></Page>} />
+        <Route path="/mission" element={<Page><Mission /></Page>} />
+        <Route path="/values" element={<Page><Values /></Page>} />
+        <Route path="/why-shiksha" element={<Page><WhySiksha /></Page>} />
+        <Route path="/contact" element={<Page><Contact /></Page>} />
+        <Route path="/terms" element={<Page><TermsCondition /></Page>} />
+        <Route path="/faq" element={<Page><Faq /></Page>} />
 
         {/* ===== CONTENT ===== */}
-        <Route
-          path="/current-affairs"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <CurrentAffairs />
-              <Footer />
-            </div>
-          }
-        />
-
-        <Route
-          path="/courses"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <Courses />
-              <Footer />
-            </div>
-          }
-        />
-
-        {/* ✅ PLACEMENTS (ADDED) */}
-        <Route
-          path="/placements"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <Placements />
-              <Footer />
-            </div>
-          }
-        />
-
-        <Route path="/upcoming" element={<Upcoming />} />
-
-        <Route
-          path="/terms"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <TermsCondition />
-              <Footer />
-            </div>
-          }
-        />
-
-        <Route
-          path="/faq"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <Faq />
-              <Footer />
-            </div>
-          }
-        />
-
-        <Route
-          path="/insight"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <Insight />
-              <Footer />
-            </div>
-          }
-        />
+        <Route path="/courses" element={<Page><Courses /></Page>} />
+        <Route path="/placements" element={<Page><Placements /></Page>} />
+        <Route path="/general-studies" element={<Page><GeneralStudies /></Page>} />
+        <Route path="/counselling" element={<Page><Counselling /></Page>} />
+        <Route path="/insight" element={<Page><Insight /></Page>} />
+        <Route path="/current-affairs" element={<Page><CurrentAffairs /></Page>} />
 
         <Route path="/training" element={<Training />} />
+        <Route path="/upcoming" element={<Upcoming />} />
 
-        <Route
-          path="/general-studies"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <GeneralStudies />
-              <Footer />
-            </div>
-          }
-        />
-
-        <Route
-          path="/counselling"
-          element={
-            <div className="page-content">
-              <Navbar />
-              <Counselling />
-              <Footer />
-            </div>
-          }
-        />
+        {/* ===== FORUM ===== */}
+        <Route path="/forum" element={<Page><ThreadListPage /></Page>} />
+        <Route path="/forum/:threadId" element={<Page><ThreadDetailPage /></Page>} />
 
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
