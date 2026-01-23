@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa';
-import '../css/Navbar.css';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
+import "../css/Navbar.css";
 
-import { useLanguage } from '../contexts/LanguageContext';
-import { useAuth } from '../contexts/AuthContext';
+import { useLanguage } from "../contexts/LanguageContext";
+import { useAuth } from "../contexts/AuthContext";
 
 const Navbar = () => {
   const { t, switchLanguage } = useLanguage();
@@ -13,7 +13,10 @@ const Navbar = () => {
 
   const [fontSize, setFontSize] = useState(1);
 
+  // ⛔ Prevent wrong buttons during auth bootstrap
   if (loading) return null;
+
+  /* ================= Accessibility ================= */
 
   const increaseFont = () => {
     const size = Math.min(fontSize + 0.1, 1.5);
@@ -27,13 +30,16 @@ const Navbar = () => {
     document.documentElement.style.fontSize = `${size * 100}%`;
   };
 
+  /* ================= Auth ================= */
+
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate("/login", { replace: true });
   };
 
-  const showDashboard =
-    isAuthenticated && !hasRole('admin');
+  const showDashboard = isAuthenticated && !hasRole("admin");
+
+  /* ================= Render ================= */
 
   return (
     <>
@@ -46,10 +52,14 @@ const Navbar = () => {
         </marquee>
 
         <div className="strip-controls">
-          <button onClick={decreaseFont} className="accessibility-btn">A-</button>
-          <button onClick={increaseFont} className="accessibility-btn">A+</button>
+          <button onClick={decreaseFont} className="accessibility-btn">
+            A-
+          </button>
+          <button onClick={increaseFont} className="accessibility-btn">
+            A+
+          </button>
           <button onClick={switchLanguage} className="language-btn">
-            {t('language')}
+            {t("language")}
           </button>
         </div>
       </div>
@@ -67,25 +77,31 @@ const Navbar = () => {
         </div>
 
         <div className="header-right">
-          <a href="https://www.facebook.com" className="social-icon"><FaFacebookF /></a>
-          <a href="https://www.instagram.com" className="social-icon"><FaInstagram /></a>
-          <a href="https://www.youtube.com" className="social-icon"><FaYoutube /></a>
+          <a href="https://www.facebook.com" className="social-icon">
+            <FaFacebookF />
+          </a>
+          <a href="https://www.instagram.com" className="social-icon">
+            <FaInstagram />
+          </a>
+          <a href="https://www.youtube.com" className="social-icon">
+            <FaYoutube />
+          </a>
         </div>
       </header>
 
       {/* ===== NAV ===== */}
       <nav className="navbar navbar-pc">
         <ul className="nav-menu">
-          <li><Link to="/">{t('home')}</Link></li>
-          <li><Link to="/about">{t('about')}</Link></li>
-          <li><Link to="/upcoming">{t('registration')}</Link></li>
-          <li><Link to="/courses">{t('services')}</Link></li>
+          <li><Link to="/">{t("home")}</Link></li>
+          <li><Link to="/about">{t("about")}</Link></li>
+          <li><Link to="/upcoming">{t("registration")}</Link></li>
+          <li><Link to="/courses">{t("services")}</Link></li>
           <li><Link to="/placements">Placements</Link></li>
-          <li><Link to="/general-studies">{t('generalStudies')}</Link></li>
-          <li><Link to="/forum">{t('forum')}</Link></li>
-          <li><Link to="/counselling">{t('counselling')}</Link></li>
-          <li><Link to="/insight">{t('insight')}</Link></li>
-          <li><Link to="/contact">{t('contact')}</Link></li>
+          <li><Link to="/general-studies">{t("generalStudies")}</Link></li>
+          <li><Link to="/forum">{t("forum")}</Link></li>
+          <li><Link to="/counselling">{t("counselling")}</Link></li>
+          <li><Link to="/insight">{t("insight")}</Link></li>
+          <li><Link to="/contact">{t("contact")}</Link></li>
 
           {!isAuthenticated ? (
             <>
@@ -94,12 +110,26 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              {showDashboard && <li><Link to="/dashboard">Dashboard</Link></li>}
-              {hasRole('teacher') && <li><Link to="/teacher">Teacher</Link></li>}
-              {hasRole('admin') && <li><Link to="/admin">Admin</Link></li>}
+              {showDashboard && (
+                <li>
+                  <Link to="/dashboard">Dashboard</Link>
+                </li>
+              )}
+
+              {hasRole("teacher") && (
+                <li>
+                  <Link to="/teacher">Teacher</Link>
+                </li>
+              )}
+
+              {hasRole("admin") && (
+                <li>
+                  <Link to="/admin">Admin</Link>
+                </li>
+              )}
 
               <li className="nav-user">
-                <span>{user?.email}</span>
+                <span className="nav-email">{user?.email}</span>
                 <button onClick={handleLogout} className="logout-btn">
                   Logout
                 </button>
