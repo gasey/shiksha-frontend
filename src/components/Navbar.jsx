@@ -99,24 +99,33 @@ const Navbar = () => {
           <li><Link to="/contact">{t("contact")}</Link></li>
 
           {/* ===== AUTH SECTION ===== */}
-          {isAuthenticated && (
-            <>
-              {hasRole("teacher") && (
-                <li><Link to="/teacher">Teacher</Link></li>
-              )}
+          {/* ===== AUTH SECTION ===== */}
+{isAuthenticated && user && (
+  <>
+    {hasRole?.("teacher") && (
+      <li><Link to="/teacher">Teacher</Link></li>
+    )}
 
-              {hasRole("admin") && (
-                <li><Link to="/admin">Admin</Link></li>
-              )}
+    {hasRole?.("admin") && (
+      <li><Link to="/admin">Admin</Link></li>
+    )}
 
-              <li className="nav-user">
-                <span className="nav-email">{user?.email}</span>
-                <button onClick={handleLogout} className="logout-btn">
-                  Logout
-                </button>
-              </li>
-            </>
-          )}
+    <li className="nav-user">
+      <span className="nav-email">{user.email}</span>
+      <button onClick={handleLogout} className="logout-btn">
+        Logout
+      </button>
+    </li>
+  </>
+)}
+
+{!isAuthenticated && (
+  <li className="nav-auth">
+    <Link to="/login">Login</Link>
+    <Link to="/signup">Signup</Link>
+  </li>
+)}
+
         </ul>
       </nav>
     </>
