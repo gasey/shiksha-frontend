@@ -18,24 +18,20 @@ const Login = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setSubmitting(true);
+  e.preventDefault();
+  setError("");
+  setSubmitting(true);
 
-    try {
-      await login(email, password);
-      navigate("/", { replace: true });
-    } catch (err) {
-      // ✅ Show backend message if available
-      if (err?.message) {
-        setError(err.message);
-      } else {
-        setError("Login failed. Please try again.");
-      }
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  try {
+    await login(email, password);
+    navigate("/", { replace: true });
+  } catch (err) {
+    setError(err); // ✅ THIS is the fix
+  } finally {
+    setSubmitting(false);
+  }
+};
+
 
   return (
     <div className="login-container">
