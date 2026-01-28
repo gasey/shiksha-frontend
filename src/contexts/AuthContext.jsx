@@ -37,25 +37,28 @@ export const AuthProvider = ({ children }) => {
 
   // 🔑 LOGIN
   const login = async (email, password) => {
-    const res = await api.post("/token/", { email, password });
+  try {
+    const res = await api.post("/login/", { email, password });
 
     localStorage.setItem("access", res.data.access);
     localStorage.setItem("refresh", res.data.refresh);
 
     setLoading(true);
     await bootstrap();
-  };
-
+  } catch (err) {
+    throw extractError(err);
+  }
+};
   // 🔑 SIGNUP
   const signup = async (payload) => {
-    const res = await api.post("/signup/", payload);
-
-    localStorage.setItem("access", res.data.access);
-    localStorage.setItem("refresh", res.data.refresh);
-
-    setLoading(true);
-    await bootstrap();
-  };
+  try {
+    await api.post("/signup/", payload);
+    // ❌ DO NOT store tokens
+    // ❌ DO NOT call bootstrap
+  } catch (err) {
+    throw extractError(err);
+  }
+};
 
   // 🚪 LOGOUT
   const logout = () => {
