@@ -119,7 +119,7 @@ const Navbar = () => {
   </>
 )}
 
-{!isAuthenticated && (
+{!loading && !user && (
   <li className="nav-auth">
     <Link to="/login">Login</Link>
     <Link to="/signup">Signup</Link>
