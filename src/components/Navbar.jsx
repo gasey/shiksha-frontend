@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const [fontSize, setFontSize] = useState(1);
 
-  // ⛔ Prevent wrong buttons during auth bootstrap
+  // ⛔ Prevent flicker during auth bootstrap
   if (loading) return null;
 
   /* ================= Accessibility ================= */
@@ -31,6 +31,7 @@ const Navbar = () => {
   };
 
   /* ================= Logout ================= */
+
   const handleLogout = () => {
     logout();
     navigate("/login", { replace: true });
@@ -84,11 +85,13 @@ const Navbar = () => {
         </div>
       </header>
 
-      {/* ===== NAV ===== */}
+      {/* ===== NAVIGATION ===== */}
       <nav className="navbar navbar-pc">
         <ul className="nav-menu">
+
           <li><Link to="/">{t("home")}</Link></li>
 
+          {/* About Dropdown */}
           <li className="nav-item dropdown">
             <Link to="/about">{t("about")}</Link>
             <ul className="dropdown-menu">
@@ -99,15 +102,17 @@ const Navbar = () => {
             </ul>
           </li>
 
+          {/* Registration Dropdown */}
           <li className="nav-item dropdown">
-            <Link to="/upcoming">{t('registration')}</Link>
+            <Link to="/upcoming">{t("registration")}</Link>
             <ul className="dropdown-menu">
-              <li><Link to="/upcoming">{t('students')}</Link></li>
-              <li><Link to="/upcoming">{t('teachers')}</Link></li>
-              <li><Link to="/upcoming">{t('experts')}</Link></li>
+              <li><Link to="/upcoming">{t("students")}</Link></li>
+              <li><Link to="/upcoming">{t("teachers")}</Link></li>
+              <li><Link to="/upcoming">{t("experts")}</Link></li>
             </ul>
           </li>
 
+          {/* Services Dropdown */}
           <li className="nav-item dropdown">
             <Link to="/courses">{t("services")}</Link>
             <ul className="dropdown-menu">
@@ -121,6 +126,7 @@ const Navbar = () => {
           <li><Link to="/general-studies">{t("generalStudies")}</Link></li>
           <li><Link to="/forum">{t("forum")}</Link></li>
 
+          {/* Counselling Dropdown */}
           <li className="nav-item dropdown">
             <Link to="/counselling">{t("counselling")}</Link>
             <ul className="dropdown-menu">
@@ -132,18 +138,19 @@ const Navbar = () => {
 
           <li><Link to="/insight">{t("insight")}</Link></li>
 
+          {/* Training Dropdown */}
           <li className="nav-item dropdown">
-            <Link to="/training">{t('training')}</Link>
+            <Link to="/training">{t("training")}</Link>
             <ul className="dropdown-menu">
-              <li><Link to="/training">{t('industrial')}</Link></li>
-              <li><Link to="/training">{t('specialized')}</Link></li>
+              <li><Link to="/training">{t("industrial")}</Link></li>
+              <li><Link to="/training">{t("specialized")}</Link></li>
             </ul>
           </li>
 
           <li><Link to="/contact">{t("contact")}</Link></li>
 
           {/* ===== AUTH SECTION ===== */}
-          {isAuthenticated && user && (
+          {isAuthenticated && user ? (
             <>
               {hasRole?.("teacher") && (
                 <li><Link to="/teacher">Teacher</Link></li>
@@ -160,9 +167,13 @@ const Navbar = () => {
                 </button>
               </li>
             </>
+          ) : (
+            <li className="nav-auth">
+              <Link to="/login">Login</Link>
+              <Link to="/signup">Signup</Link>
+            </li>
           )}
 
-          
         </ul>
       </nav>
     </>
