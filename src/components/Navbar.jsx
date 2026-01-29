@@ -89,35 +89,35 @@ const Navbar = () => {
         <ul className="nav-menu">
           <li><Link to="/">{t("home")}</Link></li>
 
-        <li className="nav-item dropdown">
-  <a href="/about">{t("about")}</a>
+<li className="nav-item dropdown">
+  <Link to="/about">{t("about")}</Link>
   <ul className="dropdown-menu">
-    <li><a href="/vision">{t("vision")}</a></li>
-    <li><a href="/mission">{t("mission")}</a></li>
-    <li><a href="/values">{t("values")}</a></li>
-    <li><a href="/why-shiksha">{t("whyShiksha")}</a></li>
+    <li><Link to="/vision">{t("vision")}</Link></li>
+    <li><Link to="/mission">{t("mission")}</Link></li>
+    <li><Link to="/values">{t("values")}</Link></li>
+    <li><Link to="/why-shiksha">{t("whyShiksha")}</Link></li>
   </ul>
 </li>
 
 
 
           <li className="nav-item dropdown">
-            <a href="/upcoming">{t('registration')}</a>
+            <Link to="/upcoming">{t('registration')}</link>
             <ul className="dropdown-menu">
-              <li><a href="/upcoming">{t('students')}</a></li>
-              <li><a href="/upcoming">{t('teachers')}</a></li>
-              <li><a href="/upcoming">{t('experts')}</a></li>
+              <li><Link to="/upcoming">{t('students')}</Link></li>
+              <li><Link to="/upcoming">{t('teachers')}</Link</li>
+              <li><Link to="/upcoming">{t('experts')}</Link></li>
             </ul>
           </li>
 
 
 
 <li className="nav-item dropdown">
-  <a href="/courses">{t("services")}</a>
+  <Link to="/courses">{t("services")}</Link>
   <ul className="dropdown-menu">
-    <li><a href="/courses">{t("online")}</a></li>
-    <li><a href="/upcoming">{t("classroom")}</a></li>
-    <li><a href="/upcoming">{t("softwareDev")}</a></li>
+    <li><Link to="/courses">{t("online")}</Link></li>
+    <li><Link to="/upcoming">{t("classroom")}</Link></li>
+    <li><Link to="/upcoming">{t("softwareDev")}</Link></li>
   </ul>
 </li>
 
@@ -128,11 +128,11 @@ const Navbar = () => {
           <li><Link to="/forum">{t("forum")}</Link></li>
 
 <li className="nav-item dropdown">
-  <a href="/counselling">{t("counselling")}</a>
+  <Link to="/counselling">{t("counselling")}</Link>
   <ul className="dropdown-menu">
-    <li><a href="/counselling">{t("Career")}</a></li>
-    <li><a href="/counselling">{t("Admission in India")}</a></li>
-    <li><a href="/counselling">{t("Admission in Abroad")}</a></li>
+    <li><Link to="/counselling">{t("Career")}</Link></li>
+    <li><Link to="/counselling">{t("Admission in India")}</Link></li>
+    <li><Link to="/counselling">{t("Admission in Abroad")}</Link></li>
   </ul>
 </li>
 
@@ -142,10 +142,10 @@ const Navbar = () => {
           <li><Link to="/insight">{t("insight")}</Link></li>
             
       <li className="nav-item dropdown">
-            <a href="/training">{t('training')}</a>
+            <Link to="/training">{t('training')}</link>
             <ul className="dropdown-menu">
-              <li><a href="/training">{t('industrial')}</a></li>
-              <li><a href="/training">{t('specialized')}</a></li>
+              <li><Link to="/training">{t('industrial')}</Link></li>
+              <li><Link to="/training">{t('specialized')}</Link></li>
             </ul>
           </li>
           <li><Link to="/contact">{t("contact")}</Link></li>
