@@ -88,14 +88,66 @@ const Navbar = () => {
       <nav className="navbar navbar-pc">
         <ul className="nav-menu">
           <li><Link to="/">{t("home")}</Link></li>
-          <li><Link to="/about">{t("about")}</Link></li>
-          <li><Link to="/upcoming">{t("registration")}</Link></li>
-          <li><Link to="/courses">{t("services")}</Link></li>
+
+<li className="nav-item dropdown">
+  <Link to="/about">{t("about")}</Link>
+  <ul className="dropdown-menu">
+    <li><Link to="/vision">{t("vision")}</Link></li>
+    <li><Link to="/mission">{t("mission")}</Link></li>
+    <li><Link to="/values">{t("values")}</Link></li>
+    <li><Link to="/why-shiksha">{t("whyShiksha")}</Link></li>
+  </ul>
+</li>
+
+
+
+          <li className="nav-item dropdown">
+            <Link to="/upcoming">{t('registration')}</link>
+            <ul className="dropdown-menu">
+              <li><Link to="/upcoming">{t('students')}</Link></li>
+              <li><Link to="/upcoming">{t('teachers')}</Link</li>
+              <li><Link to="/upcoming">{t('experts')}</Link></li>
+            </ul>
+          </li>
+
+
+
+<li className="nav-item dropdown">
+  <Link to="/courses">{t("services")}</Link>
+  <ul className="dropdown-menu">
+    <li><Link to="/courses">{t("online")}</Link></li>
+    <li><Link to="/upcoming">{t("classroom")}</Link></li>
+    <li><Link to="/upcoming">{t("softwareDev")}</Link></li>
+  </ul>
+</li>
+
+          
+
           <li><Link to="/placements">Placements</Link></li>
           <li><Link to="/general-studies">{t("generalStudies")}</Link></li>
           <li><Link to="/forum">{t("forum")}</Link></li>
-          <li><Link to="/counselling">{t("counselling")}</Link></li>
+
+<li className="nav-item dropdown">
+  <Link to="/counselling">{t("counselling")}</Link>
+  <ul className="dropdown-menu">
+    <li><Link to="/counselling">{t("Career")}</Link></li>
+    <li><Link to="/counselling">{t("Admission in India")}</Link></li>
+    <li><Link to="/counselling">{t("Admission in Abroad")}</Link></li>
+  </ul>
+</li>
+
+         
+
+
           <li><Link to="/insight">{t("insight")}</Link></li>
+            
+      <li className="nav-item dropdown">
+            <Link to="/training">{t('training')}</link>
+            <ul className="dropdown-menu">
+              <li><Link to="/training">{t('industrial')}</Link></li>
+              <li><Link to="/training">{t('specialized')}</Link></li>
+            </ul>
+          </li>
           <li><Link to="/contact">{t("contact")}</Link></li>
 
           {/* ===== AUTH SECTION ===== */}
