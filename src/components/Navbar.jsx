@@ -143,14 +143,15 @@ const Navbar = () => {
           <li><Link to="/contact">{t("contact")}</Link></li>
 
           {/* ===== AUTH (LOGOUT ONLY) ===== */}
-          {isAuthenticated && user && (
-            <li className="nav-user">
-              <span className="nav-email">{user.email}</span>
-              <button onClick={handleLogout} className="logout-btn">
-                Logout
-              </button>
-            </li>
-          )}
+          {isAuthenticated && typeof user === "object" && user?.email && (
+  <li className="nav-user">
+    <span className="nav-email">{String(user.email)}</span>
+    <button onClick={handleLogout} className="logout-btn">
+      Logout
+    </button>
+  </li>
+)}
+
         </ul>
       </nav>
     </>
