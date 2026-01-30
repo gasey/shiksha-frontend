@@ -15,10 +15,8 @@ export const AuthProvider = ({ children }) => {
       const res = await api.get("/me/");
       setUser(res.data);
     } catch (err) {
-      if (err.response?.status === 401) {
-        localStorage.clear();
-        setUser(null);
-      }
+      localStorage.clear();
+      setUser(null);
     } finally {
       setLoading(false);
     }
@@ -42,7 +40,8 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       await bootstrap();
     } catch (err) {
-      throw extractError(err);
+      setLoading(false);
+      return Promise.reject(extractError(err)); // ✅ FIX
     }
   };
 
@@ -50,7 +49,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await api.post("/signup/", payload);
     } catch (err) {
-      throw extractError(err);
+      return Promise.reject(extractError(err));
     }
   };
 
