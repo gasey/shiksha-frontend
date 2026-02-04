@@ -25,7 +25,7 @@ const extractError = (err) => {
 
   // DRF default → ["message"]
   if (Array.isArray(data)) {
-    return new Error(data[0]);
+    return data[0];
   }
 
   // Fallback
