@@ -26,7 +26,13 @@ const Login = () => {
     await login(email, password);
     navigate("/", { replace: true });
   } catch (err) {
-    setError(err); // ✅ THIS is the fix
+      const message =
+        typeof err === "string"
+          ? err
+          : err?.response?.data?.detail ||
+            err?.message ||
+            "login Failed";
+    setError(message); // ✅ THIS is the fix
   } finally {
     setSubmitting(false);
   }
@@ -59,7 +65,7 @@ const Login = () => {
             />
           </div>
 
-          {error && <p className="login-error">{error}</p>}
+          {error && <p className="login-error">{String(error)}</p>}
 
           <button type="submit" disabled={submitting}>
             {submitting ? "Logging in..." : "Login"}

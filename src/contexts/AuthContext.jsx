@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("refresh", res.data.refresh);
 
       setLoading(true);
-      await bootstrap();
+      //await bootstrap();
     } catch (err) {
       setLoading(false);
       return Promise.reject(extractError(err)); // ✅ FIX
