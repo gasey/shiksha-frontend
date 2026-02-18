@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
    */
   const bootstrap = useCallback(async () => {
     try {
-      const res = await api.get("/me/");
+      const res = await api.get("/accounts/me/");
       setUser(res.data);
     } catch (err) {
       setUser(null);
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
    */
   const login = async (email, password) => {
     try {
-      await api.post("/login/", { email, password });
+      await api.post("/accounts/login/", { email, password });
 
       setLoading(true);
       await bootstrap();
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
    */
   const logout = async () => {
     try {
-      await api.post("/logout/");
+      await api.post("/accounts/logout/");
     } catch {
       // ignore network failure
     }
