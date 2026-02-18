@@ -1,4 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
+import DailyTopics from "./DailyTopics";
+
+<Route path="/daily-topics" element={<DailyTopics />} />
 
 import Dashboard from './Dashboard';
 import ProtectedRoute from '../routes/ProtectedRoute';

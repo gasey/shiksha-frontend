@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback } from "react";
 import api from "../api/apiClient";
 import extractError from "../utils/extractError";
 
@@ -10,41 +10,47 @@ export const AuthProvider = ({ children }) => {
 
   const isAuthenticated = !!user;
 
-  const bootstrap = async () => {
+  /**
+   * Bootstraps user session using HttpOnly cookie
+   */
+  const bootstrap = useCallback(async () => {
     try {
       const res = await api.get("/me/");
       setUser(res.data);
     } catch (err) {
-      localStorage.clear();
       setUser(null);
     } finally {
       setLoading(false);
     }
-  };
-
-  useEffect(() => {
-    if (localStorage.getItem("access")) {
-      bootstrap();
-    } else {
-      setLoading(false);
-    }
   }, []);
 
+  /**
+   * Run bootstrap on first load
+   * Browser automatically sends cookies
+   */
+  useEffect(() => {
+    bootstrap();
+  }, [bootstrap]);
+
+  /**
+   * Login
+   * Backend sets HttpOnly cookies
+   */
   const login = async (email, password) => {
     try {
-      const res = await api.post("/login/", { email, password });
-
-      localStorage.setItem("access", res.data.access);
-      localStorage.setItem("refresh", res.data.refresh);
+      await api.post("/login/", { email, password });
 
       setLoading(true);
       await bootstrap();
     } catch (err) {
       setLoading(false);
-      return Promise.reject(extractError(err)); // ✅ FIX
+      return Promise.reject(extractError(err));
     }
   };
 
+  /**
+   * Signup
+   */
   const signup = async (payload) => {
     try {
       await api.post("/signup/", payload);
@@ -53,10 +59,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    localStorage.clear();
+  /**
+   * Logout
+   * Calls backend to clear cookies
+   */
+  const logout = async () => {
+    try {
+      await api.post("/logout/");
+    } catch {
+      // ignore network failure
+    }
+
     setUser(null);
-    setLoading(false);
   };
 
   return (

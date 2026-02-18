@@ -2,42 +2,39 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
+  withCredentials: true, // 🔥 REQUIRED for HttpOnly cookies
 });
 
-api.interceptors.request.use((config) => {
-  const access = localStorage.getItem("access");
-  if (access) {
-    config.headers.Authorization = `Bearer ${access}`;
-  }
-  return config;
-});
-
+/**
+ * Response interceptor:
+ * - If access token expired (401)
+ * - Attempt refresh using refresh cookie
+ * - Retry original request
+ * - If refresh fails → redirect to login
+ */
 api.interceptors.response.use(
-  (res) => res,
+  (response) => response,
   async (error) => {
-    const original = error.config;
+    const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !original._retry) {
-      original._retry = true;
+    if (!error.response) {
+      return Promise.reject(error);
+    }
 
-      const refresh = localStorage.getItem("refresh");
-      if (!refresh) {
-        localStorage.clear();
-        window.location.href = "/login";
-        return Promise.reject(error);
-      }
+    const isUnauthorized = error.response.status === 401;
+    const isRefreshCall = originalRequest.url.includes("/refresh/");
+
+    // Only try refresh if:
+    // - 401
+    // - not already retried
+    // - not the refresh endpoint itself
+    if (isUnauthorized && !originalRequest._retry && !isRefreshCall) {
+      originalRequest._retry = true;
 
       try {
-        const res = await axios.post(
-          `${import.meta.env.VITE_API_URL}/api/token/refresh/`,
-          { refresh }
-        );
-
-        localStorage.setItem("access", res.data.access);
-        original.headers.Authorization = `Bearer ${res.data.access}`;
-        return api(original);
+        await api.post("/refresh/");
+        return api(originalRequest);
       } catch {
-        localStorage.clear();
         window.location.href = "/login";
       }
     }
@@ -45,5 +42,7 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+
 
 export default api;

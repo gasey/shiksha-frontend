@@ -32,7 +32,7 @@ const Login = () => {
           : err?.response?.data?.detail ||
             err?.message ||
             "login Failed";
-    setError(message); // ✅ THIS is the fix
+    setError(message); //  THIS is the fix
   } finally {
     setSubmitting(false);
   }
