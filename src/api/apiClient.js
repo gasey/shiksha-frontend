@@ -2,16 +2,9 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  withCredentials: true, // 🔥 REQUIRED for HttpOnly cookies
+  withCredentials: true,
 });
 
-/**
- * Response interceptor:
- * - If access token expired (401)
- * - Attempt refresh using refresh cookie
- * - Retry original request
- * - If refresh fails → redirect to login
- */
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -22,12 +15,15 @@ api.interceptors.response.use(
     }
 
     const isUnauthorized = error.response.status === 401;
-    const isRefreshCall = originalRequest.url.includes("/refresh/");
+    const isRefreshCall = originalRequest.url?.includes("/refresh/");
+    const isMeCall = originalRequest.url?.includes("/me/");
 
-    // Only try refresh if:
-    // - 401
-    // - not already retried
-    // - not the refresh endpoint itself
+    // 🚫 If simply not logged in, do NOT attempt refresh
+    if (isUnauthorized && isMeCall) {
+      return Promise.reject(error);
+    }
+
+    // 🔄 Attempt refresh only once and not for refresh endpoint
     if (isUnauthorized && !originalRequest._retry && !isRefreshCall) {
       originalRequest._retry = true;
 
@@ -35,14 +31,12 @@ api.interceptors.response.use(
         await api.post("/refresh/");
         return api(originalRequest);
       } catch {
-        window.location.href = "/login";
+        window.location.href = "https://www.shikshacom.com/login";
       }
     }
 
     return Promise.reject(error);
   }
 );
-
-
 
 export default api;
