@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
    */
   const signup = async (payload) => {
     try {
-      await api.post("/signup/", payload);
+      await api.post("/accounts/signup/", payload);
     } catch (err) {
       return Promise.reject(extractError(err));
     }
