@@ -17,8 +17,10 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await api.get("/accounts/me/");
       setUser(res.data);
+      return res.data; // return fetched user so callers can act on it
     } catch (err) {
       setUser(null);
+      return null;
     } finally {
       setLoading(false);
     }
@@ -41,7 +43,9 @@ export const AuthProvider = ({ children }) => {
       await api.post("/accounts/login/", { email, password });
 
       setLoading(true);
-      await bootstrap();
+      // bootstrap returns the authenticated user object
+      const me = await bootstrap();
+      return me;
     } catch (err) {
       setLoading(false);
       return Promise.reject(extractError(err));
