@@ -17,15 +17,18 @@ const handleSubmit = async (e) => {
   setSubmitting(true);
 
   try {
-  const loggedInUser = await login(email, password);
+    const loggedInUser = await login(email, password);
 
-const role = loggedInUser?.user?.roles?.[0]?.toLowerCase();
+    const role = (loggedInUser?.role || user?.role || "").toLowerCase();
 
-if (role === "teacher") {
-  window.location.href = "https://teacher.shikshacom.com/";
-} else {
-  window.location.href = "https://app.shikshacom.com/";
-}
+    console.log("Logged in user:", loggedInUser);
+    console.log("Role detected:", role);
+
+    if (role === "teacher") {
+      window.location.href = "https://teacher.shikshacom.com";
+    } else {
+      window.location.href = "https://app.shikshacom.com";
+    }
 
   } catch (err) {
     const message =
@@ -37,7 +40,7 @@ if (role === "teacher") {
   } finally {
     setSubmitting(false);
   }
-};S
+};
  
 
   return (
