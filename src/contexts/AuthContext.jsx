@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, useCallback } from "rea
 import api from "../api/apiClient";
 import extractError from "../utils/extractError";
 
+
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -9,6 +10,17 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const isAuthenticated = !!user;
+
+  /**
+   * Convenience check used by components and routes to determine if the
+   * current user has a particular role. The backend returns a `role` string,
+   * so we normalize to lowercase when comparing and gracefully handle
+   * `null`/`undefined` values.
+   */
+  const hasRole = (role) => {
+    if (!user || !role) return false;
+    return String(user.role).toLowerCase() === String(role).toLowerCase();
+  };
 
   /**
    * Bootstraps user session using HttpOnly cookie
@@ -79,7 +91,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, loading, login, signup, logout }}
+      value={{ user, isAuthenticated, loading, login, signup, logout, hasRole }}
     >
       {children}
     </AuthContext.Provider>

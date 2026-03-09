@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import "./Login.css";
 
 const Login = () => {
   const { login, isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,13 +22,11 @@ const Login = () => {
       // login now returns the authenticated user object, but we can also
       // read it from context after the promise resolves
       const loggedInUser = await login(email, password);
-const role = (loggedInUser?.role || user?.role || "").toLowerCase();
-      // Role-based redirect
-      if (role === "teacher") {
-        window.location.href = "https://teacher.shikshacom.com";
-      } else {
-        window.location.href = "https://app.shikshacom.com";
-      }
+      // once we're authenticated we no longer need to punt the user to an
+      // external domain; the dashboard component will render the appropriate
+      // teacher/student view based on the role stored in context. doing the
+      // redirect via react-router keeps the navigation inside this SPA.
+      navigate("/dashboard");
     } catch (err) {
       const message =
         err?.response?.data?.detail ||

@@ -56,25 +56,24 @@ function Page({ children }) {
 function App() {
   const { isAuthenticated, user, loading } = useAuth();
 
-  if (loading) return null; // or spinner
+  if (loading) return <div>Loading...</div>;
+
   return (
     <div className="app">
       <Routes>
 
-        {/* ===== HOME ===== */}
-       {/* ===== ROOT DOMAIN CONTROL ===== */}
-<Route
+        {/* ===== ROOT DOMAIN CONTROL ===== */}
+        <Route
   path="/"
   element={
-    isAuthenticated ? (
-      user?.role === "student" ? (
-        <Navigate to="/dashboard" />
-      ) : (
-        <Navigate to="/login" />
-      )
-    ) : (
-      <Navigate to="/login" />
-    )
+    <>
+      <Navbar />
+      <LandingHeader />
+      <MainGrid />
+      <LowerGrid />
+      <Feedback />
+      <Footer />
+    </>
   }
 />
 
@@ -114,7 +113,7 @@ function App() {
 
         <Route path="/training" element={<Training />} />
         <Route path="/upcoming" element={<Upcoming />} />
-        <Route path="/payment" element={<Page><Payment /></Page>} />
+        <Route path="/payment" element={<Payment />} />
 
         {/* ===== FORUM ===== */}
         <Route path="/forum" element={<Page><ThreadListPage /></Page>} />
@@ -124,5 +123,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
