@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 
 const DateFilter = ({ onChange }) => {
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
+  const [date, setDate] = useState('');
 
-  const apply = () => onChange(from || '', to || '');
+  const handleChange = (e) => {
+    const val = e.target.value;
+    setDate(val);
+    onChange(val || '', val || '');
+  };
 
   return (
-    <div style={{display:'flex', gap:8, alignItems:'center'}}>
-      <input className="search-input" type="date" value={from} onChange={e => setFrom(e.target.value)} />
-      <input className="search-input" type="date" value={to} onChange={e => setTo(e.target.value)} />
-      <button className="btn" onClick={apply}>Apply</button>
-    </div>
+    <input className="search-input tl-date-input" type="date" value={date} onChange={handleChange} />
   );
 };
 

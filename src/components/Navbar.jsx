@@ -12,6 +12,22 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const [fontSize, setFontSize] = useState(1);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  const toggleMobileMenu = () => {
+    setMobileOpen((prev) => !prev);
+    setOpenDropdown(null);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileOpen(false);
+    setOpenDropdown(null);
+  };
+
+  const handleDropdownToggle = (name) => {
+    setOpenDropdown((prev) => (prev === name ? null : name));
+  };
 
   // Prevent render while auth bootstraps
   if (loading) return null;
@@ -93,47 +109,60 @@ const Navbar = () => {
 
       {/* ===== NAV ===== */}
       <nav className="navbar navbar-pc">
-        <ul className="nav-menu">
-          <li><NavLink to="/" end>{t("home")}</NavLink></li>
+        {/* Hamburger – phone only */}
+        <button
+          className={`hamburger-btn${mobileOpen ? " open" : ""}`}
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
 
-          <li className="nav-item dropdown">
-            <NavLink to="/about">{t("about")}</NavLink>
+        <ul className={`nav-menu${mobileOpen ? " mobile-open" : ""}`}>
+          <li><NavLink to="/" end onClick={closeMobileMenu}>{t("home")}</NavLink></li>
+
+          <li className={`nav-item dropdown${openDropdown === "about" ? " mobile-dropdown-open" : ""}`}>
+            <NavLink to="/about" onClick={closeMobileMenu}>{t("about")}</NavLink>
+            <button className="mobile-dropdown-arrow" onClick={() => handleDropdownToggle("about")} aria-label="Toggle about menu">▾</button>
             <ul className="dropdown-menu">
-              <li><NavLink to="/vision">{t("vision")}</NavLink></li>
-              <li><NavLink to="/mission">{t("mission")}</NavLink></li>
-              <li><NavLink to="/values">{t("values")}</NavLink></li>
-              <li><NavLink to="/why-shiksha">{t("whyShiksha")}</NavLink></li>
+              <li><NavLink to="/vision" onClick={closeMobileMenu}>{t("vision")}</NavLink></li>
+              <li><NavLink to="/mission" onClick={closeMobileMenu}>{t("mission")}</NavLink></li>
+              <li><NavLink to="/values" onClick={closeMobileMenu}>{t("values")}</NavLink></li>
+              <li><NavLink to="/why-shiksha" onClick={closeMobileMenu}>{t("whyShiksha")}</NavLink></li>
             </ul>
           </li>
 
           <li className="nav-item dropdown">
-            <NavLink to="/courses">{t("courses")}</NavLink>
+            <NavLink to="/courses" onClick={closeMobileMenu}>{t("courses")}</NavLink>
           </li>
 
-          <li><NavLink to="/upcoming">Placements</NavLink></li>
-          <li><NavLink to="/general-studies">{t("generalStudies")}</NavLink></li>
-          <li><NavLink to="/forum">{t("forum")}</NavLink></li>
+          <li><NavLink to="/upcoming" onClick={closeMobileMenu}>Placements</NavLink></li>
+          <li><NavLink to="/general-studies" onClick={closeMobileMenu}>{t("generalStudies")}</NavLink></li>
+          <li><NavLink to="/forum" onClick={closeMobileMenu}>{t("forum")}</NavLink></li>
 
-          <li className="nav-item dropdown">
-            <NavLink to="/counselling">{t("counselling")}</NavLink>
+          <li className={`nav-item dropdown${openDropdown === "counselling" ? " mobile-dropdown-open" : ""}`}>
+            <NavLink to="/counselling" onClick={closeMobileMenu}>{t("counselling")}</NavLink>
+            <button className="mobile-dropdown-arrow" onClick={() => handleDropdownToggle("counselling")} aria-label="Toggle counselling menu">▾</button>
             <ul className="dropdown-menu">
-              <li><NavLink to="/counselling">{t("Career")}</NavLink></li>
-              <li><NavLink to="/counselling">{t("Admission in India")}</NavLink></li>
-              <li><NavLink to="/counselling">{t("Admission in Abroad")}</NavLink></li>
+              <li><NavLink to="/counselling" onClick={closeMobileMenu}>{t("Career")}</NavLink></li>
+              <li><NavLink to="/counselling" onClick={closeMobileMenu}>{t("Admission in India")}</NavLink></li>
+              <li><NavLink to="/counselling" onClick={closeMobileMenu}>{t("Admission in Abroad")}</NavLink></li>
             </ul>
           </li>
 
-          <li className="nav-item dropdown">
-            <NavLink to="/training">{t("training")}</NavLink>
+          <li className={`nav-item dropdown${openDropdown === "training" ? " mobile-dropdown-open" : ""}`}>
+            <NavLink to="/training" onClick={closeMobileMenu}>{t("training")}</NavLink>
+            <button className="mobile-dropdown-arrow" onClick={() => handleDropdownToggle("training")} aria-label="Toggle training menu">▾</button>
             <ul className="dropdown-menu">
-              <li><NavLink to="/training">{t("industrial")}</NavLink></li>
-              <li><NavLink to="/training">{t("specialized")}</NavLink></li>
+              <li><NavLink to="/training" onClick={closeMobileMenu}>{t("industrial")}</NavLink></li>
+              <li><NavLink to="/training" onClick={closeMobileMenu}>{t("specialized")}</NavLink></li>
             </ul>
           </li>
 
-          <li><NavLink to="/insight">{t("insight")}</NavLink></li>
-          <li><NavLink to="/contact">{t("contact")}</NavLink></li>
-
+          <li><NavLink to="/insight" onClick={closeMobileMenu}>{t("insight")}</NavLink></li>
+          <li><NavLink to="/contact" onClick={closeMobileMenu}>{t("contact")}</NavLink></li>
         </ul>
       </nav>
     </>
