@@ -472,3 +472,20 @@
 .dropdown-menu li a.active:hover {
   background: #e6f0ff;
 }
+
+.header-dashboard-btn {
+  background-color: #0b5d3b;
+  color: #fff;
+  border: 1px solid #0b5d3b;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.header-dashboard-btn:hover {
+  background-color: #ffffff;
+  color: #0b5d3b;
+}

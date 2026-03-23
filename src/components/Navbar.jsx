@@ -148,18 +148,10 @@ const Navbar = () => {
 
                 <button
                   type="button"
-                  className="header-signup-btn"
+                  className="header-dashboard-btn"
                   onClick={handleDashboard}
                 >
                   Dashboard
-                </button>
-
-                <button
-                  type="button"
-                  className="header-login-btn"
-                  onClick={handleLogout}
-                >
-                  Logout
                 </button>
               </>
             ) : (
