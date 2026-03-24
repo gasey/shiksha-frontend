@@ -21,21 +21,20 @@ api.interceptors.response.use(
     const isRefreshCall = originalRequest.url?.includes("/refresh/");
     const isMeCall = originalRequest.url?.includes("/me/");
 
-    // If /me/ fails, just reject — let AuthProvider handle it
+    // 🚫 If simply not logged in, do NOT attempt refresh
     if (isUnauthorized && isMeCall) {
       return Promise.reject(error);
     }
 
-    // Try refresh once
+    // 🔄 Attempt refresh only once and not for refresh endpoint
     if (isUnauthorized && !originalRequest._retry && !isRefreshCall) {
       originalRequest._retry = true;
 
       try {
         await api.post("/refresh/");
         return api(originalRequest);
-      } catch (refreshError) {
+      } catch {
         window.location.href = "/login";
-        return Promise.reject(refreshError);
       }
     }
 

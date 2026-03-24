@@ -17,11 +17,6 @@ export const AuthProvider = ({ children }) => {
    * so we normalize to lowercase when comparing and gracefully handle
    * `null`/`undefined` values.
    */
-  const hasRole = (role) => {
-    if (!user || !role) return false;
-    return String(user.role).toLowerCase() === String(role).toLowerCase();
-  };
-
   /**
    * Bootstraps user session using HttpOnly cookie
    */
@@ -87,6 +82,14 @@ export const AuthProvider = ({ children }) => {
     }
 
     setUser(null);
+  };
+
+  /**
+   * Check if user has a specific role
+   */
+  const hasRole = (role) => {
+    if (!user?.role) return false;
+    return String(user.role).toLowerCase() === String(role).toLowerCase();
   };
 
   return (

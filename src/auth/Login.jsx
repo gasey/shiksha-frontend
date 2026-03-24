@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import "./Login.css";
 
 const Login = () => {
-  const { login, isAuthenticated, user } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -12,26 +12,28 @@ const Login = () => {
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
-    setError(""); 
+    e.preventDefault();
+    setError("");
     setSubmitting(true);
 
     try {
-      // login now returns the authenticated user object, but we can also
-      // read it from context after the promise resolves
       const loggedInUser = await login(email, password);
-      // once we're authenticated we no longer need to punt the user to an
-      // external domain; the dashboard component will render the appropriate
-      // teacher/student view based on the role stored in context. doing the
-      // redirect via react-router keeps the navigation inside this SPA.
-      navigate("/dashboard");
+
+      const role = loggedInUser?.role?.toLowerCase();
+
+      if (role === "teacher") {
+        navigate("/dashboard");
+      } else {
+        navigate("/dashboard");
+      }
+
     } catch (err) {
       const message =
         err?.response?.data?.detail ||
         err?.message ||
         "Login failed";
+
       setError(message);
     } finally {
       setSubmitting(false);
