@@ -13,32 +13,39 @@ const Login = () => {
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setSubmitting(true);
+  e.preventDefault();
+  setError("");
+  setSubmitting(true);
 
-    try {
-      const loggedInUser = await login(email, password);
+  try {
+    const loggedInUser = await login(email, password);
 
-      const role = loggedInUser?.role?.toLowerCase();
+    const roles = loggedInUser?.roles || [];
+    const isTeacher = roles.some(
+      (r) => r.toLowerCase() === "teacher"
+    );
 
-      if (role === "teacher") {
-        navigate("/dashboard");
-      } else {
-        navigate("/dashboard");
-      }
+    console.log("Logged in user:", loggedInUser);
+    console.log("Roles:", roles);
 
-    } catch (err) {
-      const message =
-        err?.response?.data?.detail ||
-        err?.message ||
-        "Login failed";
-
-      setError(message);
-    } finally {
-      setSubmitting(false);
+    if (isTeacher) {
+      window.location.href = "https://teacher.shikshacom.com";
+    } else {
+      window.location.href = "https://app.shikshacom.com";
     }
-  };
+
+  } catch (err) {
+    const message =
+      err?.response?.data?.detail ||
+      err?.message ||
+      "Login failed";
+
+    setError(message);
+  } finally {
+    setSubmitting(false);
+  }
+};
+
 
   return (
     <div className="login-container">
