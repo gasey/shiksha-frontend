@@ -1,199 +1,61 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../css/Courses.css';
+import CourseDetail from './CourseDetail';
+import { courseData } from '../data/courseData';
 
-import { useNavigate } from "react-router-dom";
+export const courseCards = Object.values(courseData);
 
-
-
+export const CourseCard = ({ course, onArrowClick }) => (
+  <div className="course-card">
+    <div className="course-card-img" />
+    <div className="course-card-body">
+      <h3 className="course-card-title">{course.title}</h3>
+      <p className="course-card-desc">{course.desc}</p>
+      <div className="course-card-footer">
+        <span className="course-card-price">{course.price}</span>
+        <button className="course-arrow-btn" onClick={() => onArrowClick(course)}>
+          →
+        </button>
+      </div>
+    </div>
+  </div>
+);
 
 const Courses = () => {
-  const [selectedClass, setSelectedClass] = useState('Class 8');
-  const [selectedStream, setSelectedStream] = useState(null);
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [selectedCourse]);
 
-  const navigate = useNavigate();
-
-  const subjectsData = {
-    'Class 8': [
-      { name: 'Science', icon: '🧪' },
-      { name: 'Social Science', icon: '🌍' },
-      { name: 'Maths', icon: '🔢' },
-      { name: 'English', icon: '📚' },
-      { name: 'GK', icon: '🧠' },
-      { name: 'IT', icon: '💻' },
-      { name: 'MIL', icon: '🗣️' }
-    ],
-    'Class 9': [
-      { name: 'Science', icon: '🧪' },
-      { name: 'Social Science', icon: '🌍' },
-      { name: 'Maths', icon: '🔢' },
-      { name: 'English', icon: '📚' },
-      { name: 'GK', icon: '🧠' },
-      { name: 'MIL', icon: '🗣️' }
-    ],
-    'Class 10': [
-      { name: 'Science', icon: '🧪' },
-      { name: 'Social Science', icon: '🌍' },
-      { name: 'Maths', icon: '🔢' },
-      { name: 'English', icon: '📚' },
-      { name: 'MIL', icon: '🗣️' }
-    ],
-    'Class 11': {
-      'Science': [
-        { name: 'Physics', icon: '⚛️' },
-        { name: 'Chemistry', icon: '🧪' },
-        { name: 'Biology', icon: '🧬' },
-        { name: 'Maths', icon: '🔢' },
-        { name: 'English', icon: '📚' },
-        { name: 'MIL', icon: '🗣️' }
-      ],
-      'Arts': [
-        { name: 'History', icon: '📜' },
-        { name: 'Geography', icon: '🌍' },
-        { name: 'Political Science', icon: '🏛️' },
-        { name: 'Sociology', icon: '👥' },
-        { name: 'English', icon: '📚' },
-        { name: 'MIL', icon: '🗣️' }
-      ],
-      'Commerce': [
-        { name: 'Accountancy', icon: '📊' },
-        { name: 'Business Studies', icon: '💼' },
-        { name: 'Economics', icon: '💰' },
-        { name: 'Maths', icon: '🔢' },
-        { name: 'English', icon: '📚' },
-        { name: 'MIL', icon: '🗣️' }
-      ]
-    },
-    'Class 12': {
-      'Science': [
-        { name: 'Physics', icon: '⚛️' },
-        { name: 'Chemistry', icon: '🧪' },
-        { name: 'Biology', icon: '🧬' },
-        { name: 'Maths', icon: '🔢' },
-        { name: 'English', icon: '📚' },
-        { name: 'MIL', icon: '🗣️' }
-      ],
-      'Arts': [
-        { name: 'History', icon: '📜' },
-        { name: 'Geography', icon: '🌍' },
-        { name: 'Political Science', icon: '🏛️' },
-        { name: 'Sociology', icon: '👥' },
-        { name: 'English', icon: '📚' },
-        { name: 'MIL', icon: '🗣️' }
-      ],
-      'Commerce': [
-        { name: 'Accountancy', icon: '📊' },
-        { name: 'Business Studies', icon: '💼' },
-        { name: 'Economics', icon: '💰' },
-        { name: 'Maths', icon: '🔢' },
-        { name: 'English', icon: '📚' },
-        { name: 'MIL', icon: '🗣️' }
-      ]
-    }
-  };
-
-  const handleClassClick = (className) => {
-    setSelectedClass(className);
-    setSelectedStream(null);
-  };
-
-  const handleStreamClick = (stream) => {
-    setSelectedStream(stream);
-  };
-
-  const handleBackClick = () => {
-    setSelectedStream(null);
-  };
-const handleSubjectClick = (subjectName) => {
-  navigate("/payment", {
-    state: {
-      className: selectedClass,
-      stream: selectedStream,
-      subject: subjectName,
-      price: 1200,
-    },
-  });
-};
-
-  const renderContent = () => {
-    if (selectedStream) {
-      // Show subjects for the selected stream
-      return (
-        <div className="courses-content-area">
-          <h3>{selectedClass} - {selectedStream}</h3>
-          <div className="courses-subjects-grid">
-            {subjectsData[selectedClass][selectedStream].map((subject, index) => (
-              <div className="courses-subject-card" key={index}>
-                <div className="card-icon">{subject.icon}</div>
-                <h4>{subject.name}</h4>
-              </div>
-            ))}
-          </div>
-          <button className="courses-back-button" onClick={handleBackClick}>Back to Streams</button>
-        </div>
-      );
-    } else if (!Array.isArray(subjectsData[selectedClass]) && typeof subjectsData[selectedClass] === 'object') {
-      // Show streams for Class 11 or 12
-      return (
-        <div className="courses-content-area">
-          <h3>{selectedClass}</h3>
-          <div className="courses-streams-grid">
-            {Object.keys(subjectsData[selectedClass]).map((stream, index) => (
-             <div
-  className="courses-subject-card"
-  key={index}
-  onClick={() => handleSubjectClick(subject.name)}>
-
-              onClick={() => handleStreamClick(stream)}
-                <h4>{stream}</h4>
-                <p>Click to view subjects</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-    } else {
-      // Show subjects for Class 8-10
-      return (
-        <div className="courses-content-area">
-          <h3>{selectedClass}</h3>
-          <div className="courses-subjects-grid">
-            {subjectsData[selectedClass].map((subject, index) => (
-              <div
-  className="courses-subject-card"
-  key={index}
-  onClick={() => handleSubjectClick(subject.name)}
->
-
-                <div className="card-icon">{subject.icon}</div>
-                <h4>{subject.name}</h4>
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-    }
-  };
+  if (selectedCourse) {
+    return (
+      <CourseDetail
+        course={selectedCourse}
+        onBack={() => setSelectedCourse(null)}
+      />
+    );
+  }
 
   return (
-    <div className="courses-container">
-      <div className="courses-canvas">
-        <h1 className="courses-title">Our Online Courses</h1>
-        <p className="courses-subtitle">Explore subjects for classes 8 to 12, including specialized streams for classes 11 and 12.</p>
+    <div className="courses-page">
+      <div className="courses-full-header">
+        <h1 className="courses-full-title">Online Courses</h1>
+        <p className="courses-full-subtitle">
+          Explore the Courses we provide in our website
+        </p>
+      </div>
 
-        <div className="courses-class-tabs">
-          {Object.keys(subjectsData).map((className) => (
-            <button
-              key={className}
-              className={`courses-class-tab ${selectedClass === className ? 'selected' : ''}`}
-              onClick={() => handleClassClick(className)}
-            >
-              {className}
-            </button>
+      <div className="courses-grid-wrap">
+        <div className="courses-grid">
+          {courseCards.map((course) => (
+            <CourseCard
+              key={course.id}
+              course={course}
+              onArrowClick={setSelectedCourse}
+            />
           ))}
         </div>
-
-        {renderContent()}
       </div>
     </div>
   );

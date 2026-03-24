@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "../css/Navbar.css";
 
 import { useLanguage } from "../contexts/LanguageContext";
@@ -8,15 +7,28 @@ import { useAuth } from "../contexts/AuthContext";
 
 const Navbar = () => {
   const { t, switchLanguage } = useLanguage();
-  const { isAuthenticated, user, logout, loading } = useAuth();
+  const { isAuthenticated, user, loading, logout } = useAuth();
   const navigate = useNavigate();
 
   const [fontSize, setFontSize] = useState(1);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
 
-  // Prevent render while auth bootstraps
+  const toggleMobileMenu = () => {
+    setMobileOpen((prev) => !prev);
+    setOpenDropdown(null);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileOpen(false);
+    setOpenDropdown(null);
+  };
+
+  const handleDropdownToggle = (name) => {
+    setOpenDropdown((prev) => (prev === name ? null : name));
+  };
+
   if (loading) return null;
-
-  /* ================= Accessibility ================= */
 
   const increaseFont = () => {
     const size = Math.min(fontSize + 0.1, 1.5);
@@ -30,16 +42,46 @@ const Navbar = () => {
     document.documentElement.style.fontSize = `${size * 100}%`;
   };
 
-  /* ================= Logout ================= */
-
   const handleLogout = () => {
     logout();
     navigate("/login", { replace: true });
   };
 
+  const handleDashboard = () => {
+    if (!user) return;
+
+    const roles = Array.isArray(user?.roles) ? user.roles : [];
+    const normalizedRoles = roles.map((r) => String(r).toLowerCase());
+    const singleRole = String(user?.role || "").toLowerCase();
+
+    const isTeacher =
+      normalizedRoles.includes("teacher") || singleRole === "teacher";
+
+    const isStudent =
+      normalizedRoles.includes("student") || singleRole === "student";
+
+    if (isTeacher) {
+      window.location.href = "https://teacher.shikshacom.com/teacher/dashboard";
+      return;
+    }
+
+    if (isStudent) {
+      window.location.href = "https://app.shikshacom.com/";
+      return;
+    }
+
+    window.location.href = "https://app.shikshacom.com/";
+  };
+
+  const displayName =
+    user?.name ||
+    user?.full_name ||
+    user?.username ||
+    user?.email?.split("@")[0] ||
+    "My Account";
+
   return (
     <>
-      {/* ===== TOP STRIP ===== */}
       <div className="top-strip">
         <marquee width="90%" direction="left" height="30px" scrollAmount="10">
           <span>Hurry Up!!! Admission is going on.</span>
@@ -60,7 +102,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* ===== HEADER ===== */}
       <header className="main-header">
         <div className="header-left">
           <Link to="/" className="brand-link">
@@ -73,84 +114,195 @@ const Navbar = () => {
         </div>
 
         <div className="header-right">
-          <a href="https://www.facebook.com" className="social-icon" target="_blank" rel="noopener noreferrer">
-            <FaFacebookF />
-          </a>
-          <a href="https://www.instagram.com" className="social-icon" target="_blank" rel="noopener noreferrer">
-            <FaInstagram />
-          </a>
-          <a href="https://www.youtube.com" className="social-icon" target="_blank" rel="noopener noreferrer">
-            <FaYoutube />
-          </a>
+          <div className="header-auth">
+          {isAuthenticated && user ? (
+  <div className="header-auth-loggedin">
+    <button
+      type="button"
+      className="header-dashboard-btn"
+      onClick={handleDashboard}
+    >
+      Dashboard
+    </button>
+
+    <div className="header-user-row">
+      <span className="header-user-name">{displayName}</span>
+
+      <button
+        type="button"
+        className="header-login-btn"
+        onClick={handleLogout}
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+) : (
+  <div className="header-auth">
+    <Link to="/login" className="header-login-btn">
+      Login
+    </Link>
+    <Link to="/signup" className="header-signup-btn">
+      Signup
+    </Link>
+  </div>
+)}
+          </div>
         </div>
       </header>
 
-      {/* ===== NAV ===== */}
       <nav className="navbar navbar-pc">
-        <ul className="nav-menu">
-          <li><Link to="/">{t("home")}</Link></li>
+        <button
+          className={`hamburger-btn${mobileOpen ? " open" : ""}`}
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
 
-          <li className="nav-item dropdown">
-            <Link to="/about">{t("about")}</Link>
+        <ul className={`nav-menu${mobileOpen ? " mobile-open" : ""}`}>
+          <li>
+            <NavLink to="/" end onClick={closeMobileMenu}>
+              {t("home")}
+            </NavLink>
+          </li>
+
+          <li
+            className={`nav-item dropdown${
+              openDropdown === "about" ? " mobile-dropdown-open" : ""
+            }`}
+          >
+            <NavLink to="/about" onClick={closeMobileMenu}>
+              {t("about")}
+            </NavLink>
+            <button
+              className="mobile-dropdown-arrow"
+              onClick={() => handleDropdownToggle("about")}
+              aria-label="Toggle about menu"
+            >
+              ▾
+            </button>
             <ul className="dropdown-menu">
-              <li><Link to="/vision">{t("vision")}</Link></li>
-              <li><Link to="/mission">{t("mission")}</Link></li>
-              <li><Link to="/values">{t("values")}</Link></li>
-              <li><Link to="/why-shiksha">{t("whyShiksha")}</Link></li>
+              <li>
+                <NavLink to="/vision" onClick={closeMobileMenu}>
+                  {t("vision")}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/mission" onClick={closeMobileMenu}>
+                  {t("mission")}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/values" onClick={closeMobileMenu}>
+                  {t("values")}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/why-shiksha" onClick={closeMobileMenu}>
+                  {t("whyShiksha")}
+                </NavLink>
+              </li>
             </ul>
           </li>
 
           <li className="nav-item dropdown">
-            <Link to="/upcoming">{t("registration")}</Link>
+            <NavLink to="/courses" onClick={closeMobileMenu}>
+              {t("courses")}
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/upcoming" onClick={closeMobileMenu}>
+              Placements
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/general-studies" onClick={closeMobileMenu}>
+              {t("generalStudies")}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/forum" onClick={closeMobileMenu}>
+              {t("forum")}
+            </NavLink>
+          </li>
+
+          <li
+            className={`nav-item dropdown${
+              openDropdown === "counselling" ? " mobile-dropdown-open" : ""
+            }`}
+          >
+            <NavLink to="/counselling" onClick={closeMobileMenu}>
+              {t("counselling")}
+            </NavLink>
+            <button
+              className="mobile-dropdown-arrow"
+              onClick={() => handleDropdownToggle("counselling")}
+              aria-label="Toggle counselling menu"
+            >
+              ▾
+            </button>
             <ul className="dropdown-menu">
-              <li><Link to="/upcoming">{t("students")}</Link></li>
-              <li><Link to="/upcoming">{t("teachers")}</Link></li>
-              <li><Link to="/upcoming">{t("experts")}</Link></li>
+              <li>
+                <NavLink to="/counselling" onClick={closeMobileMenu}>
+                  {t("Career")}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/counselling" onClick={closeMobileMenu}>
+                  {t("Admission in India")}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/counselling" onClick={closeMobileMenu}>
+                  {t("Admission in Abroad")}
+                </NavLink>
+              </li>
             </ul>
           </li>
 
-          <li className="nav-item dropdown">
-            <Link to="/courses">{t("services")}</Link>
+          <li
+            className={`nav-item dropdown${
+              openDropdown === "training" ? " mobile-dropdown-open" : ""
+            }`}
+          >
+            <NavLink to="/training" onClick={closeMobileMenu}>
+              {t("training")}
+            </NavLink>
+            <button
+              className="mobile-dropdown-arrow"
+              onClick={() => handleDropdownToggle("training")}
+              aria-label="Toggle training menu"
+            >
+              ▾
+            </button>
             <ul className="dropdown-menu">
-              <li><Link to="/courses">{t("online")}</Link></li>
-              <li><Link to="/upcoming">{t("classroom")}</Link></li>
-              <li><Link to="/upcoming">{t("softwareDev")}</Link></li>
+              <li>
+                <NavLink to="/training" onClick={closeMobileMenu}>
+                  {t("industrial")}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/training" onClick={closeMobileMenu}>
+                  {t("specialized")}
+                </NavLink>
+              </li>
             </ul>
           </li>
 
-          <li><Link to="/placements">Placements</Link></li>
-          <li><Link to="/general-studies">{t("generalStudies")}</Link></li>
-          <li><Link to="/forum">{t("forum")}</Link></li>
-
-          <li className="nav-item dropdown">
-            <Link to="/counselling">{t("counselling")}</Link>
-            <ul className="dropdown-menu">
-              <li><Link to="/counselling">{t("Career")}</Link></li>
-              <li><Link to="/counselling">{t("Admission in India")}</Link></li>
-              <li><Link to="/counselling">{t("Admission in Abroad")}</Link></li>
-            </ul>
+          <li>
+            <NavLink to="/insight" onClick={closeMobileMenu}>
+              {t("insight")}
+            </NavLink>
           </li>
-
-          <li className="nav-item dropdown">
-            <Link to="/training">{t("training")}</Link>
-            <ul className="dropdown-menu">
-              <li><Link to="/training">{t("industrial")}</Link></li>
-              <li><Link to="/training">{t("specialized")}</Link></li>
-            </ul>
+          <li>
+            <NavLink to="/contact" onClick={closeMobileMenu}>
+              {t("contact")}
+            </NavLink>
           </li>
-
-          <li><Link to="/insight">{t("insight")}</Link></li>
-          <li><Link to="/contact">{t("contact")}</Link></li>
-
-          {/* ===== AUTH (LOGOUT ONLY) ===== */}
-          {isAuthenticated && user && (
-            <li className="nav-user">
-              <span className="nav-email">{user.email}</span>
-              <button onClick={handleLogout} className="logout-btn">
-                Logout
-              </button>
-            </li>
-          )}
         </ul>
       </nav>
     </>

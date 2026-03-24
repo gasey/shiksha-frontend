@@ -1,5 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import '../css/Insight.css';
+
+const stripHtml = (html) => {
+  if (!html) return '';
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || '';
+};
 
 const Insight = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -17,23 +24,6 @@ const Insight = () => {
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleSearch();
-    }
-  };
-
-  const handleRelatedTopicClick = async (topicTitle) => {
-    setSearchQuery(topicTitle);
-    // Trigger search automatically
-    setLoading(true);
-    setError('');
-    setArticleData(null);
-
-    try {
-      const data = await fetchArticleData(topicTitle);
-      setArticleData(data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -65,7 +55,7 @@ const Insight = () => {
 
       // Fetch a short description for the sidebar
       try {
-        const extractResponse = await fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=true&explaintext=true&exchars=300&format=json&titles=${encodeURIComponent(query)}&origin=*`);
+        const extractResponse = await fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=true&explaintext=true&format=json&titles=${encodeURIComponent(query)}&origin=*`);
         if (extractResponse.ok) {
           const extractData = await extractResponse.json();
           const pages = extractData.query.pages;
@@ -278,13 +268,10 @@ const Insight = () => {
 
   const fetchRelatedTopics = async (title) => {
     try {
-      console.log('Fetching related topics for:', title);
       const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/related/${encodeURIComponent(title)}`);
       if (!response.ok) throw new Error('Failed to fetch related topics');
       const data = await response.json();
-      console.log('Related topics data:', data);
       const topics = data.pages?.slice(0, 5) || [];
-      console.log('Processed related topics:', topics);
       return topics;
     } catch (err) {
       console.warn('Related topics fetch failed:', err);
@@ -306,7 +293,7 @@ const Insight = () => {
               placeholder="Search insights..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyPress}
               disabled={loading}
             />
             <button onClick={handleSearch} disabled={loading || !searchQuery.trim()}>
@@ -337,7 +324,9 @@ const Insight = () => {
               <article className="insight-article-content">
                 <h1>{articleData.title}</h1>
 
-                <p dangerouslySetInnerHTML={{ __html: articleData.summary.replace(/<a[^>]*>(.*?)<\/a>/g, '$1').replace(/\n/g, '<br>') }} />
+                {articleData.description && (
+                  <p>{articleData.description}</p>
+                )}
 
                 {articleData.sections && articleData.sections.length > 0 && (
                   <div className="insight-toc">
@@ -352,12 +341,15 @@ const Insight = () => {
                   </div>
                 )}
 
-                {articleData.sections && articleData.sections.map((section, index) => (
-                  <section key={index} id={`section-${index}`}>
-                    <h2>{section.line || section.anchor}</h2>
-                    {section.text && <div dangerouslySetInnerHTML={{ __html: section.text }} />}
-                  </section>
-                ))}
+                {articleData.sections && articleData.sections.map((section, index) => {
+                  const text = stripHtml(section.text || '').trim();
+                  return (
+                    <section key={index} id={`section-${index}`}>
+                      <h2>{section.line || section.anchor}</h2>
+                      {text && <p>{text}</p>}
+                    </section>
+                  );
+                })}
 
                 {/*<section className="insight-related-topics">
                   <h2>Related Topics</h2>
@@ -452,7 +444,9 @@ const Insight = () => {
                   {/* Description from Wikipedia summary */}
                   <h4>Description</h4>
                   <p>
-                    {articleData.description || 'No description available.'}
+                    {articleData.description
+                      ? articleData.description.split('. ').slice(0, 3).join('. ') + '.'
+                      : 'No description available.'}
                   </p>
 
                   {articleData.infobox && articleData.infobox.aliases?.en && articleData.infobox.aliases.en.length > 0 && (

@@ -1,0 +1,78 @@
+/* ===== HOMEPAGE COURSE PREVIEW ===== */
+.course-preview {
+  background: #f9f7f0;
+  padding-bottom: 50px;
+}
+
+/* Tab bar */
+.preview-tab-bar {
+  display: flex;
+  background: #1a3a2a;
+  margin: 0 auto;
+  margin-bottom: 100px;
+  margin-top: 50px;
+  max-width: 1400px;
+}
+
+.preview-tab {
+  flex: 1;
+  padding: 16px 10px;
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.preview-tab.active {
+  background: #2e5c3e;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.preview-tab:hover:not(.active) {
+  color: #fff;
+}
+
+/* Grid */
+.preview-grid-wrap {
+  max-width: 1100px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* Show all */
+.preview-show-all-btn {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 10px 28px;
+  background: #1a3a2a;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.preview-show-all-btn:hover {
+  background: #2e5c3e;
+}
+
+@media (max-width: 900px) {
+  .preview-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+  .preview-grid { grid-template-columns: 1fr; }
+  .preview-tab { font-size: 12px; padding: 12px 6px; }
+}

@@ -2,9 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  background-color: #f9f7f0; /* Light beige */
-  border-bottom: 1px solid #e8e6df;
+  padding: 14px 32px;
+  background-color: #f9f7f0;
+  border-bottom: 1px solid #e0dbd0;
 }
 
 .search-section {
@@ -98,6 +98,24 @@
 .signup-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.demo-btn {
+  background-color: #004A33;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 28px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.demo-btn:hover {
+  background-color: #2e5c3e;
 }
 
 /* Responsive */

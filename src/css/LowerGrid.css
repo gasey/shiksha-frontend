@@ -1,22 +1,21 @@
 .lower-grid {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 30px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  background: #f9f7f0;
 }
+
 /* ========================
    STATS SECTION
 ======================== */
 .stats-section {
-  background: #efe3d1;
-  padding: 25px 0;
-  margin: 40px 0;
-  border-top: 1px solid #dcccb4;
-  border-bottom: 1px solid #dcccb4;
+  width: 100%;
+  background: #004933;
+  padding: 40px 0;
+  margin-bottom: 50px;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 .stat {
@@ -24,28 +23,31 @@
 }
 
 .stat .number {
-  font-size: 45px;
+  font-size: 3.2rem;
   font-weight: 700;
+  color: #ffffff;
+  font-family: Georgia, serif;
+  line-height: 1.1;
 }
 
 .stat .label {
-  font-size: 20px;
-  color: #666;
+  font-size: 1.1rem;
+  color: #b8d8b8;
+  margin-top: 8px;
 }
 
 /* ========================
    WHY CHOOSE SHIKSHA HEADING
 ======================== */
 .why-choose-heading {
-  position: relative;
-  top: 30px;
-  left: 60px;
+  padding: 56px 80px 16px;
 }
 
 .why-choose-heading h2 {
-  color: #222;
+  color: #1a1a1a;
   margin: 0;
   font-size: 2rem;
+  font-weight: 750;
 }
 
 /* ========================
@@ -53,112 +55,104 @@
 ======================== */
 .why-choose-section {
   display: flex;
-  padding: 40px;
-  gap: 40px;
+  padding: 24px 80px 80px;
+  gap: 60px;
+  align-items: flex-start;
 }
 
 .features {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
 }
 
 .feature-card {
-  background: #f7efe2;
-  border: 1px solid #e4d8c8;
+  background: #c9b48a;
+  border: none;
   border-radius: 12px;
-  padding: 16px;
-  height: 100px;
+  padding: 22px 28px;
 }
 
 .feature-card h4 {
   margin: 0;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a1a;
 }
 
 .feature-card p {
-  margin: 4px 0 0;
-  font-size: 0.99rem;
-  color: #6a6a6a;
+  margin: 6px 0 0;
+  font-size: 0.95rem;
+  color: #3a3a3a;
 }
 
 .promo-video {
-  flex: 1;
-  background: #d9d9d9;
-  border-radius: 12px;
+  flex: 1.3;
+  background: #ffffff;
+  border: 1.5px solid #cccccc;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 450px;
+  min-height: 440px;
 }
 
-/* Responsive */
+.promo-video p {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* ========================
+   RESPONSIVE
+======================== */
 @media (max-width: 1024px) {
-  .lower-grid {
-    padding: 20px;
-    gap: 20px;
+  .why-choose-heading {
+    padding: 30px 40px 10px;
   }
 
   .why-choose-section {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .features {
-    align-items: center;
-  }
-
-  .feature-card {
-    width: 100%;
-    max-width: 350px;
-  }
-
-  .promo-video {
-    width: 100%;
-    max-width: 420px;
-    height: 250px;
+    padding: 20px 40px 40px;
+    gap: 30px;
   }
 }
 
 @media (max-width: 768px) {
-  .why-choose-section {
-    padding: 15px;
-    gap: 30px;
+  .why-choose-heading {
+    padding: 24px 24px 10px;
   }
 
-  .feature-card {
-    height: auto;
+  .why-choose-section {
+    flex-direction: column;
+    padding: 16px 24px 40px;
+    gap: 24px;
+  }
+
+  .features {
+    width: 100%;
   }
 
   .promo-video {
-    height: 220px;
+    width: 100%;
+    min-height: 250px;
   }
 }
 
 @media (max-width: 480px) {
-  .lower-grid {
-    padding: 10px;
-    gap: 15px;
-  }
-
   .why-choose-heading {
-    left: 10px;
-    top: 15px;
+    padding: 20px 16px 8px;
   }
 
   .why-choose-section {
-    gap: 20px;
-    padding: 10px;
+    padding: 12px 16px 30px;
+    gap: 16px;
   }
 
-  .feature-card {
-    max-width: 100%;
+  .stat .number {
+    font-size: 2rem;
   }
 
   .promo-video {
-    height: 180px;
+    min-height: 200px;
   }
 }

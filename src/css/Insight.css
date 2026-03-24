@@ -114,7 +114,7 @@ aside {
   display: flex;
   flex-direction: column;
   gap: 20px;
-
+}
 
 .insight-sidebar {
   background-color: #f9f7f0;
@@ -550,5 +550,4 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #b8a085;
-}
 }

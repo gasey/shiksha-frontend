@@ -1,109 +1,154 @@
 .feedback-container {
   width: 100%;
-  min-height: 40vh;
-  background: #f8f5ed;
+  min-height: 100vh;
+  background: #f0ead8;
   display: flex;
   justify-content: center;
-  padding: 40px 0;
+  align-items: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
 }
 
-.feedback-content {
-  width: 90%;
-  max-width: 900px;
-  background: #fffdf6;
-  border-radius: 12px;
-  padding: 40px 60px;
+.feedback-card {
+  width: 100%;
+  max-width: 860px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 50px 55px;
   display: flex;
   gap: 50px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e0d9c8;
+  box-sizing: border-box;
 }
 
+/* Left Side */
 .feedback-left {
-  width: 40%;
-  text-align: left;
+  width: 38%;
+  flex-shrink: 0;
+  padding-top: 4px;
 }
 
 .feedback-title {
-  font-size: 42px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #000000ff;
-}
-
-.feedback-title span {
-  color: #000000ff;
+  font-size: 1.4em;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
 }
 
 .feedback-description {
-  width: 90%;
-  margin-bottom: 20px;
-  font-size: 16px;
+  font-size: 0.88em;
+  color: #444;
+  line-height: 1.65;
+  margin: 0;
 }
 
-.feedback-email {
-  color: #0b5f27;
-  font-size: 16px;
-  margin-top: 10px;
-}
-
+/* Right Side Form */
 .feedback-form {
-  width: 60%;
-}
-
-.feedback-form-label {
-  font-size: 15px;
-  font-weight: 500;
-  margin-bottom: 6px;
-  display: block;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .feedback-name-row {
   display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
-.feedback-name-row input {
+.feedback-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
   width: 100%;
-  padding: 12px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  background: #fff2cc;
-  font-size: 14px;
 }
 
-.feedback-full-input {
-  width: 100%;
-  margin-bottom: 20px;
-  padding: 12px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  background: #fff2cc;
-  font-size: 14px;
+.feedback-name-row .feedback-field {
+  margin-bottom: 0;
+  flex: 1;
 }
 
-textarea {
+.feedback-label {
+  font-size: 0.88em;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+}
+
+.feedback-name-row input,
+.feedback-full-input,
+.feedback-form input[type="email"] {
   width: 100%;
-  height: 130px;
-  padding: 12px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  background: #fff2cc;
-  font-size: 14px;
-  margin-bottom: 20px;
+  padding: 10px 12px;
+  border: 1px solid #c8b89a;
+  border-radius: 4px;
+  background: #ddd0b0;
+  font-size: 0.88em;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.feedback-name-row input:focus,
+.feedback-full-input:focus,
+.feedback-form input[type="email"]:focus {
+  border-color: #8a7a5a;
+  background: #d4c49e;
+}
+
+.feedback-form textarea {
+  width: 100%;
+  height: 110px;
+  padding: 10px 12px;
+  border: 1px solid #c8b89a;
+  border-radius: 4px;
+  background: #ddd0b0;
+  font-size: 0.88em;
+  color: #333;
   resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.feedback-form textarea:focus {
+  border-color: #8a7a5a;
+  background: #d4c49e;
 }
 
 .feedback-submit-btn {
-  width: 30%;
-  background: #0b5f27;
-  color: white;
-  padding: 10px;
+  align-self: flex-start;
+  background: #1a4a2a;
+  color: #ffffff;
+  padding: 9px 28px;
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 5px;
+  font-size: 0.95em;
+  font-weight: 500;
   cursor: pointer;
+  margin-top: 4px;
+  transition: background 0.2s ease;
 }
 
 .feedback-submit-btn:hover {
-  background: #08481e;
+  background: #143d21;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .feedback-card {
+    flex-direction: column;
+    padding: 36px 28px;
+    gap: 28px;
+  }
+
+  .feedback-left {
+    width: 100%;
+  }
+
+  .feedback-name-row {
+    flex-direction: column;
+    gap: 16px;
+  }
 }

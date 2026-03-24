@@ -1,26 +1,44 @@
 import React from "react";
-import "../css/About2.css";
+import "../css/WhySiksha.css";
+
+const features = [
+  {
+    title: "Interactive Courses",
+    desc: "Engage students with multimedia content, quizzes, and real-world projects.",
+  },
+  {
+    title: "Live Classes",
+    desc: "Provide direct interaction with expert instructors, fostering a supportive learning environment.",
+  },
+  {
+    title: "Personalized Dashboards",
+    desc: "Engage students with multimedia content, quizzes, and real-world projects.",
+  },
+  {
+    title: "Vibrant Community",
+    desc: "Connect with peers, share knowledge, and grow together.",
+  },
+];
 
 const WhyShiksha = () => {
   return (
-    <div className="about2-container">
-      <header className="about2-header">
-        <h1>Why Choose Shiksha?</h1>
-      </header>
-      <section className="about2-cards">
-        <div className="about2-card">
-          <p>
-            At Shiksha, we offer a unique learning experience designed to meet the needs of modern learners. Choose Shiksha for an education that is not only effective but also enjoyable and accessible from anywhere.
-          </p>
-          <h2>Key Features:</h2>
-          <ul>
-            <li><strong>Interactive Courses:</strong> Engage students with multimedia content, quizzes, and real-world projects.</li>
-            <li><strong>Live Classes:</strong> Provide direct interaction with expert instructors, fostering a supportive learning environment.</li>
-            <li><strong>Personalized Dashboards:</strong> Track your progress and customize your learning path.</li>
-            <li><strong>Vibrant Community:</strong> Connect with peers, share knowledge, and grow together.</li>
-          </ul>
-        </div>
-      </section>
+    <div className="why-container">
+      <h1 className="why-heading">Why Choose ShikshaCom?</h1>
+
+      <p className="why-intro">
+        At Shiksha, we offer a unique learning experience designed to meet the
+        needs of modern learners. Choose Shiksha for an education that is not
+        only effective but also enjoyable and accessible from anywhere.
+      </p>
+
+      <div className="why-cards">
+        {features.map((f, i) => (
+          <div className="why-card" key={i}>
+            <h3 className="why-card-title">{f.title}</h3>
+            <p className="why-card-desc">{f.desc}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

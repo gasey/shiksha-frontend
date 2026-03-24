@@ -20,7 +20,7 @@ const TagFilter = ({ value = '', onChange }) => {
   }, []);
 
   return (
-    <select value={value} onChange={e => onChange(e.target.value)}>
+    <select className="forum-select" value={value} onChange={e => onChange(e.target.value)}>
       <option value="">All tags</option>
       {tags.map(tag => <option key={tag.id} value={tag.name}>{tag.name}</option>)}
     </select>

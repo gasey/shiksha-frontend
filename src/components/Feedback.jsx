@@ -1,22 +1,17 @@
 import React from "react";
-import "../css/Feedback.css"; // Import the CSS file
+import "../css/Feedback.css";
 
 const Feedback = () => {
   return (
     <div className="feedback-container">
-      <div className="feedback-content">
-        {/* Left Side Text */}
+      <div className="feedback-card">
+        {/* Left Side */}
         <div className="feedback-left">
-          <h1 className="feedback-title">
-            Feed <span>back</span>
-          </h1>
-
+          <h2 className="feedback-title">Feedback</h2>
           <p className="feedback-description">
             "We’d love to hear from you! Your feedback helps us improve and
             serve you better."
           </p>
-
-          <p className="feedback-email">info@shikshacom.com</p>
         </div>
 
         {/* Right Side Form */}
@@ -31,49 +26,38 @@ const Feedback = () => {
             value="a0608d50-fde6-4fa4-84ef-088941c2ece7"
           />
 
-          {/* Name */}
-          <label className="feedback-form-label">Name (required)</label>
+          {/* First Name & Last Name */}
           <div className="feedback-name-row">
+            <div className="feedback-field">
+              <label className="feedback-label">First Name</label>
+              <input type="text" name="first_name" required />
+            </div>
+            <div className="feedback-field">
+              <label className="feedback-label">Last Name</label>
+              <input type="text" name="last_name" required />
+            </div>
+          </div>
+
+          {/* Email */}
+          <div className="feedback-field">
+            <label className="feedback-label">Email</label>
             <input
-              type="text"
-              name="first_name"
-              placeholder="Your First Name"
-              required
-            />
-            <input
-              type="text"
-              name="last_name"
-              placeholder="Your Last Name"
+              type="email"
+              name="email"
+              className="feedback-full-input"
               required
             />
           </div>
 
-          {/* Email */}
-          <label className="feedback-form-label">Email (required)</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            className="feedback-full-input"
-            required
-          />
-
           {/* Message */}
-          <label className="feedback-form-label">Message (required)</label>
-          <textarea
-            name="message"
-            placeholder="Your message..."
-            required
-          ></textarea>
+          <div className="feedback-field">
+            <label className="feedback-label">Message</label>
+            <textarea name="message" required></textarea>
+          </div>
 
           {/* Honeypot */}
-          <input
-            type="checkbox"
-            name="botcheck"
-            style={{ display: "none" }}
-          />
+          <input type="checkbox" name="botcheck" style={{ display: "none" }} />
 
-          {/* Button */}
           <button type="submit" className="feedback-submit-btn">
             Send
           </button>

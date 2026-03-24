@@ -705,12 +705,12 @@ Correct: B`;
             >
               Current Affairs
             </button>
-            <button
+            {/* <button
               className={selectedSection === 'daily-topic' ? 'active' : ''}
               onClick={() => handleSectionChange('daily-topic')}
             >
               Daily Topic
-            </button>
+            </button> */}
           </div>
 
           <div className="date-picker">
@@ -771,9 +771,9 @@ Correct: B`;
                         {aiLoading ? 'Generating...' : 'Generate Explanation'}
                       </button>
                     </div>
-                    <button onClick={fetchTriviaQuestions} disabled={triviaLoading}>
+                    {/* <button onClick={fetchTriviaQuestions} disabled={triviaLoading}>
                       {triviaLoading ? 'Fetching...' : 'Fetch Trivia Quiz'}
-                    </button>
+                    </button> */}
                   </div>
                   {aiError && <div className="error">{aiError}</div>}
                   {triviaError && <div className="error">{triviaError}</div>}

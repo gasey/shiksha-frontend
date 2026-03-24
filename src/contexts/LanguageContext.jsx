@@ -13,6 +13,7 @@ const translations = {
     teachers: "Teachers",
     experts: "Experts",
     services: "Services",
+    courses: "Courses",
     online: "Online",
     offline: "Offline",
     classroom: "Classroom",

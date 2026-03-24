@@ -1,24 +1,23 @@
 import React from "react";
-import "../css/About2.css";
+import "../css/Vision.css";
+import classroomImg from "../assets/meet.jpeg";
 
 const Vision = () => {
   return (
-    <div className="about2-container">
-      <header className="about2-header">
-        <h1>Our Vision</h1>
-      </header>
-      <section className="about2-cards">
-        <div className="about2-card">
+    <div className="vision-container">
+      <h1 className="vision-heading">Our Vision</h1>
+
+      <div className="vision-card">
+        <div className="vision-text">
           <p>
             At Shiksha, our vision is to provide learners with the skills and
             knowledge they need to thrive in the modern world. We aim to make
             education accessible, engaging, and effective for everyone,
-            regardless of their background or location. Through innovative
-            technology and expert guidance, we empower individuals to achieve
-            their full potential and contribute positively to society.
+            regardless of their background or location.
           </p>
-          <h2>Key Initiatives:</h2>
-          <ul>
+
+          <p className="vision-initiatives-label">Key Initiatives:</p>
+          <ul className="vision-list">
             <li>Leveraging technology like online learning platforms, mobile schools, and digital resources to reach students in remote areas.</li>
             <li>Enabling individuals in remote areas to acquire knowledge and skills for personal growth and community development.</li>
             <li>Supporting learners of all backgrounds, abilities, and learning styles.</li>
@@ -26,7 +25,11 @@ const Vision = () => {
             <li>Bringing the classroom to your doorstep.</li>
           </ul>
         </div>
-      </section>
+
+        <div className="vision-image-wrap">
+          <img src={classroomImg} alt="Classroom" className="vision-image" />
+        </div>
+      </div>
     </div>
   );
 };

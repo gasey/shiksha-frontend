@@ -22,18 +22,21 @@ const CommentComposer = ({ threadId, onPosted }) => {
   };
 
   return (
-    <div style={{marginTop:16}}>
-      <div className="comment-composer">
-        <textarea
-          className="comment-input"
-          placeholder="Write a reply... (use @username to mention)"
-          value={content}
-          onChange={e => setContent(e.target.value)}
-        />
-      </div>
-      <div style={{marginTop:8}}>
-        <button className="btn" onClick={submit} disabled={loading}>{loading ? 'Posting…' : 'Post Reply'}</button>
-      </div>
+    <div className="td-composer-row">
+      <input
+        className="td-composer-input"
+        type="text"
+        placeholder="Log in to Participate"
+        value={content}
+        onChange={e => setContent(e.target.value)}
+        onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(); } }}
+        disabled={loading}
+      />
+      {content.trim() && (
+        <button className="td-composer-send" onClick={submit} disabled={loading}>
+          {loading ? '…' : '↑'}
+        </button>
+      )}
     </div>
   );
 };

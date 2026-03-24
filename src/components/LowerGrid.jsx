@@ -10,18 +10,18 @@ const LowerGrid = () => {
           <div className="label">Courses</div>
         </div>
         <div className="stat">
-          <div className="number">0+</div>
-          <div className="label">Enrollment</div>
+          <div className="number">100+</div>
+          <div className="label">Practitioners</div>
         </div>
         <div className="stat">
-          <div className="number">1</div>
-          <div className="label">Sites</div>
+          <div className="number">5</div>
+          <div className="label">Labs</div>
         </div>
       </section>
 
       {/* WHY CHOOSE SHIKSHA HEADING */}
       <section className="why-choose-heading">
-        <h2>Why Choose Shiksha?</h2>
+        <h2>Why Choose ShikshaCom?</h2>
       </section>
 
       {/* WHY CHOOSE SECTION */}
@@ -29,19 +29,19 @@ const LowerGrid = () => {
         <div className="features">
           <div className="feature-card">
             <h4>Academic Courses</h4>
-            <p>Comprehensive curriculum for all levels.</p>
+            <p>Bringing Board Topics for Class 8 – 12</p>
           </div>
           <div className="feature-card">
-            <h4>Advance Teaching</h4>
-            <p>Expert instructors with modern methods.</p>
+            <h4>Student Courses</h4>
+            <p>Bringing Board Topics for Class 8 – 12</p>
           </div>
           <div className="feature-card">
-            <h4>Self Paced Learning</h4>
-            <p>Learn at your own speed.</p>
+            <h4>Judicial Courses</h4>
+            <p>Bringing Board Topics for Class 8 – 12</p>
           </div>
           <div className="feature-card">
-            <h4>Registration</h4>
-            <p>Easy and quick enrollment process.</p>
+            <h4>Academic Courses</h4>
+            <p>Bringing Board Topics for Class 8 – 12</p>
           </div>
         </div>
         <div className="promo-video">

@@ -1,0 +1,87 @@
+.mission-container {
+  min-height: 100vh;
+  background: #d6dfd7;
+  padding: 64px 32px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.mission-heading {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 36px 0;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+.mission-intro {
+  max-width: 760px;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #1a1a1a;
+  text-align: center;
+  margin: 0 0 64px 0;
+}
+
+/* Pillars row */
+.mission-pillars {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.mission-pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160px;
+  gap: 18px;
+}
+
+.mission-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+  flex-shrink: 0;
+}
+
+.mission-pillar-label {
+  font-size: 0.88rem;
+  color: #1a1a1a;
+  text-align: center;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .mission-pillars {
+    gap: 32px;
+  }
+
+  .mission-pillar {
+    width: 130px;
+  }
+
+  .mission-circle {
+    width: 90px;
+    height: 90px;
+    font-size: 2rem;
+  }
+
+  .mission-heading {
+    font-size: 1.9rem;
+  }
+
+  .mission-intro {
+    font-size: 0.95rem;
+  }
+}

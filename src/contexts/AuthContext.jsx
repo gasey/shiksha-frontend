@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await api.get("/accounts/me/");
       setUser(res.data);
-      return res.data; // return fetched user so callers can act on it
+      return res.data;
     } catch (err) {
       setUser(null);
       return null;
@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }) => {
 
   /**
    * Run bootstrap on first load
-   * Browser automatically sends cookies
    */
   useEffect(() => {
     bootstrap();
@@ -50,7 +49,6 @@ export const AuthProvider = ({ children }) => {
       await api.post("/accounts/login/", { email, password });
 
       setLoading(true);
-      // bootstrap returns the authenticated user object
       const me = await bootstrap();
       return me;
     } catch (err) {
@@ -86,15 +84,44 @@ export const AuthProvider = ({ children }) => {
 
   /**
    * Check if user has a specific role
+   * Supports both:
+   * - user.role = "teacher"
+   * - user.roles = ["teacher"]
    */
+
 const hasRole = (role) => {
   if (!user?.role || !role) return false;
   return String(user.role).toLowerCase() === String(role).toLowerCase();
 };
-    
+  
+const hasRole = (role) => {
+    if (!user) return false;
+
+    const targetRole = String(role).toLowerCase();
+
+    const roleFromSingleField = String(user.role || "").toLowerCase();
+    if (roleFromSingleField === targetRole) return true;
+
+    const rolesFromArray = Array.isArray(user.roles)
+      ? user.roles.map((r) => String(r).toLowerCase())
+      : [];
+
+    return rolesFromArray.includes(targetRole);
+  };
+
+
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, loading, login, signup, logout, hasRole }}
+      value={{
+        user,
+        isAuthenticated,
+        loading,
+        login,
+        signup,
+        logout,
+        hasRole,
+        bootstrap,
+      }}
     >
       {children}
     </AuthContext.Provider>

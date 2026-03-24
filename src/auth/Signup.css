@@ -1,3 +1,38 @@
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 2.5rem;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  color: #888;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password:hover {
+  color: #333;
+}
+
+/* Hide browser native password reveal */
+.password-wrapper input::-ms-reveal,
+.password-wrapper input::-webkit-contacts-auto-fill-button,
+.password-wrapper input::-webkit-credentials-auto-fill-button {
+  display: none;
+}
+
 /* Signup page container */
 .signup-container {
   min-height: calc(100vh - 160px);
@@ -55,7 +90,7 @@
 }
 
 /* Button */
-.signup-form button {
+.signup-form button[type="submit"] {
   width: 100%;
   padding: 0.75rem;
   background-color: #28a745;
@@ -68,11 +103,11 @@
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.signup-form button:hover {
+.signup-form button[type="submit"]:hover {
   background-color: #218838;
 }
 
-.signup-form button:disabled {
+.signup-form button[type="submit"]:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
