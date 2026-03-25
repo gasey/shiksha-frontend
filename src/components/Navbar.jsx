@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { FiUser, FiArrowUpRight, FiLogOut } from "react-icons/fi";
 import "../css/Navbar.css";
 
 import { useLanguage } from "../contexts/LanguageContext";
 import { useAuth } from "../contexts/AuthContext";
+
 
 const Navbar = () => {
   const { t, switchLanguage } = useLanguage();
@@ -140,20 +142,7 @@ const Navbar = () => {
                 onClick={() => setProfileOpen((prev) => !prev)}
                 aria-label="Open profile menu"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="34"
-                  height="34"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M20 21a8 8 0 1 0-16 0" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
+                <FiUser size={34} />
               </button>
 
               {profileOpen && (
@@ -164,7 +153,9 @@ const Navbar = () => {
                     onClick={handleDashboard}
                   >
                     <span>Go to Dashboard</span>
-                    <span className="header-profile-menu-icon">↗</span>
+                    <span className="header-profile-menu-icon">
+                      <FiArrowUpRight size={22} />
+                    </span>
                   </button>
 
                   <button
@@ -173,7 +164,9 @@ const Navbar = () => {
                     onClick={handleLogout}
                   >
                     <span>Logout</span>
-                    <span className="header-profile-menu-icon">↪</span>
+                    <span className="header-profile-menu-icon">
+                      <FiLogOut size={22} />
+                    </span>
                   </button>
                 </div>
               )}
@@ -259,11 +252,13 @@ const Navbar = () => {
               Placements
             </NavLink>
           </li>
+
           <li>
             <NavLink to="/general-studies" onClick={closeMobileMenu}>
               {t("generalStudies")}
             </NavLink>
           </li>
+
           <li>
             <NavLink to="/forum" onClick={closeMobileMenu}>
               {t("forum")}
@@ -338,6 +333,7 @@ const Navbar = () => {
               {t("insight")}
             </NavLink>
           </li>
+
           <li>
             <NavLink to="/contact" onClick={closeMobileMenu}>
               {t("contact")}

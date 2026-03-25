@@ -8,16 +8,19 @@ import App from "./components/App.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { LanguageProvider } from "./contexts/LanguageContext.jsx";
 import AuthLoader from "./components/AuthLoader.jsx";
+import { NotificationProvider } from "./contexts/NotificationContext";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <LanguageProvider>
-          <AuthLoader>
-            <App />
-          </AuthLoader>
-        </LanguageProvider>
+        <NotificationProvider>
+          <LanguageProvider>
+            <AuthLoader>
+              <App />
+            </AuthLoader>
+          </LanguageProvider>
+        </NotificationProvider>
       </AuthProvider>
     </BrowserRouter>
   </StrictMode>

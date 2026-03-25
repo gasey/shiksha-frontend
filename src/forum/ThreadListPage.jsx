@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IoNotificationsOutline } from "react-icons/io5";
 import { getThreads } from '../mock/api/threads';
 import ThreadCard from './ThreadCard';
 import SearchBar from './SearchBar';
 import SortSelector from './SortSelector';
 import DateFilter from './DateFilter';
+import { useAuth } from '../contexts/AuthContext';
+import { useNotification } from '../contexts/NotificationContext';
 import '../css/forum.css';
 
 const ThreadListPage = () => {
   const navigate = useNavigate();
-  const isLoggedIn = !!localStorage.getItem('access');
+  const { isAuthenticated } = useAuth();
+  const isLoggedIn = isAuthenticated;
 
+  const {
+    notifications,
+    unreadCount,
+    markAsRead,
+    markAllAsRead,
+  } = useNotification();
+
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [threads, setThreads] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const [filters, setFilters] = useState({
     search: '',
     date_from: '',
@@ -24,7 +37,7 @@ const ThreadListPage = () => {
   useEffect(() => {
     let mounted = true;
 
-    const fetch = async () => {
+    const fetchThreads = async () => {
       setLoading(true);
       try {
         const data = await getThreads(filters);
@@ -37,7 +50,8 @@ const ThreadListPage = () => {
       }
     };
 
-    fetch();
+    fetchThreads();
+
     return () => {
       mounted = false;
     };
@@ -61,7 +75,7 @@ const ThreadListPage = () => {
 
         <SortSelector
           value={filters.sort}
-          onChange={(val) => setFilters({ ...filters, sort: val })}
+          onChange={(val) => setFilters({ ...filters, sort: val, page: 1 })}
         />
 
         {isLoggedIn && (
@@ -73,13 +87,60 @@ const ThreadListPage = () => {
               Create Thread
             </button>
 
-            <button
-              className="tl-notification-btn"
-              type="button"
-              aria-label="Notifications"
-            >
-              🔔
-            </button>
+            <div className="tl-notification-wrap">
+              <button
+                className="tl-notification-btn"
+                type="button"
+                aria-label="Notifications"
+                onClick={() => setIsNotificationOpen((prev) => !prev)}
+              >
+                <IoNotificationsOutline />
+                {unreadCount > 0 && (
+                  <span className="tl-notification-badge">{unreadCount}</span>
+                )}
+              </button>
+
+              {isNotificationOpen && (
+                <div className="tl-notification-dropdown">
+                  <div className="tl-notification-header">
+                    <span>Notifications</span>
+                    {notifications.length > 0 && (
+                      <button
+                        type="button"
+                        className="tl-mark-read-btn"
+                        onClick={markAllAsRead}
+                      >
+                        Mark all read
+                      </button>
+                    )}
+                  </div>
+
+                  {notifications.length === 0 ? (
+                    <div className="tl-notification-empty">
+                      No notifications yet
+                    </div>
+                  ) : (
+                    <div className="tl-notification-list">
+                      {notifications.map((item) => (
+                        <button
+                          key={item.id}
+                          type="button"
+                          className={`tl-notification-item ${item.isRead ? "" : "unread"}`}
+                          onClick={() => markAsRead(item.id)}
+                        >
+                          <div className="tl-notification-message">
+                            {item.message}
+                          </div>
+                          <div className="tl-notification-time">
+                            {new Date(item.createdAt).toLocaleString()}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </>
         )}
       </div>
@@ -96,7 +157,9 @@ const ThreadListPage = () => {
               No threads found. Be the first to start a discussion!
             </div>
           ) : (
-            threads.map((t) => <ThreadCard key={t.id} thread={t} />)
+            threads.map((t) => (
+              <ThreadCard key={t.id} thread={t} isLoggedIn={isLoggedIn} />
+            ))
           )}
         </div>
       )}

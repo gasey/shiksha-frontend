@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { BiUpArrow, BiSolidUpArrow } from 'react-icons/bi';
 
-const CommentItem = ({ comment }) => {
+const CommentItem = ({ comment, isLoggedIn }) => {
   const d = new Date(comment.created_at);
   const date = d.toLocaleDateString('en-US', {
     month: 'numeric',
@@ -16,7 +17,6 @@ const CommentItem = ({ comment }) => {
     .toLowerCase();
 
   const username = comment.author_username || 'User';
-  const isLoggedIn = !!localStorage.getItem('access');
 
   const [upvoted, setUpvoted] = useState(false);
   const [upvotes, setUpvotes] = useState(comment.upvote_count ?? 0);
@@ -44,12 +44,17 @@ const CommentItem = ({ comment }) => {
       <div className="td-comment-content">{comment.content}</div>
 
       <button
-        className={`td-upvote-btn td-upvote-btn--sm${upvoted ? ' td-upvoted' : ''}${!isLoggedIn ? ' td-upvote-disabled' : ''}`}
+        className={`td-upvote-btn td-upvote-btn--sm${upvoted ? ' td-upvoted' : ''}${!isLoggedIn ? ' td-upvote-guest' : ''}`}
         onClick={toggleUpvote}
         disabled={!isLoggedIn}
         title={!isLoggedIn ? 'Login required to upvote' : 'Upvote comment'}
       >
-        {upvotes} Upvotes
+        {isLoggedIn && (
+          <span className="td-upvote-icon">
+            {upvoted ? <BiSolidUpArrow /> : <BiUpArrow />}
+          </span>
+        )}
+        <span>{upvotes} Upvotes</span>
       </button>
     </div>
   );

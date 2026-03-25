@@ -522,7 +522,7 @@
   position: absolute;
   top: calc(100% + 14px);
   right: 0;
-  width: 320px;
+  width: 275px;
   background: #ffffff;
   border-radius: 18px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
@@ -557,7 +557,11 @@
 }
 
 .header-profile-menu-item:hover {
-  background: #f8f8f8;
+  color: #2563eb;
+}
+
+.header-profile-menu-item:hover .header-profile-menu-icon {
+  color: #2563eb;
 }
 
 .header-profile-menu-icon {

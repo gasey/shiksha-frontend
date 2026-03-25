@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BiUpArrow, BiSolidUpArrow } from 'react-icons/bi';
 
-const ThreadCard = ({ thread }) => {
+const ThreadCard = ({ thread, isLoggedIn }) => {
   const d = new Date(thread.created_at);
   const date = d.toLocaleDateString('en-US', {
     month: 'numeric',
@@ -18,7 +18,6 @@ const ThreadCard = ({ thread }) => {
     .toLowerCase();
 
   const replies = thread.reply_count ?? 0;
-  const isLoggedIn = !!localStorage.getItem('access');
 
   const [upvoted, setUpvoted] = useState(false);
   const [upvotes, setUpvotes] = useState(thread.upvote_count ?? 0);

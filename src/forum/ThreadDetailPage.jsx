@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getThread } from '../mock/api/threads';
 import { getComments } from '../mock/api/comments';
 import CommentList from './CommentList';
 import CommentComposer from './CommentComposer';
 import SortSelector from './SortSelector';
+import { useAuth } from '../contexts/AuthContext';
+import { BiUpArrow, BiSolidUpArrow } from 'react-icons/bi';
 import '../css/forum.css';
 
 const ThreadDetailPage = () => {
   const { threadId } = useParams();
+  const { isAuthenticated } = useAuth();
+  const isLoggedIn = isAuthenticated;
+
   const [thread, setThread] = useState(null);
   const [comments, setComments] = useState([]);
   const [sort, setSort] = useState('oldest');
@@ -16,15 +21,15 @@ const ThreadDetailPage = () => {
   const [upvoted, setUpvoted] = useState(false);
   const [upvotes, setUpvotes] = useState(0);
 
-  const isLoggedIn = !!localStorage.getItem('access');
-
   useEffect(() => {
     let mounted = true;
-    const fetch = async () => {
+
+    const fetchData = async () => {
       setLoading(true);
       try {
         const t = await getThread(threadId);
         if (!mounted) return;
+
         setThread(t);
         setUpvotes(t.upvote_count ?? 0);
 
@@ -38,7 +43,8 @@ const ThreadDetailPage = () => {
       }
     };
 
-    fetch();
+    fetchData();
+
     return () => {
       mounted = false;
     };
@@ -74,7 +80,7 @@ const ThreadDetailPage = () => {
     return `${date} - ${time}`;
   };
 
-  if (loading && !thread)
+  if (loading && !thread) {
     return (
       <div className="forum-container">
         <div className="forum-loading">
@@ -82,34 +88,38 @@ const ThreadDetailPage = () => {
         </div>
       </div>
     );
+  }
 
-  if (!thread)
+  if (!thread) {
     return (
       <div className="forum-container">
         <div className="thread-empty">Thread not found.</div>
       </div>
     );
+  }
 
   return (
     <div className="forum-container td-page">
-      {/* <div className="td-back-row">
-        <Link to="/forum" className="td-back-link">← Back to Forum</Link>
-      </div> */}
-
       <div className="td-post-card">
         <h2 className="td-post-title">{thread.title}</h2>
         {thread.body ? <p className="td-post-body">{thread.body}</p> : null}
+
         <div className="td-post-meta">
           {thread.author_username || 'Unknown'} – {formatDateTime(thread.created_at)}
         </div>
 
         <button
-          className={`td-upvote-btn${upvoted ? ' td-upvoted' : ''}${!isLoggedIn ? ' td-upvote-disabled' : ''}`}
+          className={`td-upvote-btn${upvoted ? ' td-upvoted' : ''}${!isLoggedIn ? ' td-upvote-guest' : ''}`}
           onClick={toggleUpvote}
           disabled={!isLoggedIn}
-          title={!isLoggedIn ? 'Login required to upvote' : 'Upvote thread'}
+          title={!isLoggedIn ? 'Login required to upvote' : 'Upvote'}
         >
-          {upvotes} Upvotes
+          {isLoggedIn && (
+            <span className="td-upvote-icon">
+              {upvoted ? <BiSolidUpArrow /> : <BiUpArrow />}
+            </span>
+          )}
+          <span>{upvotes} Upvotes</span>
         </button>
 
         {!isLoggedIn && (
@@ -137,7 +147,7 @@ const ThreadDetailPage = () => {
           </div>
         )}
 
-        <CommentList comments={comments} />
+        <CommentList comments={comments} isLoggedIn={isLoggedIn} />
       </div>
     </div>
   );
