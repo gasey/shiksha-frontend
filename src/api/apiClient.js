@@ -17,9 +17,10 @@ api.interceptors.response.use(
     const isUnauthorized = error.response.status === 401;
     const isRefreshCall = originalRequest.url?.includes("/refresh/");
     const isMeCall = originalRequest.url?.includes("/me/");
+    const isNotificationCall = originalRequest.url?.includes("/notifications/");
 
     // 🚫 If simply not logged in, do NOT attempt refresh
-    if (isUnauthorized && isMeCall) {
+    if (isUnauthorized && (isMeCall || isNotificationCall)) {
       return Promise.reject(error);
     }
 
