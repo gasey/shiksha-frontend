@@ -126,7 +126,10 @@ const ThreadListPage = () => {
                           key={item.id}
                           type="button"
                           className={`tl-notification-item ${item.is_read ? "" : "unread"}`}
-                          onClick={() => markAsRead(item.id)}
+                          onClick={() => {
+                            markAsRead(item.id);
+                            if (item.thread_id) navigate(`/forum/${item.thread_id}`);
+                          }}
                         >
                           <div className="tl-notification-message">
                             {item.message}
