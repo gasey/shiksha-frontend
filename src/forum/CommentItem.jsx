@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BiUpArrow, BiSolidUpArrow } from 'react-icons/bi';
+import { toggleCommentUpvote } from '../api/forum';
 
 const CommentItem = ({ comment, isLoggedIn }) => {
   const d = new Date(comment.created_at);
@@ -18,14 +19,19 @@ const CommentItem = ({ comment, isLoggedIn }) => {
 
   const username = comment.author_username || 'User';
 
-  const [upvoted, setUpvoted] = useState(false);
+  const [upvoted, setUpvoted] = useState(comment.user_has_upvoted ?? false);
   const [upvotes, setUpvotes] = useState(comment.upvote_count ?? 0);
 
-  const toggleUpvote = () => {
+  const toggleUpvote = async () => {
     if (!isLoggedIn) return;
 
-    setUpvotes((u) => (upvoted ? u - 1 : u + 1));
-    setUpvoted((prev) => !prev);
+    try {
+      const data = await toggleCommentUpvote(comment.id);
+      setUpvoted(data.upvoted);
+      setUpvotes(data.upvote_count);
+    } catch (err) {
+      console.error("Failed to toggle comment upvote:", err);
+    }
   };
 
   return (
