@@ -59,10 +59,11 @@ const Login = () => {
       }, 500);
 
     } catch (err) {
+      const raw = err?.message ?? err;
       const message =
-        err?.response?.data?.detail ||
-        err?.message ||
-        "Login failed";
+        raw instanceof Error ? raw.message :
+        typeof raw === "string" ? raw :
+        err?.response?.data?.detail || "Login failed";
 
       setError(message);
       setSubmitting(false);

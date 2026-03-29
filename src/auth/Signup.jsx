@@ -68,7 +68,7 @@ const Signup = () => {
       <div className="signup-form">
         <h2>Sign Up</h2>
 
-        {error && <p className="signup-error">{error}</p>}
+        {error && <p className="error general-error">{error}</p>}
 
         <form onSubmit={handleSubmit}>
           <div className="signup-form-group">
