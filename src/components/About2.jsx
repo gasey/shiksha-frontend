@@ -3,13 +3,13 @@ import "../css/About2.css";
 import { FaUsers, FaWrench, FaHome } from "react-icons/fa";
 import { GiSprout } from "react-icons/gi";
 
-import img1 from "../assets/teach1.jpeg";
-import img2 from "../assets/teach2.jpeg";
-import img3 from "../assets/teach3.jpeg";
-import img4 from "../assets/teach4.jpeg";
-import img5 from "../assets/teach5.jpeg";
-import visionImg from "../assets/meet.jpeg";
-import valuesImg from "../assets/studio.jpeg";
+import img1 from "../assets/image7.jpg";
+import img2 from "../assets/image8.jpg";
+import img3 from "../assets/image9.jpg";
+import img4 from "../assets/image10.jpg";
+import img5 from "../assets/image11.jpg";
+import visionImg from "../assets/vision.jpg";
+import valuesImg from "../assets/value.jpg";
 
 const missionPillars = [
   { icon: <FaUsers />,  bg: "rgba(29,202,171,0.12)",  color: "#1dcaab", label: "Fostering a supportive community" },
