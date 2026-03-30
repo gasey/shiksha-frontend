@@ -1,207 +1,72 @@
+/* ═══════════════════════════════════════════
+   FORM FILLUP — matches Hero theme
+═══════════════════════════════════════════ */
 .ff-container {
-  min-height: 60vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  padding: 2rem 1rem 3rem;
+  align-items: flex-start;
+  padding: 80px 24px 80px;
+  background: #e8e0cc;
+  position: relative;
+  overflow: hidden;
 }
 
+/* bg grid */
+.ff-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(132, 104, 39, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 173, 51, 0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(
+    ellipse 80% 80% at 50% 50%,
+    black 30%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* glow top-right */
+.ff-container::after {
+  content: "";
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16, 67, 18, 0.28), transparent 70%);
+  top: -200px;
+  right: -100px;
+  pointer-events: none;
+}
+
+/* glow bottom-left */
+.ff-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(40, 156, 49, 0.2), transparent 70%);
+  bottom: -150px;
+  left: -100px;
+  pointer-events: none;
+}
+
+/* ── card ── */
 .ff-card {
   width: 100%;
-  max-width: 680px;
-  background: #fff;
-  padding: 2.5rem 2rem;
-  border-radius: 14px;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+  max-width: 700px;
+  background: rgba(10, 30, 15, 0.52);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  padding: 40px 36px;
+  position: relative;
+  z-index: 2;
   animation: ffCardEnter 0.45s ease;
-}
-
-.ff-card h2 {
-  text-align: center;
-  color: #222;
-  font-size: 1.7rem;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.ff-subtitle {
-  text-align: center;
-  color: #666;
-  font-size: 0.95rem;
-  margin-bottom: 1.8rem;
-}
-
-.ff-loading {
-  text-align: center;
-  color: #888;
-  padding: 3rem 0;
-}
-
-/* Section titles */
-.ff-section-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #004A33;
-  margin: 1.6rem 0 0.8rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 2px solid #e8e4d9;
-}
-
-/* Fields */
-.ff-field {
-  margin-bottom: 1rem;
-}
-
-.ff-field label {
-  display: block;
-  margin-bottom: 0.4rem;
-  font-weight: 600;
-  color: #444;
-  font-size: 0.92rem;
-}
-
-.ff-field input,
-.ff-field select,
-.ff-field textarea {
-  width: 100%;
-  padding: 0.75rem 0.85rem;
-  border: 1px solid #dcdcdc;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  background: #fff;
-  color: #222;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.ff-field input:focus,
-.ff-field select:focus,
-.ff-field textarea:focus {
-  outline: none;
-  border-color: #3fad4e;
-  box-shadow: 0 0 0 3px rgba(63, 173, 78, 0.12);
-}
-
-.ff-field input:disabled {
-  background: #f3f4f6;
-  color: #888;
-  cursor: not-allowed;
-}
-
-.ff-field textarea {
-  resize: vertical;
-  min-height: 70px;
-}
-
-.ff-field select {
-  cursor: pointer;
-}
-
-.ff-field-error {
-  display: block;
-  color: #c0392b;
-  font-size: 0.82rem;
-  margin-top: 4px;
-}
-
-/* Two-column row */
-.ff-row {
-  display: flex;
-  gap: 1rem;
-}
-
-.ff-row .ff-field {
-  flex: 1;
-}
-
-/* Checkbox */
-.ff-checkbox-row {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.ff-checkbox-row input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  accent-color: #004A33;
-  cursor: pointer;
-}
-
-.ff-checkbox-row label {
-  font-size: 0.92rem;
-  color: #444;
-  cursor: pointer;
-}
-
-/* Messages */
-.ff-error-msg {
-  color: #c0392b;
-  font-size: 0.92rem;
-  font-weight: 500;
-  background: rgba(192, 57, 43, 0.08);
-  border: 1px solid rgba(192, 57, 43, 0.14);
-  padding: 0.6rem 0.85rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-.ff-success-msg {
-  color: #2c6e49;
-  font-size: 0.92rem;
-  font-weight: 500;
-  background: rgba(44, 110, 73, 0.08);
-  border: 1px solid rgba(44, 110, 73, 0.14);
-  padding: 0.6rem 0.85rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-/* Actions */
-.ff-actions {
-  display: flex;
-  gap: 0.8rem;
-  margin-top: 1.5rem;
-}
-
-.ff-btn-primary {
-  flex: 1;
-  padding: 0.82rem;
-  background: linear-gradient(135deg, #3fad4e 0%, #2f9d42 100%);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.22s ease;
-  box-shadow: 0 10px 22px rgba(63, 173, 78, 0.2);
-}
-
-.ff-btn-primary:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 28px rgba(63, 173, 78, 0.24);
-}
-
-.ff-btn-primary:disabled {
-  opacity: 0.78;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-.ff-btn-secondary {
-  padding: 0.82rem 1.5rem;
-  background: #f3f4f6;
-  color: #333;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.ff-btn-secondary:hover {
-  background: #e5e7eb;
 }
 
 @keyframes ffCardEnter {
@@ -215,17 +80,255 @@
   }
 }
 
-@media (max-width: 600px) {
-  .ff-card {
-    padding: 1.5rem 1rem;
-  }
+.ff-card h2 {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 6px;
+}
 
+.ff-subtitle {
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 28px;
+}
+
+.ff-loading {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Poppins", sans-serif;
+  padding: 3rem 0;
+}
+
+/* ── section titles ── */
+.ff-section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1dcaab;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 28px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── fields ── */
+.ff-field {
+  margin-bottom: 14px;
+}
+
+.ff-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 12px;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.ff-field input,
+.ff-field select,
+.ff-field textarea {
+  width: 100%;
+  padding: 10px 13px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  font-size: 13px;
+  font-family: "Poppins", sans-serif;
+  color: rgba(255, 255, 255, 0.88);
+  transition:
+    border-color 0.22s,
+    box-shadow 0.22s;
+  outline: none;
+}
+
+.ff-field input::placeholder,
+.ff-field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* date & select option text fix */
+.ff-field input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7);
+  cursor: pointer;
+}
+
+.ff-field select option {
+  background: #0a1f1c;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.ff-field input:focus,
+.ff-field select:focus,
+.ff-field textarea:focus {
+  border-color: #1dcaab;
+  box-shadow: 0 0 0 3px rgba(29, 202, 171, 0.12);
+}
+
+.ff-field input:disabled {
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.3);
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.ff-field textarea {
+  resize: vertical;
+  min-height: 74px;
+}
+
+.ff-field select {
+  cursor: pointer;
+}
+
+.ff-field-error {
+  display: block;
+  color: #f87171;
+  font-size: 11px;
+  font-family: "Poppins", sans-serif;
+  margin-top: 4px;
+}
+
+/* ── two-column row ── */
+.ff-row {
+  display: flex;
+  gap: 14px;
+}
+
+.ff-row .ff-field {
+  flex: 1;
+}
+
+/* ── checkbox ── */
+.ff-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 14px;
+}
+
+.ff-checkbox-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #1dcaab;
+  cursor: pointer;
+}
+
+.ff-checkbox-row label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+}
+
+/* ── messages ── */
+.ff-error-msg {
+  color: #f87171;
+  font-size: 13px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.2);
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+.ff-success-msg {
+  color: #1dcaab;
+  font-size: 13px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  background: rgba(29, 202, 171, 0.08);
+  border: 1px solid rgba(29, 202, 171, 0.2);
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+/* ── actions ── */
+.ff-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* primary — mirrors .sa-btn style */
+.ff-btn-primary {
+  flex: 1;
+  padding: 12px;
+  background: rgba(10, 30, 15, 0.6);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 11px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition:
+    border-color 0.22s,
+    box-shadow 0.22s,
+    transform 0.22s;
+}
+
+.ff-btn-primary:hover:not(:disabled) {
+  border-color: #1dcaab;
+  box-shadow: 0 0 0 1.5px #1dcaab;
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.ff-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* secondary */
+.ff-btn-secondary {
+  padding: 12px 22px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 11px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.ff-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .ff-container {
+    padding: 60px 16px 60px;
+  }
+  .ff-card {
+    padding: 28px 20px;
+  }
+  .ff-card h2 {
+    font-size: 18px;
+  }
   .ff-row {
     flex-direction: column;
     gap: 0;
-  }
-
-  .ff-card h2 {
-    font-size: 1.4rem;
   }
 }

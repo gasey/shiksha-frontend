@@ -39,15 +39,15 @@ const TEACHER_FIELDS = {
 };
 
 const QUALIFICATION_OPTIONS = [
-  { value: "high_school", label: "High School" },
-  { value: "intermediate", label: "Intermediate" },
-  { value: "bachelors", label: "Bachelor's Degree" },
-  { value: "masters", label: "Master's Degree" },
-  { value: "phd", label: "Ph.D." },
-  { value: "bed", label: "B.Ed." },
-  { value: "med", label: "M.Ed." },
-  { value: "diploma", label: "Diploma" },
-  { value: "other", label: "Other" },
+  { value: "high_school",   label: "High School" },
+  { value: "intermediate",  label: "Intermediate" },
+  { value: "bachelors",     label: "Bachelor's Degree" },
+  { value: "masters",       label: "Master's Degree" },
+  { value: "phd",           label: "Ph.D." },
+  { value: "bed",           label: "B.Ed." },
+  { value: "med",           label: "M.Ed." },
+  { value: "diploma",       label: "Diploma" },
+  { value: "other",         label: "Other" },
 ];
 
 const FormFillup = () => {
@@ -57,14 +57,14 @@ const FormFillup = () => {
 
   const isOnboarding = location.state?.onboarding === true;
 
-  const [formType, setFormType] = useState(null);
-  const [email, setEmail] = useState("");
-  const [form, setForm] = useState({});
-  const [errors, setErrors] = useState({});
+  const [formType, setFormType]     = useState(null);
+  const [email, setEmail]           = useState("");
+  const [form, setForm]             = useState({});
+  const [errors, setErrors]         = useState({});
   const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess]       = useState("");
   const [fetchError, setFetchError] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading]       = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -103,31 +103,27 @@ const FormFillup = () => {
 
     setForm((prev) => {
       const updated = { ...prev, [name]: val };
-
       if (name === "same_as_current" && checked) {
         updated.permanent_address = prev.current_address;
       }
       if (name === "current_address" && prev.same_as_current) {
         updated.permanent_address = value;
       }
-
       return updated;
     });
 
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
-    }
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const validate = () => {
     const errs = {};
 
-    if (!form.name?.trim()) errs.name = "Full name is required";
-    if (!form.phone?.trim()) errs.phone = "Phone number is required";
-    if (!form.date_of_birth) errs.date_of_birth = "Date of birth is required";
-    if (!form.father_name?.trim()) errs.father_name = "Father's name is required";
-    if (!form.mother_name?.trim()) errs.mother_name = "Mother's name is required";
-    if (!form.current_address?.trim()) errs.current_address = "Current address is required";
+    if (!form.name?.trim())             errs.name = "Full name is required";
+    if (!form.phone?.trim())            errs.phone = "Phone number is required";
+    if (!form.date_of_birth)            errs.date_of_birth = "Date of birth is required";
+    if (!form.father_name?.trim())      errs.father_name = "Father's name is required";
+    if (!form.mother_name?.trim())      errs.mother_name = "Mother's name is required";
+    if (!form.current_address?.trim())  errs.current_address = "Current address is required";
 
     if (!form.same_as_current && !form.permanent_address?.trim()) {
       errs.permanent_address = "Permanent address is required";
@@ -151,18 +147,14 @@ const FormFillup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccess("");
-
     if (!validate()) return;
 
     setSubmitting(true);
-
     try {
       const payload = { ...form };
-
       if (formType === "teacher") {
         payload.teaching_experience_years = Number(payload.teaching_experience_years) || 0;
       }
-
       await submitFormFillup(payload);
       await bootstrap();
 
@@ -183,6 +175,7 @@ const FormFillup = () => {
   if (loading) {
     return (
       <div className="ff-container">
+        <div className="ff-glow"></div>
         <div className="ff-card">
           <p className="ff-loading">Loading form...</p>
         </div>
@@ -193,6 +186,7 @@ const FormFillup = () => {
   if (fetchError) {
     return (
       <div className="ff-container">
+        <div className="ff-glow"></div>
         <div className="ff-card">
           <p className="ff-error-msg">{fetchError}</p>
         </div>
@@ -202,6 +196,9 @@ const FormFillup = () => {
 
   return (
     <div className="ff-container">
+      {/* ambient glow bottom-left — mirrors hero-glow-2 */}
+      <div className="ff-glow"></div>
+
       <div className="ff-card">
         <h2>{isOnboarding ? "Complete Your Profile" : "Update Profile"}</h2>
         <p className="ff-subtitle">
@@ -211,18 +208,13 @@ const FormFillup = () => {
         </p>
 
         <form onSubmit={handleSubmit} noValidate>
+
           {/* ===== PERSONAL INFO ===== */}
           <h3 className="ff-section-title">Personal Information</h3>
 
           <div className="ff-field">
             <label>Full Name *</label>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="Enter your full name"
-            />
+            <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Enter your full name" />
             {errors.name && <span className="ff-field-error">{errors.name}</span>}
           </div>
 
@@ -233,13 +225,7 @@ const FormFillup = () => {
 
           <div className="ff-field">
             <label>Phone *</label>
-            <input
-              type="tel"
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-              placeholder="Enter phone number"
-            />
+            <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="Enter phone number" />
             {errors.phone && <span className="ff-field-error">{errors.phone}</span>}
           </div>
 
@@ -258,15 +244,8 @@ const FormFillup = () => {
 
           <div className="ff-field">
             <label>Date of Birth *</label>
-            <input
-              type="date"
-              name="date_of_birth"
-              value={form.date_of_birth || ""}
-              onChange={handleChange}
-            />
-            {errors.date_of_birth && (
-              <span className="ff-field-error">{errors.date_of_birth}</span>
-            )}
+            <input type="date" name="date_of_birth" value={form.date_of_birth || ""} onChange={handleChange} />
+            {errors.date_of_birth && <span className="ff-field-error">{errors.date_of_birth}</span>}
           </div>
 
           {/* ===== FAMILY INFO ===== */}
@@ -275,63 +254,27 @@ const FormFillup = () => {
           <div className="ff-row">
             <div className="ff-field">
               <label>Father's Name *</label>
-              <input
-                type="text"
-                name="father_name"
-                value={form.father_name}
-                onChange={handleChange}
-                placeholder="Father's name"
-              />
-              {errors.father_name && (
-                <span className="ff-field-error">{errors.father_name}</span>
-              )}
+              <input type="text" name="father_name" value={form.father_name} onChange={handleChange} placeholder="Father's name" />
+              {errors.father_name && <span className="ff-field-error">{errors.father_name}</span>}
             </div>
-
             <div className="ff-field">
               <label>Father's Phone</label>
-              <input
-                type="tel"
-                name="father_phone"
-                value={form.father_phone}
-                onChange={handleChange}
-                placeholder="Father's phone"
-              />
+              <input type="tel" name="father_phone" value={form.father_phone} onChange={handleChange} placeholder="Father's phone" />
             </div>
           </div>
 
           <div className="ff-row">
             <div className="ff-field">
               <label>Mother's Name *</label>
-              <input
-                type="text"
-                name="mother_name"
-                value={form.mother_name}
-                onChange={handleChange}
-                placeholder="Mother's name"
-              />
-              {errors.mother_name && (
-                <span className="ff-field-error">{errors.mother_name}</span>
-              )}
+              <input type="text" name="mother_name" value={form.mother_name} onChange={handleChange} placeholder="Mother's name" />
+              {errors.mother_name && <span className="ff-field-error">{errors.mother_name}</span>}
             </div>
-
             <div className="ff-field">
               <label>{formType === "teacher" ? "Mother's Phone" : "Guardian"}</label>
               {formType === "teacher" ? (
-                <input
-                  type="tel"
-                  name="mother_phone"
-                  value={form.mother_phone}
-                  onChange={handleChange}
-                  placeholder="Mother's phone"
-                />
+                <input type="tel" name="mother_phone" value={form.mother_phone} onChange={handleChange} placeholder="Mother's phone" />
               ) : (
-                <input
-                  type="text"
-                  name="guardian"
-                  value={form.guardian}
-                  onChange={handleChange}
-                  placeholder="Guardian name"
-                />
+                <input type="text" name="guardian" value={form.guardian} onChange={handleChange} placeholder="Guardian name" />
               )}
             </div>
           </div>
@@ -339,13 +282,7 @@ const FormFillup = () => {
           {formType !== "teacher" && (
             <div className="ff-field">
               <label>Guardian's Phone</label>
-              <input
-                type="tel"
-                name="guardian_phone"
-                value={form.guardian_phone}
-                onChange={handleChange}
-                placeholder="Guardian's phone"
-              />
+              <input type="tel" name="guardian_phone" value={form.guardian_phone} onChange={handleChange} placeholder="Guardian's phone" />
             </div>
           )}
 
@@ -354,44 +291,20 @@ const FormFillup = () => {
 
           <div className="ff-field">
             <label>Current Address *</label>
-            <textarea
-              name="current_address"
-              value={form.current_address}
-              onChange={handleChange}
-              placeholder="Enter current address"
-              rows={3}
-            />
-            {errors.current_address && (
-              <span className="ff-field-error">{errors.current_address}</span>
-            )}
+            <textarea name="current_address" value={form.current_address} onChange={handleChange} placeholder="Enter current address" rows={3} />
+            {errors.current_address && <span className="ff-field-error">{errors.current_address}</span>}
           </div>
 
           <div className="ff-checkbox-row">
-            <input
-              type="checkbox"
-              id="same_as_current"
-              name="same_as_current"
-              checked={form.same_as_current}
-              onChange={handleChange}
-            />
-            <label htmlFor="same_as_current">
-              Permanent address is same as current address
-            </label>
+            <input type="checkbox" id="same_as_current" name="same_as_current" checked={form.same_as_current} onChange={handleChange} />
+            <label htmlFor="same_as_current">Permanent address is same as current address</label>
           </div>
 
           {!form.same_as_current && (
             <div className="ff-field">
               <label>Permanent Address *</label>
-              <textarea
-                name="permanent_address"
-                value={form.permanent_address}
-                onChange={handleChange}
-                placeholder="Enter permanent address"
-                rows={3}
-              />
-              {errors.permanent_address && (
-                <span className="ff-field-error">{errors.permanent_address}</span>
-              )}
+              <textarea name="permanent_address" value={form.permanent_address} onChange={handleChange} placeholder="Enter permanent address" rows={3} />
+              {errors.permanent_address && <span className="ff-field-error">{errors.permanent_address}</span>}
             </div>
           )}
 
@@ -402,74 +315,37 @@ const FormFillup = () => {
 
               <div className="ff-field">
                 <label>Highest Qualification *</label>
-                <select
-                  name="highest_qualification"
-                  value={form.highest_qualification}
-                  onChange={handleChange}
-                >
+                <select name="highest_qualification" value={form.highest_qualification} onChange={handleChange}>
                   <option value="">Select Qualification</option>
                   {QUALIFICATION_OPTIONS.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </option>
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
                   ))}
                 </select>
-                {errors.highest_qualification && (
-                  <span className="ff-field-error">{errors.highest_qualification}</span>
-                )}
+                {errors.highest_qualification && <span className="ff-field-error">{errors.highest_qualification}</span>}
               </div>
 
               {form.highest_qualification === "other" && (
                 <div className="ff-field">
                   <label>Specify Qualification *</label>
-                  <input
-                    type="text"
-                    name="other_qualification"
-                    value={form.other_qualification}
-                    onChange={handleChange}
-                    placeholder="Enter your qualification"
-                  />
-                  {errors.other_qualification && (
-                    <span className="ff-field-error">{errors.other_qualification}</span>
-                  )}
+                  <input type="text" name="other_qualification" value={form.other_qualification} onChange={handleChange} placeholder="Enter your qualification" />
+                  {errors.other_qualification && <span className="ff-field-error">{errors.other_qualification}</span>}
                 </div>
               )}
 
               <div className="ff-field">
                 <label>Subject Specialization *</label>
-                <input
-                  type="text"
-                  name="subject_specialization"
-                  value={form.subject_specialization}
-                  onChange={handleChange}
-                  placeholder="e.g. Mathematics, Physics"
-                />
-                {errors.subject_specialization && (
-                  <span className="ff-field-error">{errors.subject_specialization}</span>
-                )}
+                <input type="text" name="subject_specialization" value={form.subject_specialization} onChange={handleChange} placeholder="e.g. Mathematics, Physics" />
+                {errors.subject_specialization && <span className="ff-field-error">{errors.subject_specialization}</span>}
               </div>
 
               <div className="ff-row">
                 <div className="ff-field">
                   <label>Teaching Experience (Years)</label>
-                  <input
-                    type="number"
-                    name="teaching_experience_years"
-                    value={form.teaching_experience_years}
-                    onChange={handleChange}
-                    min={0}
-                  />
+                  <input type="number" name="teaching_experience_years" value={form.teaching_experience_years} onChange={handleChange} min={0} />
                 </div>
-
                 <div className="ff-field">
                   <label>Previous Institution</label>
-                  <input
-                    type="text"
-                    name="previous_institution"
-                    value={form.previous_institution}
-                    onChange={handleChange}
-                    placeholder="Previous institution name"
-                  />
+                  <input type="text" name="previous_institution" value={form.previous_institution} onChange={handleChange} placeholder="Previous institution name" />
                 </div>
               </div>
             </>
@@ -481,23 +357,15 @@ const FormFillup = () => {
 
           <div className="ff-actions">
             {!isOnboarding && (
-              <button
-                type="button"
-                className="ff-btn-secondary"
-                onClick={() => navigate(-1)}
-              >
+              <button type="button" className="ff-btn-secondary" onClick={() => navigate(-1)}>
                 Cancel
               </button>
             )}
-
             <button type="submit" className="ff-btn-primary" disabled={submitting}>
-              {submitting
-                ? "Saving..."
-                : isOnboarding
-                ? "Complete Profile"
-                : "Save Changes"}
+              {submitting ? "Saving..." : isOnboarding ? "Complete Profile" : "Save Changes"}
             </button>
           </div>
+
         </form>
       </div>
     </div>
