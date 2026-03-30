@@ -1,0 +1,231 @@
+.ff-container {
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem 3rem;
+}
+
+.ff-card {
+  width: 100%;
+  max-width: 680px;
+  background: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 14px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+  animation: ffCardEnter 0.45s ease;
+}
+
+.ff-card h2 {
+  text-align: center;
+  color: #222;
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.ff-subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 1.8rem;
+}
+
+.ff-loading {
+  text-align: center;
+  color: #888;
+  padding: 3rem 0;
+}
+
+/* Section titles */
+.ff-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #004A33;
+  margin: 1.6rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid #e8e4d9;
+}
+
+/* Fields */
+.ff-field {
+  margin-bottom: 1rem;
+}
+
+.ff-field label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #444;
+  font-size: 0.92rem;
+}
+
+.ff-field input,
+.ff-field select,
+.ff-field textarea {
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #fff;
+  color: #222;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ff-field input:focus,
+.ff-field select:focus,
+.ff-field textarea:focus {
+  outline: none;
+  border-color: #3fad4e;
+  box-shadow: 0 0 0 3px rgba(63, 173, 78, 0.12);
+}
+
+.ff-field input:disabled {
+  background: #f3f4f6;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.ff-field textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.ff-field select {
+  cursor: pointer;
+}
+
+.ff-field-error {
+  display: block;
+  color: #c0392b;
+  font-size: 0.82rem;
+  margin-top: 4px;
+}
+
+/* Two-column row */
+.ff-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.ff-row .ff-field {
+  flex: 1;
+}
+
+/* Checkbox */
+.ff-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.ff-checkbox-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #004A33;
+  cursor: pointer;
+}
+
+.ff-checkbox-row label {
+  font-size: 0.92rem;
+  color: #444;
+  cursor: pointer;
+}
+
+/* Messages */
+.ff-error-msg {
+  color: #c0392b;
+  font-size: 0.92rem;
+  font-weight: 500;
+  background: rgba(192, 57, 43, 0.08);
+  border: 1px solid rgba(192, 57, 43, 0.14);
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.ff-success-msg {
+  color: #2c6e49;
+  font-size: 0.92rem;
+  font-weight: 500;
+  background: rgba(44, 110, 73, 0.08);
+  border: 1px solid rgba(44, 110, 73, 0.14);
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Actions */
+.ff-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.ff-btn-primary {
+  flex: 1;
+  padding: 0.82rem;
+  background: linear-gradient(135deg, #3fad4e 0%, #2f9d42 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.22s ease;
+  box-shadow: 0 10px 22px rgba(63, 173, 78, 0.2);
+}
+
+.ff-btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(63, 173, 78, 0.24);
+}
+
+.ff-btn-primary:disabled {
+  opacity: 0.78;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.ff-btn-secondary {
+  padding: 0.82rem 1.5rem;
+  background: #f3f4f6;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.ff-btn-secondary:hover {
+  background: #e5e7eb;
+}
+
+@keyframes ffCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .ff-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .ff-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .ff-card h2 {
+    font-size: 1.4rem;
+  }
+}

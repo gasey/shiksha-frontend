@@ -41,6 +41,9 @@ import Counselling from './Counselling';
 
 import Placements from './Placements';
 import Payment from "./Payment";
+import FormFillup from './FormFillup';
+
+import RequireProfileComplete from '../routes/RequireProfileComplete';
 
 import ThreadListPage from '../forum/ThreadListPage';
 import ThreadDetailPage from '../forum/ThreadDetailPage';
@@ -94,8 +97,22 @@ function App() {
           path="/dashboard"
           element={
             <ProtectedRoute>
+              <RequireProfileComplete>
+                <Page>
+                  <Dashboard />
+                </Page>
+              </RequireProfileComplete>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* ===== FORM FILLUP (PROTECTED) ===== */}
+        <Route
+          path="/form-fillup"
+          element={
+            <ProtectedRoute>
               <Page>
-                <Dashboard />
+                <FormFillup />
               </Page>
             </ProtectedRoute>
           }
