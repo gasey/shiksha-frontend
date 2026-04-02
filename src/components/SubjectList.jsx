@@ -28,7 +28,7 @@ const Breadcrumb = ({ items, onNavigate }) => {
 
 const SubjectList = ({ course, boardGroup, board, selectedClass, onBack }) => {
   const navigate = useNavigate();
-  const [expanded, setExpanded] = useState({});
+  const [expandedIndex, setExpandedIndex] = useState(0);
 
   if (!course || !course.topics) return null;
 
@@ -54,7 +54,9 @@ const SubjectList = ({ course, boardGroup, board, selectedClass, onBack }) => {
       'Complete chapter-wise assignments for self-assessment',
       'Take quizzes for regular practice and progress tracking',
       'Build strong conceptual understanding',
-      isMbse ? 'Learn from MBSE / textbook-aligned curriculum' : 'Learn from textbook-aligned curriculum',
+      isMbse
+        ? 'Learn from MBSE / textbook-aligned curriculum'
+        : 'Learn from textbook-aligned curriculum',
     ],
     [courseName, boardName, isMbse]
   );
@@ -71,14 +73,6 @@ const SubjectList = ({ course, boardGroup, board, selectedClass, onBack }) => {
 
   const handleBreadcrumbNav = (key) => {
     onBack?.(key);
-  };
-
-  const expandAll = () => {
-    const next = {};
-    course.topics.forEach((_, index) => {
-      next[index] = true;
-    });
-    setExpanded(next);
   };
 
   return (
@@ -151,26 +145,18 @@ const SubjectList = ({ course, boardGroup, board, selectedClass, onBack }) => {
               <section className="course-content-section">
                 <div className="course-content-head">
                   <h3 className="course-sub-heading">Course Contents</h3>
-                  <button type="button" className="course-expand-btn" onClick={expandAll}>
-                    Expand all sections
-                  </button>
                 </div>
 
                 <div className="course-accordion">
                   {course.topics.map((topic, index) => {
-                    const isOpen = expanded[index] ?? false;
+                    const isOpen = expandedIndex === index;
 
                     return (
                       <div className="course-accordion__item" key={index}>
                         <button
                           type="button"
                           className="course-accordion__header"
-                          onClick={() =>
-                            setExpanded((prev) => ({
-                              ...prev,
-                              [index]: !isOpen,
-                            }))
-                          }
+                          onClick={() => setExpandedIndex(isOpen ? null : index)}
                         >
                           <span className="course-accordion__left">
                             <span

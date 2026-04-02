@@ -4,18 +4,30 @@ import '../css/Courses.css';
 import SubjectList from './SubjectList';
 import { courseData, mbseCourseData } from '../data/courseData';
 
+import cbseImg from '../assets/courses/Cbse.png';
+import mbseImg from '../assets/courses/Mbse.png';
+import class8Img from '../assets/courses/class8.png';
+import class9Img from '../assets/courses/class9.png';
+import class10Img from '../assets/courses/class10.png';
+import class11ArtsImg from '../assets/courses/class11-Arts.png';
+import class11ComImg from '../assets/courses/class11-Com.png';
+import class11SciImg from '../assets/courses/class11-Sci.png';
+import class12ArtsImg from '../assets/courses/class12-Arts.png';
+import class12ComImg from '../assets/courses/class12-Com.png';
+import class12SciImg from '../assets/courses/class12-Sci.png';
+
 const BOARD_GROUPS = [
   {
     id: 'central',
     title: 'Central Board',
     desc: 'National Curriculum Boards',
-    image: '/images/course-thumb.jpg',
+    image: cbseImg,
   },
   {
     id: 'state',
     title: 'State Board',
     desc: 'Regional Curriculum Boards',
-    image: '/images/course-thumb.jpg',
+    image: mbseImg,
   },
 ];
 
@@ -25,25 +37,7 @@ const BOARD_OPTIONS = {
       id: 'cbse',
       title: 'CBSE',
       desc: 'Central Board of Secondary Education. Most widely followed board in India.',
-      image: '/images/course-thumb.jpg',
-    },
-    {
-      id: 'nios',
-      title: 'NIOS',
-      desc: 'National Institute of Open Schooling. Flexible learning for diverse student needs.',
-      image: '/images/course-thumb.jpg',
-    },
-    {
-      id: 'isc',
-      title: 'ISC',
-      desc: 'Indian School Certificate for higher secondary with detailed academic coverage.',
-      image: '/images/course-thumb.jpg',
-    },
-    {
-      id: 'icse',
-      title: 'ICSE',
-      desc: 'Indian Certificate of Secondary Education with strong conceptual learning.',
-      image: '/images/course-thumb.jpg',
+      image: cbseImg,
     },
   ],
   state: [
@@ -51,25 +45,7 @@ const BOARD_OPTIONS = {
       id: 'mbse',
       title: 'MBSE',
       desc: 'Mizoram Board of School Education.',
-      image: '/images/course-thumb.jpg',
-    },
-    {
-      id: 'tbse',
-      title: 'TBSE',
-      desc: 'Tripura Board of Secondary Education.',
-      image: '/images/course-thumb.jpg',
-    },
-    {
-      id: 'asseb',
-      title: 'ASSEB',
-      desc: 'Assam State School Education Board.',
-      image: '/images/course-thumb.jpg',
-    },
-    {
-      id: 'nbse',
-      title: 'NBSE',
-      desc: 'Nagaland Board of School Education.',
-      image: '/images/course-thumb.jpg',
+      image: mbseImg,
     },
   ],
 };
@@ -80,18 +56,21 @@ const CLASSES = [
     title: 'Class 8',
     desc: 'Information regarding the course',
     price: '₹1,500',
+    image: class8Img,
   },
   {
     id: 'class9',
     title: 'Class 9',
     desc: 'Information regarding the course',
     price: '₹1,500',
+    image: class9Img,
   },
   {
     id: 'class10',
     title: 'Class 10',
     desc: 'Information regarding the course',
     price: '₹1,500',
+    image: class10Img,
   },
   {
     id: 'class11science',
@@ -99,6 +78,7 @@ const CLASSES = [
     subtitle: 'Science',
     desc: 'Physics, Chemistry, Biology, Mathematics',
     price: '₹1,500',
+    image: class11SciImg,
   },
   {
     id: 'class11commerce',
@@ -106,6 +86,7 @@ const CLASSES = [
     subtitle: 'Commerce',
     desc: 'Accountancy, Business Studies, Economics',
     price: '₹1,500',
+    image: class11ComImg,
   },
   {
     id: 'class11arts',
@@ -113,6 +94,7 @@ const CLASSES = [
     subtitle: 'Arts',
     desc: 'History, Political Science, Geography',
     price: '₹1,500',
+    image: class11ArtsImg,
   },
   {
     id: 'class12science',
@@ -120,6 +102,7 @@ const CLASSES = [
     subtitle: 'Science',
     desc: 'Physics, Chemistry, Biology, Mathematics',
     price: '₹1,500',
+    image: class12SciImg,
   },
   {
     id: 'class12commerce',
@@ -127,6 +110,7 @@ const CLASSES = [
     subtitle: 'Commerce',
     desc: 'Accountancy, Business Studies, Economics',
     price: '₹1,500',
+    image: class12ComImg,
   },
   {
     id: 'class12arts',
@@ -134,6 +118,7 @@ const CLASSES = [
     subtitle: 'Arts',
     desc: 'History, Political Science, Geography',
     price: '₹1,500',
+    image: class12ArtsImg,
   },
 ];
 
@@ -357,7 +342,7 @@ const Courses = () => {
             {CLASSES.map((cls) => (
               <CourseTile
                 key={cls.id}
-                image="/images/course-thumb.jpg"
+                image={cls.image}
                 title={cls.title}
                 subtitle={cls.subtitle}
                 desc={cls.desc}

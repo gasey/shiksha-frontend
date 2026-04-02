@@ -236,26 +236,35 @@ const Navbar = () => {
   {t("courses")}
 </button>
             </li>
+<li
+  className={`nav-item dropdown${
+    openDropdown === "general-studies" ? " mobile-dropdown-open" : ""
+  }`}
+>
+  <span className="nav-label">General Studies</span>
 
-   <li className="nav-item dropdown">
-  <NavLink to="/general-studies" onClick={closeMobileMenu}>
-    General Studies
-  </NavLink>
+  <button
+    type="button"
+    className="mobile-dropdown-arrow"
+    onClick={() => handleDropdownToggle("general-studies")}
+  >
+    ▾
+  </button>
 
   <ul className="dropdown-menu">
-  <li>
-    <NavLink to="/blogs" onClick={closeMobileMenu}>
-      Blogs
-    </NavLink>
-  </li>
+    <li>
+      <NavLink to="/blogs" onClick={closeMobileMenu}>
+        Blogs
+      </NavLink>
+    </li>
 
-  <li>
-    <NavLink to="/current-affairs" onClick={closeMobileMenu}>
-      Current Affairs
-    </NavLink>
-  </li>
-</ul>
-            </li>
+    <li>
+      <NavLink to="/current-affairs" onClick={closeMobileMenu}>
+        Current Affairs
+      </NavLink>
+    </li>
+  </ul>
+</li>
             
             <li
               className={`nav-item dropdown${
@@ -283,7 +292,7 @@ const Navbar = () => {
                 </li>
                  
                 <li className="nav-item dropdown nested-dropdown">
-                  <span className="nav-labels">Skill Hub</span>
+                  <span className="nav-labels">Skill Development</span>
                   <ul className="dropdown-menu nested-menu">
                     <li>
                       <NavLink to="/training" onClick={closeMobileMenu}>
@@ -339,7 +348,7 @@ const Navbar = () => {
                   className="nav-dashboard-btn"
                   onClick={handleDashboard}
                 >
-                  go to dashboard
+                  Go to Dashboard
                   <FiArrowUpRight size={15} />
                 </button>
               </li>

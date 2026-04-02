@@ -4,6 +4,9 @@ import ComingSoon from './ComingSoon';
 import '../css/CoursePreview.css';
 import '../css/Courses.css';
 
+import cbseImg from '../assets/courses/Cbse.png';
+import mbseImg from '../assets/courses/Mbse.png';
+
 const TABS = ['Online', 'Classroom Training', 'Software Development'];
 
 const BOARDS = [
@@ -11,13 +14,13 @@ const BOARDS = [
     id: 'CENTRAL_BOARD',
     title: 'Central Board',
     desc: 'National Curriculum Boards',
-    image: '/images/central-board.jpg',
+    image: cbseImg,
   },
   {
     id: 'STATE_BOARD',
     title: 'State Board',
     desc: 'Regional Curriculum Boards',
-    image: '/images/state-board.jpg',
+    image: mbseImg,
   },
 ];
 

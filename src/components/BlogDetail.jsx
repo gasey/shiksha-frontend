@@ -9,11 +9,13 @@ function PremiumQuiz({ quizMeta, quiz }) {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [revealed, setRevealed] = useState({});
   const [openSolutions, setOpenSolutions] = useState({});
+  const [showScore, setShowScore] = useState(false);
 
   useEffect(() => {
     setSelectedAnswers({});
     setRevealed({});
     setOpenSolutions({});
+    setShowScore(false);
   }, [quiz]);
 
   const score = quiz.reduce((total, q, index) => {
@@ -36,8 +38,50 @@ function PremiumQuiz({ quizMeta, quiz }) {
     setOpenSolutions((prev) => ({ ...prev, [qIndex]: !prev[qIndex] }));
   };
 
+  const handleShowScore = () => {
+    setShowScore(true);
+
+    setTimeout(() => {
+      const resultBox = document.querySelector(".result-banner");
+      if (resultBox) {
+        resultBox.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }, 100);
+  };
+
   return (
     <section className="premium-quiz-section">
+      <div className="quiz-header">
+        <div className="quiz-badge">{quizMeta?.badge || "📚 Knowledge Check"}</div>
+        <h2 className="quiz-title">Test Your Understanding</h2>
+        <p className="quiz-subtitle">{quizMeta?.subtitle}</p>
+
+        <div className="quiz-stats">
+          <div className="stat-item">
+            <span className="stat-number">{quiz.length}</span>
+            <span className="stat-label">Questions</span>
+          </div>
+
+          <div className="stat-item">
+            <span className="stat-number">4</span>
+            <span className="stat-label">Options Each</span>
+          </div>
+
+          <div className="stat-item">
+            <span className="stat-number">{score}</span>
+            <span className="stat-label">Your Score</span>
+          </div>
+        </div>
+      </div>
+
+      <div className={`result-banner ${showScore ? "show" : ""}`}>
+        <div className="result-score">
+          {score}/{quiz.length}
+        </div>
+        <div className="result-text">
+          Great effort! Review the solutions to learn more.
+        </div>
+      </div>
 
       <div className="quiz-container">
         {quiz.map((q, qIndex) => {
@@ -73,9 +117,6 @@ function PremiumQuiz({ quizMeta, quiz }) {
                     </button>
                   );
                 })}
-
-
-                
               </div>
 
               <div className="action-row">
@@ -109,33 +150,15 @@ function PremiumQuiz({ quizMeta, quiz }) {
         })}
       </div>
 
-      <div className="quiz-header">
-        <div className="quiz-badge">{quizMeta?.badge || "📚 Knowledge Check"}</div>
-        <h2 className="quiz-title">Test Your Understanding</h2>
-        <p className="quiz-subtitle">{quizMeta?.subtitle}</p>
-
-        <div className="quiz-stats">
-          <div className="stat-item">
-            <span className="stat-number">{quiz.length}</span>
-            <span className="stat-label">Questions</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-number">4</span>
-            <span className="stat-label">Options Each</span>
-          </div>
-          
-          <div className="stat-item">
-            <span className="stat-number">{score}</span>
-            <span className="stat-label">Your Score</span>
-          </div>
-        </div>
-      </div>
-
-      <div className={`result-banner ${allChecked ? "show" : ""}`}>
-        <div className="result-score">
-          {score}/{quiz.length}
-        </div>
-        <div className="result-text">Great effort! Review the solutions to learn more.</div>
+      <div className="quiz-score-action">
+        <button
+          type="button"
+          className="check-score-btn"
+          onClick={handleShowScore}
+          disabled={!allChecked}
+        >
+          Check Your Score
+        </button>
       </div>
     </section>
   );

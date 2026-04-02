@@ -45,7 +45,7 @@ const Footer = () => {
                 <Link to="/forum">Forum</Link><br />
                 <Link to="/insight">Explore</Link><br />
                 <Link to="/counselling">Counselling</Link><br />
-                <Link to="/training">Skill Hub</Link><br />
+                <Link to="/training">Skill Development</Link><br />
                 <Link to="/upcoming">Placement</Link>
               </p>
             </div>

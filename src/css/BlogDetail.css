@@ -1463,3 +1463,45 @@
     font-size: 14px;
   }
 }
+
+.quiz-score-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 28px auto 0;
+}
+
+.check-score-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #003223, #004A33);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(0, 74, 51, 0.22);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+.check-score-btn:hover {
+  background: #004A33;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(0, 74, 51, 0.3);
+}
+
+.check-score-btn:active {
+  transform: translateY(0);
+}
+
+.check-score-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

@@ -94,7 +94,8 @@
 }
 
 .courses-grid--board-options {
-  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  grid-template-columns: 280px;
+  justify-content: center;
 }
 
 .courses-grid--classes {
@@ -122,6 +123,8 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   background: #d7c9a4;
+  border-bottom: 3px solid ;
+  border-bottom: 5px solid #296754;
 }
 
 .courses-tile__image {
@@ -189,7 +192,7 @@
 .courses-tile__footer {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 10px;
   margin-top: 12px;
 }

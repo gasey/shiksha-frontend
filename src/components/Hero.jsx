@@ -8,42 +8,12 @@ import image6 from '../assets/image6.jpg';
 import '../css/Hero.css';
 
 const subjectCards = [
-  {
-    id: 1,
-    name: 'Physics',
-    img: image1,
-    accent: '#60a5fa',
-  },
-  {
-    id: 2,
-    name: 'Chemistry',
-    img: image2,
-    accent: '#34d399',
-  },
-  {
-    id: 3,
-    name: 'Biology',
-    img: image3,
-    accent: '#fbbf24',
-  },
-  {
-    id: 4,
-    name: 'Mathematics',
-    img: image4,
-    accent: '#a78bfa',
-  },
-  {
-    id: 5,
-    name: 'History',
-    img: image5,
-    accent: '#f87171',
-  },
-  {
-    id: 6,
-    name: 'English',
-    img: image6,
-    accent: '#fb923c',
-  },
+  { id: 1, name: 'Physics', img: image1, accent: '#60a5fa' },
+  { id: 2, name: 'Chemistry', img: image2, accent: '#34d399' },
+  { id: 3, name: 'Biology', img: image3, accent: '#fbbf24' },
+  { id: 4, name: 'Mathematics', img: image4, accent: '#a78bfa' },
+  { id: 5, name: 'History', img: image5, accent: '#f87171' },
+  { id: 6, name: 'English', img: image6, accent: '#fb923c' },
 ];
 
 const updates = [
@@ -68,10 +38,10 @@ const Hero = () => {
   const items = [...updates, ...updates];
   const currentRef = useRef(0);
   const intervalRef = useRef(null);
+  const resetTimeoutRef = useRef(null);
 
   useEffect(() => {
-    const t = setTimeout(() => setVisible(true), 150);
-    return () => clearTimeout(t);
+    setVisible(true);
   }, []);
 
   const step = CARD_HEIGHT + GAP;
@@ -82,7 +52,7 @@ const Hero = () => {
     setOffset(currentRef.current * step);
 
     if (currentRef.current >= updates.length) {
-      setTimeout(() => {
+      resetTimeoutRef.current = setTimeout(() => {
         setTransitioning(false);
         currentRef.current = 0;
         setOffset(0);
@@ -91,10 +61,24 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    if (paused) { clearInterval(intervalRef.current); return; }
+    if (paused) {
+      clearInterval(intervalRef.current);
+      return;
+    }
+
     intervalRef.current = setInterval(advance, 4000);
-    return () => clearInterval(intervalRef.current);
+
+    return () => {
+      clearInterval(intervalRef.current);
+    };
   }, [paused]);
+
+  useEffect(() => {
+    return () => {
+      clearInterval(intervalRef.current);
+      clearTimeout(resetTimeoutRef.current);
+    };
+  }, []);
 
   return (
     <section className="shiksha-hero">
@@ -104,26 +88,22 @@ const Hero = () => {
       <div className="hero-glow-3"></div>
 
       <div className="hero-inner">
-
-        {/* LEFT — 3 × 2 image-only grid */}
         <div className="hero-left">
           <div className="subject-grid">
             {subjectCards.map((card, i) => (
               <div
                 key={card.id}
                 className={`scard ${visible ? 'scard-visible' : ''}`}
-                style={{ '--delay': `${i * 80}ms`, '--accent': card.accent }}
+                style={{ '--delay': `${i * 40}ms`, '--accent': card.accent }}
               >
-                <img src={card.img} alt={card.name} className="scard-img" loading="lazy" />
+                <img src={card.img} alt={card.name} className="scard-img" />
               </div>
             ))}
           </div>
         </div>
 
-        {/* RIGHT — vertical scrolling update cards */}
         <div className="hero-right">
           <div className="updates-panel">
-
             <div className="up-header">
               <div className="up-header-left">
                 <span className="up-title">Latest Updates</span>
@@ -160,10 +140,8 @@ const Hero = () => {
 
               <div className="up-fade up-fade-bottom"></div>
             </div>
-
           </div>
         </div>
-
       </div>
     </section>
   );
