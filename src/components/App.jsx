@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'; // UPDATED
 import Dashboard from './Dashboard';
 import ProtectedRoute from '../routes/ProtectedRoute';
 import HomePage from './HomePage';
-
+import useAnalytics from "../useAnalytics"; 
 import Navbar from './Navbar';
 import LandingHeader from './LandingHeader';
 import MainGrid from './MainGrid';
@@ -84,7 +84,7 @@ function AppEntry({ isAuthenticated }) {
 
 function App() {
   const { isAuthenticated, loading } = useAuth(); // UPDATED: user removed because not used
-
+  useAnalytics();
   if (loading) return null; // KEEP AS IT IS
 
   return (
