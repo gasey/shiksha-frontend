@@ -2,7 +2,7 @@
    COMING SOON
 ═══════════════════════════════════════════ */
 .coming-soon-section {
-  background: #e8e0cc;
+  background: #041f09;
   background-image:
     linear-gradient(rgba(132, 104, 39, 0.12) 1px, transparent 1px),
     linear-gradient(90deg, rgba(201, 173, 51, 0.07) 1px, transparent 1px);
@@ -21,7 +21,7 @@
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(16, 67, 18, 0.18), transparent 70%);
+  background: radial-gradient(circle, rgba(11, 104, 14, 0.33), transparent 70%);
   top: -160px;
   right: -80px;
   pointer-events: none;
@@ -32,7 +32,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(8, 24, 12, 0.75);
+  background: rgba(22, 73, 34, 0.75);
   backdrop-filter: blur(14px);
   border: 1px solid rgba(29, 202, 171, 0.22);
   border-radius: 100px;
@@ -46,7 +46,7 @@
   content: "";
   width: 8px;
   height: 8px;
-  background: #1dcaab;
+  background: #efffee;
   border-radius: 50%;
   animation: csblink 1.6s infinite;
   box-shadow: 0 0 6px #1dcaab;
@@ -88,7 +88,7 @@
   font-family: "Montserrat", sans-serif;
   font-size: clamp(28px, 4vw, 42px);
   font-weight: 900;
-  color: #125027;
+  color: #ffffff;
   letter-spacing: -1.5px;
   line-height: 1.1;
   margin-bottom: 14px;
@@ -96,7 +96,7 @@
 
 .coming-soon-content p {
   font-size: 14.5px;
-  color: rgba(14, 28, 15, 0.55);
+  color: rgba(255, 255, 255, 0.55);
   margin-bottom: 32px;
   line-height: 1.75;
 }
@@ -130,7 +130,7 @@
 }
 
 .coming-soon-input:focus {
-  border-color: #1b9c85;
+  border-color: #1b9c26;
   box-shadow: 0 0 0 3px rgba(29, 202, 171, 0.12);
 }
 
@@ -149,7 +149,7 @@
 }
 
 .coming-soon-btn:hover {
-  background: #1b9c85;
+  background: #358930;
   box-shadow: 0 10px 28px rgba(27, 156, 133, 0.42);
   transform: translateY(-2px);
 }
@@ -163,7 +163,7 @@
   border: 1px solid rgba(29, 202, 171, 0.25);
   border-radius: 10px;
   padding: 12px 24px;
-  color: #1b9c85;
+  color: #107521;
   font-weight: 700;
   font-size: 14px;
 }

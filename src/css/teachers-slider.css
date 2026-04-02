@@ -3,7 +3,7 @@
 ═══════════════════════════════════════════ */
 .teachers-slider-section {
   padding: 100px 20px 90px;
-  background: #e8e0cc;
+  background: #ffffff;
   position: relative;
   overflow: hidden;
 }
@@ -32,7 +32,7 @@
   width: 650px;
   height: 650px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(16, 67, 18, 0), transparent 70%);
+  background: radial-gradient(circle, rgba(12, 102, 15, 0.25), transparent 70%);
   top: -200px;
   right: -120px;
   pointer-events: none;
@@ -44,7 +44,7 @@
   width: 450px;
   height: 450px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(40, 156, 50, 0), transparent 70%);
+  background: radial-gradient(circle, rgba(40, 156, 50, 0.22), transparent 70%);
   bottom: -130px;
   left: -100px;
   pointer-events: none;
@@ -70,7 +70,7 @@
   margin: 0 0 10px;
   font-size: 12px;
   font-weight: 700;
-  color: #1dcaab;
+  color: #ff8f01;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   font-family: "Montserrat", sans-serif;
@@ -80,7 +80,7 @@
   margin: 0 0 14px;
   font-size: 38px;
   font-weight: 800;
-  color: rgba(10, 30, 15, 0.9);
+  color: rgba(7, 78, 24, 0.9);
   font-family: "Montserrat", sans-serif;
 }
 
@@ -101,20 +101,27 @@
 }
 
 /* ═══════════════════════════════════════════
-   CARD — mirrors .scard
+   CARD
 ═══════════════════════════════════════════ */
 .teacher-slider-card {
   border-radius: 15px;
   overflow: hidden;
   cursor: pointer;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  transition: transform 0.3s ease;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.26s ease,
+    border-color 0.26s ease;
 }
 
 .teacher-slider-card:hover {
   transform: translateY(-6px) scale(1.02);
+  box-shadow:
+    0 16px 44px rgba(0, 0, 0, 0.12),
+    0 0 0 1.5px #ff8f01;
+  border-color: #ff8f01;
 }
 
 /* ── image ── */
@@ -137,14 +144,16 @@
   transform: scale(1.08);
 }
 
-/* ── info bar — light ── */
+/* ── info bar — bordered & centered ── */
 .teacher-slider-info {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 4px;
   padding: 14px 16px 16px;
   background: #ffffff;
-  text-align: left;
+  text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .teacher-slider-info h3 {
@@ -156,18 +165,20 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 100%;
 }
 
 .teacher-slider-info p {
   margin: 0;
   font-size: 12px;
   font-weight: 600;
-  color: #0f9b80;
+  color: #041f09;
   font-family: "Poppins", sans-serif;
   letter-spacing: 0.3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 100%;
 }
 
 /* ═══════════════════════════════════════════
@@ -197,10 +208,10 @@
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
   background: rgba(10, 30, 15, 0.8);
-  border-color: #1dcaab;
-  color: #1dcaab;
+  border-color: #041f09;
+  color: #041f09;
   box-shadow:
-    0 0 0 1.5px #1dcaab,
+    0 0 0 1.5px #041f09,
     0 12px 30px rgba(0, 0, 0, 0.3);
   transform: translateY(-50%) scale(1.1);
 }

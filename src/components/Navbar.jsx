@@ -262,7 +262,7 @@ const Navbar = () => {
                 openDropdown === "others" ? " mobile-dropdown-open" : ""
               }`}
             >
-              <span className="nav-label">Others</span>
+              <span className="nav-label">Resources</span>
               <button
                 className="mobile-dropdown-arrow"
                 onClick={() => handleDropdownToggle("others")}
@@ -278,12 +278,12 @@ const Navbar = () => {
 
                 <li>
                   <NavLink to="/insight" onClick={closeMobileMenu}>
-                    {t("insight")}
+                    Explore
                   </NavLink>
                 </li>
                  
                 <li className="nav-item dropdown nested-dropdown">
-                  <span className="nav-labels">Training</span>
+                  <span className="nav-labels">Skill Hub</span>
                   <ul className="dropdown-menu nested-menu">
                     <li>
                       <NavLink to="/training" onClick={closeMobileMenu}>

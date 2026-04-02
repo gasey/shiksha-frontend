@@ -17,7 +17,7 @@ const HomePage = () => {
   return (
     <div className="page-content">
       <Navbar />
-      <LandingHeader />
+   
 
       {/*NEW LANDING SECTIONS */}
       <Hero />

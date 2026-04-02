@@ -70,7 +70,6 @@ const Counselling = () => {
           </div>
         </div>
 
-        <Footer />
       </div>
     </div>
   );

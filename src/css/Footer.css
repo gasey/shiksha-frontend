@@ -2,14 +2,7 @@
    FOOTER
 ═══════════════════════════════════════════ */
 .footer {
-  background: linear-gradient(
-    to bottom,
-    #e8e0cc 0%,
-    #c8b98a 8%,
-    #4a6741 30%,
-    #1a2e1b 65%,
-    #0a140b 100%
-  );
+  background: #041f09;
   color: rgba(255, 255, 255, 0.75);
   font-family: "Poppins", sans-serif;
   position: relative;
@@ -71,6 +64,7 @@
   height: 58px;
   object-fit: contain;
   border-radius: 12px;
+  filter: brightness(0) invert(1);
 }
 
 .footer-brand-text h2 {
@@ -101,7 +95,7 @@
 .footer-info-column h4 {
   font-size: 11px;
   font-weight: 700;
-  color: #1dcaab;
+  color: #ff8f01;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   margin: 0 0 10px;
@@ -113,6 +107,16 @@
   line-height: 1.75;
   color: rgba(255, 255, 255, 0.72);
   margin: 0;
+}
+
+.footer-info-column p a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-info-column p a:hover {
+  color: #ff8f01;
 }
 
 /* ── Nav links ── */
@@ -143,7 +147,7 @@
 }
 
 .footer-nav-group a:hover {
-  color: #1dcaab;
+  color: #ff8f01;
 }
 
 /* ── Bottom bar ── */
@@ -242,12 +246,12 @@
 .footer-content {
   display: flex;
   justify-content: space-between;
-  align-items: stretch;   
+  align-items: stretch;
 }
 
 .footer-footer-nav {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; 
+  justify-content: center;
   padding-top: 0;
 }

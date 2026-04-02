@@ -1,5 +1,6 @@
 import '../css/Footer.css';
 import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import logo from '../assets/Shiksha.png';
 
 const Footer = () => {
@@ -20,15 +21,33 @@ const Footer = () => {
             <div className="footer-info-column">
               <h4>Address</h4>
               <p>
-                House no - 73A<br />
-                Maruti Vihar<br />
-                Gurgaon, Haryana - 122002<br /><br />
-                Aizawl, Mizoram - 796001
+                House no - 73A, Maruti Vihar<br />
+                Gurgaon, Haryana <br />
+                Pin - 122002<br /><br />
+                Aizawl, Mizoram <br />
+                Pin - 796009
               </p>
             </div>
             <div className="footer-info-column">
               <h4>Contact</h4>
-              <p>+91 3893570403</p>
+              <p>
+                Email<br />
+                info@shikshacom.com<br /><br />
+                Gurgaon<br />
+                +91 3893570403<br /><br />
+                Aizawl<br />
+                +0389-2300225
+              </p>
+            </div>
+            <div className="footer-info-column">
+              <h4>Resources</h4>
+              <p>
+                <Link to="/forum">Forum</Link><br />
+                <Link to="/insight">Explore</Link><br />
+                <Link to="/counselling">Counselling</Link><br />
+                <Link to="/training">Skill Hub</Link><br />
+                <Link to="/upcoming">Placement</Link>
+              </p>
             </div>
           </div>
         </div>
@@ -37,9 +56,9 @@ const Footer = () => {
         <div className="footer-footer-nav">
           <div className="footer-nav-group">
             <ul>
-              <li><a href="/faq">FAQ</a></li>
-              <li><a href="/terms">Terms of Policy</a></li>
-              <li><a href="/feedback">Feedback</a></li>
+              <li><Link to="/faq">FAQ</Link></li>
+              <li><Link to="/terms">Terms of Policy</Link></li>
+              <li><Link to="/feedback">Feedback</Link></li>
             </ul>
           </div>
         </div>

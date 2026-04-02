@@ -3,7 +3,7 @@
 ═══════════════════════════════════════════ */
 .teachers-section {
   padding: 100px 20px 90px;
-  background: #e8e0cc; /* same base as hero */
+  background: #ffffff;
   position: relative;
   overflow: hidden;
 }
@@ -14,7 +14,7 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(132, 104, 39, 0.15) 1px, transparent 1px),
+    linear-gradient(rgba(132, 104, 39, 0.3) 1px, transparent 1px),
     linear-gradient(90deg, rgba(201, 173, 51, 0.08) 1px, transparent 1px);
   background-size: 60px 60px;
   mask-image: radial-gradient(
@@ -25,14 +25,14 @@
   pointer-events: none;
 }
 
-/* ── ambient glows (mirrors hero-glow-1 / 2) ── */
+/* ── ambient glows ── */
 .teachers-section::after {
   content: "";
   position: absolute;
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(16, 67, 18, 0.22), transparent 70%);
+  background: radial-gradient(circle, rgba(16, 67, 18, 0.1), transparent 70%);
   top: -180px;
   left: -120px;
   pointer-events: none;
@@ -43,7 +43,7 @@
   width: 420px;
   height: 420px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(40, 156, 49, 0.16), transparent 70%);
+  background: radial-gradient(circle, rgba(40, 156, 49, 0.08), transparent 70%);
   bottom: -120px;
   right: -80px;
   pointer-events: none;
@@ -78,7 +78,7 @@
   margin: 0 0 14px;
   font-size: 36px;
   font-weight: 800;
-  color: rgba(10, 30, 15, 0.9); /* deep green-black, on-brand */
+  color: #0a1e0f;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -87,7 +87,7 @@
   margin: 0 auto;
   font-size: 15px;
   line-height: 1.75;
-  color: rgba(10, 30, 15, 0.6);
+  color: rgba(10, 30, 15, 0.65);
   font-family: "Poppins", sans-serif;
 }
 
@@ -98,14 +98,14 @@
   gap: 20px;
 }
 
-/* ── card — mirrors .scard exactly ── */
+/* ── card ── */
 .teacher-card {
   border-radius: 15px;
   overflow: hidden;
   cursor: pointer;
-  background: rgba(10, 30, 15, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   transition:
     transform 0.3s ease,
     box-shadow 0.26s ease,
@@ -115,7 +115,7 @@
 .teacher-card:hover {
   transform: translateY(-6px) scale(1.02);
   box-shadow:
-    0 16px 44px rgba(0, 0, 0, 0.3),
+    0 16px 44px rgba(0, 0, 0, 0.12),
     0 0 0 1.5px #1dcaab;
   border-color: #1dcaab;
 }
@@ -140,26 +140,25 @@
   transform: scale(1.08);
 }
 
-/* gradient overlay identical to .scard-img-overlay */
+/* lighter gradient overlay */
 .teacher-image-wrapper::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.06) 0%,
-    rgba(6, 20, 10, 0.72) 100%
+    rgba(0, 0, 0, 0.02) 0%,
+    rgba(0, 0, 0, 0.3) 100%
   );
 }
 
-/* ── info bar — mirrors .scard-body ── */
+/* ── info bar ── */
 .teacher-info {
   display: flex;
   flex-direction: column;
   gap: 3px;
   padding: 12px 14px 14px;
-  background: rgba(8, 24, 12, 0.75);
-  backdrop-filter: blur(8px);
+  background: #ffffff;
   text-align: left;
 }
 
@@ -167,7 +166,7 @@
   margin: 0;
   font-size: 13px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.92);
+  color: #0a1e0f;
   font-family: "Montserrat", sans-serif;
   white-space: nowrap;
   overflow: hidden;
@@ -178,7 +177,7 @@
   margin: 0;
   font-size: 11px;
   font-weight: 600;
-  color: #1dcaab; /* teal accent matches hero tags */
+  color: #1b9c85;
   font-family: "Poppins", sans-serif;
   letter-spacing: 0.3px;
   white-space: nowrap;
