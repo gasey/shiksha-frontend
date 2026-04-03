@@ -238,7 +238,7 @@
    NAVBAR
 ═══════════════════════════════════════════ */
 .navbar {
-  background: #041f09;
+  background: #05300d;
   z-index: 100;
   border-top: 1px solid var(--nb-border);
   border-bottom: 1px solid var(--nb-border);

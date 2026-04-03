@@ -90,7 +90,7 @@ const AboutShiksha = () => {
                 <div className="sa-stat-lbl">Interactive Classes</div>
               </div>
               <div className="sa-stat-box">
-                <div className="sa-stat-val" style={{ fontSize: "22px", color: "#1dcaab" }}>Free</div>
+                <div className="sa-stat-val" style={{ fontSize: "22px", color: "#ff8f01" }}>Free</div>
                 <div className="sa-stat-lbl">Guest Preview Access</div>
               </div>
             </div>
