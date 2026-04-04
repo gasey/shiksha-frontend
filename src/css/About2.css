@@ -2,7 +2,7 @@
    ABOUT PAGE
 ═══════════════════════════════════════════ */
 .about-page {
-  background: #e8e0cc;
+  background: #ffffff;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
@@ -23,12 +23,12 @@
     linear-gradient(rgba(132, 104, 39, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(201, 173, 51, 0.06) 1px, transparent 1px);
   background-size: 60px 60px;
-   scroll-margin-top: 120px;
+  scroll-margin-top: 120px;
 }
 
 /* Alternating section background */
 .ap-alt {
-  background-color: #ddd5be;
+  background-color: #041f09;
   background-image:
     linear-gradient(rgba(132, 104, 39, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(201, 173, 51, 0.06) 1px, transparent 1px);
@@ -42,7 +42,7 @@
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(18, 80, 39, 0.1), transparent 70%);
+  background: radial-gradient(circle, rgba(18, 80, 39, 0.3), transparent 70%);
   top: -160px;
   right: -80px;
   pointer-events: none;
@@ -127,7 +127,7 @@
   font-family: "Montserrat", sans-serif;
   font-size: clamp(28px, 4vw, 42px);
   font-weight: 900;
-  color: #125027;
+  color: #085717;
   margin: 0 0 22px;
   text-align: center;
   letter-spacing: -1.5px;
@@ -230,7 +230,7 @@
    VISION / VALUE CARD
 ═══════════════════════════════════════════ */
 .ap-card {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(14, 54, 7, 0.31);
   backdrop-filter: blur(14px);
   border: 1px solid rgba(132, 104, 39, 0.16);
   border-radius: 20px;
@@ -262,7 +262,7 @@
 .ap-card-text p {
   font-size: 13.5px;
   line-height: 1.82;
-  color: rgba(14, 28, 15, 0.68);
+  color: rgba(255, 255, 255, 0.68);
   margin: 0 0 14px;
 }
 
@@ -270,7 +270,7 @@
   font-size: 12px;
   font-weight: 800;
   font-family: "Montserrat", sans-serif;
-  color: #125027;
+  color: #041f09;
   margin: 0 0 8px !important;
   letter-spacing: 0.3px;
   text-transform: uppercase;
@@ -285,7 +285,7 @@
 .ap-list li {
   font-size: 13px;
   line-height: 1.72;
-  color: rgba(14, 28, 15, 0.62);
+  color: rgba(255, 255, 255, 0.62);
   padding-left: 18px;
   position: relative;
   margin-bottom: 6px;
@@ -296,7 +296,7 @@
   content: "▸";
   position: absolute;
   left: 0;
-  color: #1b9c85;
+  color: #ffffff;
   font-size: 11px;
   top: 3px;
 }
@@ -307,7 +307,7 @@
 
 .ap-list li strong {
   font-weight: 700;
-  color: #125027;
+  color: #ffffffb0;
 }
 
 /* Card image */
@@ -436,7 +436,7 @@
 }
 
 .ap-why-card {
-  background: rgba(8, 24, 12, 0.7);
+  background: rgba(4, 39, 12, 0.97);
   backdrop-filter: blur(18px);
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 18px;
@@ -471,13 +471,13 @@
 }
 
 .ap-why-card:hover .ap-why-num {
-  color: rgba(29, 202, 171, 0.1);
+  color: rgba(255, 255, 255, 0.1);
 }
 
 .ap-why-card:hover {
   transform: translateY(-6px) scale(1.02);
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.26);
-  border-color: rgba(29, 202, 171, 0.28);
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
 .ap-why-title {
@@ -503,7 +503,7 @@
 /* Animated bottom line */
 .ap-why-line {
   height: 2px;
-  background: linear-gradient(90deg, #1b9c85, #1dcaab);
+  background: linear-gradient(90deg, #ffffff, #0e4711);
   border-radius: 2px;
   transform: scaleX(0);
   transform-origin: left;

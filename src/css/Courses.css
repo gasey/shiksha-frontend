@@ -1,5 +1,5 @@
 .courses-page {
-  background: #e8e0cc;
+  background: #ffffff;
   min-height: 100vh;
   padding-bottom: 60px;
   background-image:
@@ -22,7 +22,7 @@
 .courses-breadcrumb {
   display: flex;
   align-items: center;
- 
+
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 14px;
@@ -43,7 +43,9 @@
   font-family: "Poppins", sans-serif;
   color: rgba(18, 80, 39, 0.72);
   cursor: pointer;
-  transition: color 0.2s ease, opacity 0.2s ease;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .courses-breadcrumb__item:hover:not(:disabled) {
@@ -104,14 +106,16 @@
 
 .courses-tile {
   width: 100%;
-  background: #003E2B;
-  border: 1px solid rgba(9, 72, 78, 0.18);
-  border-radius: 0;
+  background: #003e2b;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
 .courses-tile:hover {
@@ -123,7 +127,7 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   background: #d7c9a4;
-  border-bottom: 3px solid ;
+  border-bottom: 3px solid;
   border-bottom: 5px solid #296754;
 }
 
@@ -218,7 +222,10 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .courses-tile__btn:hover {

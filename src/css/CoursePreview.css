@@ -2,8 +2,8 @@
    COURSE PREVIEW
 ═══════════════════════════════════════════ */
 .course-preview {
-  background: #e8e0cc;
-  padding: 0 0 72px;
+  background: #041f09;
+  padding: 48px 0 72px;
   position: relative;
   overflow: hidden;
   background-image:
@@ -34,7 +34,7 @@
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
-  margin: 0 auto 56px;
+  margin: 0 auto 70px;
   max-width: 860px;
   width: calc(100% - 80px);
   padding: 5px;
@@ -94,7 +94,7 @@
   font-size: 54px;
   line-height: 1;
   font-weight: 800;
-  color: #0b5c3c;
+  color: #ffffff;
   text-align: center;
   font-family: "Poppins", sans-serif;
 }
@@ -116,12 +116,15 @@
 .board-card-preview {
   width: 100%;
   max-width: 300px;
-  background: #d6c79f;
+  background: #ffffff;
   border: 1px solid rgba(11, 92, 60, 0.35);
+  border-radius: 16px;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.24s ease, box-shadow 0.24s ease;
+  transition:
+    transform 0.24s ease,
+    box-shadow 0.24s ease;
 }
 
 .board-card-preview:hover {
